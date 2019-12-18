@@ -1,0 +1,27 @@
+[alias]
+	br = branch
+	ca = commit -a
+	ci = commit
+	co = checkout
+	cp = cherry-pick
+	cpxs = cherry-pick -x -s
+	st = status
+	su = status -uno
+	sh = show
+	ss = status -s
+	df = diff
+	pl = pull
+	ps = push
+	unstage = reset HEAD
+	lo  = log --graph --abbrev-commit
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s  %C(bold blue)[%an]%Creset %Cgreen(%cr)' --abbrev-commit
+	last = log --graph --abbrev-commit -1 --stat
+[user]
+	name = xuke
+	email = iceke@foxmail.com
+[core]
+	editor = vim
+[commit]
+	template = /home/xuke/.gitmessage
+[push]
+	default = simple

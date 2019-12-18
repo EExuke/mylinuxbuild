@@ -1,0 +1,12 @@
+DNS: fix after upgrading the IPv6 function of DNS, SNTP does not valid.
+
+[Cypress][Fix][SNTP][Major][I#13652][M#23937]
+bug  : 0023937: [TPE#60680] [DNS] The DUT DNS IPv4 does not valid.
+cause: After upgrading the IPv6 function of DNS module,
+       the processing of resolve host name is changed accordingly,
+       which results in that SNTP module can not get the correct
+       server IP through the original resolve processing,
+       and SNTP module will no longer send request packets to the
+       sntp server.
+solve: Use FsUtlIPvXResolveHostName instead of FsUtlResolveHostName
+       to get server IP through host name.

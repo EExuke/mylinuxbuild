@@ -1,0 +1,34 @@
+DNS: fix after upgrading the IPv6 function of DNS, SNTP does not valid.
+
+[Cypress][Fix][SNTP][Major][I#13652][M#23937]
+bug  : 0023937: [TPE#60680] [DNS] The DUT DNS IPv4 does not valid.
+cause: After upgrading the IPv6 function of DNS module,
+       the processing of resolve host name is changed accordingly,
+       which results in that SNTP module can not get the correct
+       server IP through the original resolve processing,
+       and SNTP module will no longer send request packets to the
+       sntp server.
+solve: Use FsUtlIPvXResolveHostName instead of FsUtlResolveHostName
+       to get server IP through host name.
+
+Tested on APLGS120GTPOE with tftpd32(sntp server) and DNS server
+
+* steps:
+
+1. set DUT and IPv4 and IPv6 network segment same with servers
+2. config DUT DNS IPv4&IPv6 Server to dns server PC's IP
+3. config DUT "system time" mode to SNTP, "SNTP Primary Server" to "time-server.cn"
+
+* result:
+
+1. DNS server can reach DNS IPv4 query pkt, and DNS server will reply the
+   request with response type A & SOA(start of a zone of Authority).
+   replied IPv4 address is SNTP v4 server IP: 10.3.4.27
+2. DUT will send sntp v4 query to 10.3.4.27 and sntp server will reply the time.
+3. DUT will get a new time.
+
+* Undetermined problem(SNTP IPv6 action ?)
+
+DNS only record IPv4 address to cache, so SNTP only send ntp-query by IPv4 source address;
+but if record IPv6 and IPv4 both, SNTP will always send IPv6 request to server, because
+SNTP sending request will be sent priority with IPv6, and DNS IPv6 response got ok.

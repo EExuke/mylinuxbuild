@@ -1,0 +1,865 @@
+#!/bin/sh
+#
+# This shell libarary gathers any useful tools to improve labor efficiency!
+#
+# Maintainer: zhendongcao <zhendongcao@nettech-global.com>
+#    Created: Modification on the template of Rain, 2017-3
+# LastChange: 2018-01-19
+
+#-----------------------------------------------------------
+#                SHELL TOOLS
+#-----------------------------------------------------------
+
+# Color Variables {{{1
+#-----------------------------------------------------------
+#                COLOUR VARIABLES
+#-----------------------------------------------------------
+UNDERLINE="\033[4m"
+FG_BLACK="\033[30m"
+FG_RED="\033[31m"
+FG_GREEN="\033[32m"
+FG_YELLOW="\033[33m"
+FG_BLUE="\033[34m"
+FG_PURPLE="\033[35m"
+FG_DARKGREEN="\033[36m"
+FG_WHITE="\033[37m"
+BG_BLACK="\033[40m"
+BG_RED="\033[41m"
+BG_GREEN="\033[42m"
+BG_YELLOW="\033[43m"
+BG_BLUE="\033[44m"
+BG_PURPLE="\033[45m"
+BG_DARKGREEN="\033[46m"
+BG_WHITE="\033[47m"
+F6_END="\033[0m"
+
+# Sync Command {{{1
+# Sync: synchronize cscope tags and ctags
+function Sync()
+{
+    if [ "$1" = "b" ] || [ "$1" = "-b" ]; then
+        if [ ! $2 ]; then
+            sw cscope;
+        else
+            sw $2;
+        fi
+
+        find -L . -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.lua" -o -name "*.def" > cscope.files
+        cscope -bkq -i cscope.files
+        ctags -R *
+        sw -;
+    elif [ "$1" = "c" ] || [ "$1" = "-c" ]; then
+        if [ ! $2 ]; then
+            sw cscope;
+        else
+            sw $2;
+        fi
+
+        rm -f cscope.files cscope.in.out cscope.out cscope.po.out tags
+        sw -;
+    else
+        echo -e $FG_YELLOW
+        echo -e "Usage: Sync [OPTION]"
+        echo -e $FG_GREEN
+        echo -e "\t-b [path]      build the cross-reference"
+        echo -e "\t-c [path]      clear the cross-reference"
+        echo -e $F6_END
+    fi
+}
+
+# Quickly Change Directory(sw) {{{1
+# static: export project root path
+function dir_export()
+{
+    case $# in
+        1 )
+            # export project root directory
+            export PROJ_ROOT_PATH=$1
+            # export project customer directory
+            eval $(grep "export CUSTOMER_FOLDER" $PROJ_ROOT_PATH/build.env 2> /dev/null)
+            ;;
+        2 )
+            if [ -d "$1" ]; then
+                export PROJ_ROOT_PATH=$1
+                eval $(grep "export CUSTOMER_FOLDER" $PROJ_ROOT_PATH/build.env 2> /dev/null)
+
+                # create a link 'cpe-build' to current project in place.
+                ln -sfn $PROJ_ROOT_PATH $(dirname $PROJ_ROOT_PATH)/cpe-build
+            fi
+            ;;
+        * )
+            ;;
+    esac
+}
+
+# static: decide project path
+function dir_decide()
+{
+    local GENERIC_PROJECT=cpe-build
+
+    case $1 in
+        "" )
+            ;;
+        1 )
+            dir_export ~/workspace/$GENERIC_PROJECT
+            ;;
+        2 )
+            dir_export ~/workroom/$GENERIC_PROJECT
+            ;;
+        3 )
+            dir_export /home/xuke/$GENERIC_PROJECT
+            ;;
+        * )
+            dir_export "$(dirname $PROJ_ROOT_PATH)/$1" "$(dirname $PROJ_ROOT_PATH)/$GENERIC_PROJECT"
+            ;;
+    esac
+}
+
+# print or set project root path
+function dir()
+{
+    if [ $# = 0 ]; then
+
+        echo "Please choose main directory:"
+        echo "  1: ~/workspace/cpe-build"
+        echo "  2: ~/workroom/cpe-build"
+        echo "Anykey other key to give up!!!"
+        echo ""
+
+        read -n 1 -p "which one: " op
+        if [ "$op" == "" ]; then
+            echo -ne "proj path:"
+            echo -ne "$FG_DARKGREEN"
+            echo -ne "$PROJ_ROOT_PATH"
+            echo -e  "$F6_END"
+        else
+            echo -e "\nyou choosed the option-${FG_PURPLE}$op${F6_END}!\n";
+            dir_decide "$op"
+        fi
+
+    else
+        dir_decide "$@"
+    fi
+}
+
+##################################################
+# $1 - new dir
+# $2 - old dir
+##################################################
+function try_cd()
+{
+    local _1_=$PROJ_ROOT_PATH/$1
+    local _2_=$PROJ_ROOT_PATH/$2
+
+    if [ -d "$_1_" ]; then
+        echo -e $FG_YELLOW$(dirname $PROJ_ROOT_PATH)/$F6_END$BG_YELLOW$(basename $PROJ_ROOT_PATH)$F6_END$FG_YELLOW/$1$F6_END;cd $_1_
+    elif [ -d "$_2_" ]; then
+        echo -e $FG_YELLOW$(dirname $PROJ_ROOT_PATH)/$F6_END$BG_YELLOW$(basename $PROJ_ROOT_PATH)$F6_END$FG_YELLOW/$2$F6_END;cd $_2_
+    else
+        echo -ne "$FG_RED"
+        echo -ne "No Such Dir!"
+        echo -e  "$F6_END"
+    fi
+}
+
+function sw()
+{
+    if [ "$PROJ_ROOT_PATH" = "" ];then
+        echo "Please give the main directory first!"
+        return 0
+    fi
+
+    case $1 in
+        - )
+            cd -
+            ;;
+        "" )
+            try_cd
+            ;;
+        b|boot )
+            try_cd boot/uboot_bcm_switch/uboot boot/uboot_rtk_switch/u-boot-2011.12
+            ;;
+        k|kk )
+            try_cd os/os_bcm_switch/kernel/linux-3.6.5 os/os_rtk_uClinux_switch/uClinux/linux-2.6.x
+            ;;
+        a|arch )
+            try_cd os/os_bcm_switch/kernel/linux-3.6.5/arch/arm/mach-iproc
+            ;;
+        c|cus )
+            try_cd core/code/customer/${CUSTOMER_FOLDER}
+            ;;
+        w|www )
+            try_cd core/code/customer/${CUSTOMER_FOLDER}/htmlpages/iss
+            #try_cd core/code/future/ISS/common/web/htmlpages
+            ;;
+        n|np )
+            try_cd core/code/customer/${CUSTOMER_FOLDER}/npapi
+            ;;
+        f|fu )
+            try_cd core/code/future
+            ;;
+        i|inc|include )
+            try_cd core/code/future/inc
+            ;;
+        is|iss|ISS )
+            try_cd core/code/future/ISS
+            ;;
+        co|common )
+            try_cd core/code/future/ISS/common
+            ;;
+        msr )
+            try_cd core/code/future/ISS/common/msr
+            ;;
+        l|lr )
+            try_cd core/code/future/LR
+            ;;
+        cl|clr )
+            try_cd core/code/customer/${CUSTOMER_FOLDER}/LR
+            ;;
+        m|mib )
+            try_cd core/code/future/mibs
+            ;;
+        cm|cmib )
+            try_cd core/code/customer/${CUSTOMER_FOLDER}/mibs/mibs
+            ;;
+        o|opensource)
+            try_cd core/code/opensource
+            ;;
+        rpc )
+            try_cd core/code/future/ISS/common/cmrpc
+            ;;
+        s|sdk )
+            try_cd sdk/sdk_bcm_switch/sdk-xgs-robo sdk/sdk_rtk_switch/rtk-sdk
+            ;;
+        r|rootfs )
+            try_cd target/rootfs
+            ;;
+        e|erps )
+            try_cd core/code/future/erps
+            ;;
+        t|tf|tftp|tftpboot )
+            cd /home/xuke/tftpboot/
+            ;;
+        cscope )
+            try_cd core/code
+            ;;
+        en|env|envirenment )
+            cd /home/xuke/mylinuxbuild/
+            ;;
+        * )
+            cd "$1"
+            ;;
+    esac
+
+    return $?
+}
+
+# My Shell Commands {{{1
+function p()
+{
+    if [ $# -eq "0" ]; then
+        ping www.sohu.com
+    else
+        ping $*
+    fi
+}
+
+function p6()
+{
+    ping6 $*
+}
+
+function f()
+{
+    if [ $# = 1 ]; then
+        find `pwd` -name "$1"
+    fi
+
+    if [ $# = 2 ]; then
+        find "$1" -name "$2"
+    fi
+}
+
+function g()
+{
+    if [ $# = 1 ]; then
+        grep -Irns -- "$1" *
+    fi
+
+    if [ $# = 2 ]; then
+        grep --include="$2" "$1" -Irns *
+    fi
+}
+
+function gi()
+{
+    if [ $# = 1 ]; then
+        grep -Iirns -- "$1" *
+    fi
+
+    if [ $# = 2 ]; then
+        grep --include="$2" "$1" -Iirns *
+    fi
+}
+
+function clone()
+{
+    if [ -n "$1" ]; then
+        git clone cameo_git:bs_super $1
+    else
+        git clone cameo_git:bs_super $1
+    fi
+}
+
+
+function mycat()
+{
+	local displayline=15
+
+	if [ -n "$1" ]; then
+		# mycat ISS/common/tool/cmoid/mibparser/MIBCOMPILER/temp.mib:7736:
+		local filename=${1%%:*}         # ISS/common/tool/cmoid/mibparser/MIBCOMPILER/temp.mib
+		local tmpstr=${1#*:}            # 7736:
+		local line=${tmpstr%%:*}        # 7736
+
+		# let the display line in the middle
+		local offset_line=$[$[displayline - 1]/2]
+		local startline=$[line - offset_line]
+		local stopline=$[2 * offset_line]
+
+		cat -n $filename | tail -n +$startline | head -n $offset_line
+		echo -ne ${FG_YELLOW}
+		cat -n $filename 2>/dev/null | tail -n +$line | head -n 1
+		echo -ne ${F6_END}
+		cat -n $filename 2>/dev/null | tail -n +$[line + 1] | head -n $offset_line
+	else
+		echo @ Lack of file parameters!
+	fi
+}
+
+# dump a.out/ISS.exe $(MEM_DIR)
+# dump a.out/ISS.exe $(FROM_DIR) $(TO_DIR)
+function mydump()
+{
+	local mips_dir=/opt/toolchain/mips-linux-uclibc/bin
+
+	if [ "$1" != "" ]; then
+		local binary=$(echo $1 | grep "ISS.exe" | awk '{print $1}')
+	fi
+
+	if [ "$binary" != "" ]; then
+		# mydump $(binary) $(MEM_DIR)
+		# mydump $(binary) $(FROM_DIR) $(TO_DIR)
+		if [ $# -eq "2" ]; then # addr2line
+			local MEM_DIR=$2
+		elif [ $# -eq "3" ]; then # objdump
+			local FROM_DIR=$2 TO_DIR=$3
+		fi
+	else
+		# mydump $(MEM_DIR)
+		# mydump $(FROM_DIR) $(TO_DIR)
+		# The binary compiled file name is omitted
+		binary=${PROJ_ROOT_PATH}/core/code/future/LR/ISS.exe
+		if [ $# -eq "1" ]; then #addr2line
+			local MEM_DIR=$1
+		elif [ $# -eq "2" ]; then # objdump
+			local FROM_DIR=$1 TO_DIR=$2
+		fi
+	fi
+
+	if [ "$MEM_DIR" != "" ]; then
+		if [[ "$MEM_DIR" =~ ^0x.* ]]; then
+			mem_dir=${MEM_DIR}
+		else
+			mem_dir=0x${MEM_DIR}
+		fi
+		${mips_dir}/mips-linux-addr2line -e $binary $mem_dir
+	elif [ "$FROM_DIR" != "" ] && [ "$TO_DIR" != "" ]; then
+		if [[ "$FROM_DIR" =~ ^0x.* ]] && [[ "$TO_DIR" =~ ^0x.* ]]; then
+			local str_dir=$FROM_DIR
+			local stp_dir=$TO_DIR
+		elif [[ "$FROM_DIR" =~ ^0x.* ]]; then
+			local str_dir=$FROM_DIR
+			local stp_dir=0x$TO_DIR
+		elif [[ "$TO_DIR" =~ ^0x.* ]]; then
+			local str_dir=0x$FROM_DIR
+			local stp_dir=$TO_DIR
+		else
+			local str_dir=0x$FROM_DIR
+			local stp_dir=0x$TO_DIR
+		fi
+		${mips_dir}/mips-linux-objdump -d $binary --start-address=${str_dir} --stop-address=${stp_dir}
+	else
+		echo  @ mydump \(mips-linux-addr2line\) \$\(ISS.exe\) \$\(MEM_DIR\)
+		echo  @ mydump \(\ mips-linux-objdump \) \$\(ISS.exe\) \$\(FROM_DIR\) \$\(TO_DIR\)
+	fi
+}
+
+# my vim named "vv"
+function vv()
+{
+	local colon=$(echo $1 | grep ":" | awk '{print $1}')
+
+	if [ "$colon" != "" ]; then
+		local tmpstr=${colon#*:}
+		local editfile="${colon%%:*} +${tmpstr%%:*}"
+	else
+		local editfile=$@
+	fi
+
+	vim $editfile
+}
+
+# My Notes {{{1
+function cmd()
+{
+    vi ~/bin/notes
+}
+
+function n()
+{
+    #"n Id" : create or open note book
+    vim ~/mylinuxbuild/bin/noteste$1
+}
+
+# My tfcp {{{1
+# Added for copy FW into tftpboot auto on 2017/8/4
+function tfcp()
+{
+    # Added for auto load FW image when put boot_command 6 on 2017/09/12
+    local DES_1210_52ME_IMG=5A5A5A0A.img
+    local DGS_1210_SERS_IMG=0A5A5A5A.img
+    local TRENDNET_SERS_IGM=TRENDNET.img
+
+    # give the image/FW_DIR here, if start compile a new project, please add
+    # another if branch for get new $NAME before you want use command "tftp_cp"
+    # to copy the FW into ~/tftpboot/ again.
+
+    local LINUX_TFTP_DIR=`sw t; pwd;`
+    #local WINDS_TFTP_DIR=/home/xuke/share/tftp_win
+    local RESTART_TFTP="sudo service tftpd-hpa restart"
+
+    # if TRENDNET code doesn't have single image, this branch will fail because it's FW name concreted to DUT type name
+    if [ "$CUSTOMER_FOLDER" = "soarnex" ] || [ "$CUSTOMER_FOLDER" = "trendnet"];then
+        #local NAME=$(basename $PROJ_ROOT_PATH/image/TRENDNET)
+
+        # copy image/TRENDNET* to tftpboot/ and restart tftp server.
+        local HEX_DIR=image
+    elif [ "$CUSTOMER_FOLDER" = "dlinkme" ];then
+        local NAME=$(basename $PROJ_ROOT_PATH/image/*)
+
+        # copy FW_DIR/$NAME* to tftpboot/ and restart tftp server. $NAME such
+        # like as DGS-1210-52MPME-B1
+        local HEX_DIR=image/$NAME
+
+        # Added for DLINK modles auto get hex by hex file length on 2018/01/17.
+        #for file in $(ls $PROJ_ROOT_PATH/$HEX_DIR/*.zos2)
+        for file in $(ls $PROJ_ROOT_PATH/$HEX_DIR/*.img)
+        do
+            local HexLength=`expr length $file`
+            #let HexLength=$HexLength-1
+        done
+    fi
+
+    ##############################################################
+    # For just copy fw.hex into tftpboot/ otherwise any.hex      #
+    # and change name ${special name}.img to DGS/DES fw update.  #
+    ##############################################################
+    if [ ! $1 ]; then
+        if [ "$CUSTOMER_FOLDER" = "soarnex" ] || [ "$CUSTOMER_FOLDER" = "trendnet" ];then
+            tfcp cl;
+            cp $HEX_DIR/squashfs.vc $LINUX_TFTP_DIR/
+            #cp $HEX_DIR/squashfs.vc $WINDS_TFTP_DIR/
+            tfcp sh;
+        else
+            tfcp cl;
+            # Start copy hex file to the tftpboot directory.
+            for file in $(ls $PROJ_ROOT_PATH/$HEX_DIR/*.hex)
+            do
+                #echo $file `expr length $file` $HexLength
+                # Change the local on 2018/01/17, and now need not to change here always.
+                # just need add the HexLength below.
+                if [ `expr length $file` = $HexLength ]; then
+                    if [ "$NAME" = "DES-1210-52ME-C1" ]; then
+                        #echo -e ${FG_GREEN}Copying \
+                            #${F6_END}${BG_PURPLE}$file${F6_END}${FG_GREEN} into${FG_YELLOW} \
+                            #tftpboot\/tftp_win \
+                            #${FG_GREEN}with name ${FG_RED}\"$DES_1210_52ME_IMG\" ${F6_END}
+                        cp $file $LINUX_TFTP_DIR/$DES_1210_52ME_IMG
+                        #cp $file $WINDS_TFTP_DIR/$DES_1210_52ME_IMG
+                        #echo -e ${FG_GREEN}done. ${F6_END}
+                    else
+                        #echo -e ${FG_GREEN}Copying \
+                            #${F6_END}${BG_PURPLE}$file${F6_END}${FG_GREEN} into${FG_YELLOW} \
+                            #tftpboot\/tftp_win \
+                            #${FG_GREEN}with name ${FG_RED}\"$DGS_1210_SERS_IMG\" ${F6_END}
+                        cp $file $LINUX_TFTP_DIR/$DGS_1210_SERS_IMG
+                        #cp $file $WINDS_TFTP_DIR/$DGS_1210_SERS_IMG
+                        #echo -e ${FG_GREEN}done. ${F6_END}
+                    fi
+                    tfcp sh
+                    #else
+                    #echo HexLength is $HexLength and load lenth is `expr length $file`
+                fi
+            done
+        fi # end of trendnet
+    fi
+    # Modified on 2017/9/1
+    case $1 in
+        i|in|init )
+            # For init my work state.
+            echo -e ${FG_GREEN}Opening project. ${F6_END}
+            tfcp re; sw f
+            ;;
+        r|re|restart )
+            # For restart the tftp service.
+            echo -e ${FG_GREEN}Restaring tftp service. ${F6_END}
+            $RESTART_TFTP;
+            echo -e ${FG_GREEN}Restart done. ${F6_END}
+            ;;
+        c|ch|chmod )
+            # For chmod +rwx to the console SCRT call.
+            echo -e ${FG_GREEN}Chmoding +rwx for console. ${F6_END}
+            sudo chmod 777 /dev/ttyUSB0;
+            #sudo chmod 777 /dev/ttyS0;
+            echo -e ${FG_GREEN}Chmod done. ${F6_END}
+            ;;
+        cl|cle|clean )
+            # For clear files under tftpboot.
+            if [ "$NAME" = "DES-1210-52ME-C1" ]; then
+                echo -e ${FG_GREEN}Clearing ${FG_RED}$DES_1210_52ME_IMG ${FG_GREEN}from tftpboot. ${F6_END}
+                rm -rf $LINUX_TFTP_DIR/$DES_1210_52ME_IMG
+                #rm -rf $WINDS_TFTP_DIR/$DES_1210_52ME_IMG
+            else
+                if [ "$CUSTOMER_FOLDER" = "soarnex" ] || [ "$CUSTOMER_FOLDER" = "trendnet" ];then
+                    echo -e ${FG_GREEN}Clearing ${FG_RED}squashfs.vc ${FG_GREEN}from tftpboot. ${F6_END}
+                    rm -rf $LINUX_TFTP_DIR/squashfs.vc
+                    #rm -rf $WINDS_TFTP_DIR/squashfs.vc
+                else
+                    echo -e ${FG_GREEN}Clearing ${FG_RED}$DGS_1210_SERS_IMG ${FG_GREEN}from tftpboot. ${F6_END}
+                    rm -rf $LINUX_TFTP_DIR/$DGS_1210_SERS_IMG
+                    #rm -rf $WINDS_TFTP_DIR/$DGS_1210_SERS_IMG
+                fi
+            fi
+            ;;
+        s|sh|show )
+            # For show after update FW.hex in tftpboot, to compare with time and size
+            echo -e ${FG_GREEN}-----------------------------------------------------------${F6_END}
+            if [ "$NAME" = "DES-1210-52ME-C1" ]; then
+                image_name=$DES_1210_52ME_IMG
+            else
+                if [ "$CUSTOMER_FOLDER" = "soarnex" ] || [ "$CUSTOMER_FOLDER" = "trendnet" ];then
+                    image_name="squashfs.vc"
+                else
+                    image_name=$DGS_1210_SERS_IMG
+                fi
+            fi
+
+            linux_imgf_size=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f5)                      #9.4M | null
+            if [[ "" != ${linux_imgf_size} ]]; then
+                linux_imgf_date=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f6)                  #2018-12-05
+                linux_imgf_time=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f7 | cut -d '.' -f1) #14:41:13
+                linux_imgf_file=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f9)                  #5A5A5A0A.img
+            else
+                linux_imgf_size=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f6)                  #9.4M
+                linux_imgf_date=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f7)                  #2018-12-05
+                linux_imgf_time=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f8 | cut -d '.' -f1) #14:41:13
+                linux_imgf_file=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f10)                 #5A5A5A0A.img
+            fi
+
+            #wndws_imgf_size=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f5)
+            #if [[ "" != ${wndws_imgf_size} ]]; then
+                #wndws_imgf_date=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f6)
+                #wndws_imgf_time=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f7 | cut -d '.' -f1)
+                #wndws_imgf_file=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f9)
+            #else
+                #wndws_imgf_size=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f6)
+                #wndws_imgf_date=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f7)
+                #wndws_imgf_time=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f8 | cut -d '.' -f1)
+                #wndws_imgf_file=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f10)
+            #fi
+
+            if [ ! $2 ]; then
+                echo -e "${FG_DARKGREEN}tftpboot(linux) :" \
+                    "${FG_GREEN}${linux_imgf_size} ${FG_RED}${linux_imgf_date}${FG_YELLOW}(${linux_imgf_time}) ${FG_BLUE}${linux_imgf_file}${F6_END}"
+                #echo -e ${FG_GREEN}-----------------------------------------------------------${F6_END}
+                #echo -e "${FG_DARKGREEN}tftp_win(share) :" \
+                    #"${FG_GREEN}${wndws_imgf_size} ${FG_RED}${wndws_imgf_date}${FG_YELLOW}(${wndws_imgf_time}) ${FG_BLUE}${wndws_imgf_file}${F6_END}"
+            elif [ $2 = "-t" ]; then
+                echo -e "${FG_DARKGREEN}tftpboot(linux) :" \
+                    "${FG_GREEN}${linux_imgf_size} ${FG_RED}${linux_imgf_date}${FG_YELLOW}(${linux_imgf_time}) ${FG_BLUE}${linux_imgf_file}${F6_END}"
+            #elif [ $2 = "-s" ]; then
+                #echo -e "${FG_DARKGREEN}tftp_win(share) :" \
+                    #"${FG_GREEN}${wndws_imgf_size} ${FG_RED}${wndws_imgf_date}${FG_YELLOW}(${wndws_imgf_time}) ${FG_BLUE}${wndws_imgf_file}${F6_END}"
+            elif [ $2 = "-a" ];    then
+                ls -hl $LINUX_TFTP_DIR/ ;
+                #ls -hl $WINDS_TFTP_DIR/ ;
+            fi
+            echo -e ${FG_GREEN}-----------------------------------------------------------${F6_END}
+            ;;
+        f|con|config )
+            time=$(date +%Y-%m-%d)
+            #if [ ! -d "~/make_default_msr_config" ]; then
+                #mkdir ~/make_default_msr_config ;
+            #fi
+            echo -e ${FG_GREEN} Moveing the issdefault.conf to ~/make_default_msr_config/${NAME}_issdefault.conf ${F6_END}
+            mv ~/Downloads/config.cfg  ~/make_default_msr_config/${NAME}_issdefault.conf
+            cd ; tar -cvf msr_configs_${time}.tar.gz make_default_msr_config/* ;
+            cd - ;
+            lh ~/make_default_msr_config/ ~/msr_configs_*.tar.gz
+            ;;
+    esac
+}
+# My Quick Commands {{{1
+# copy to system copyBoard
+function c()
+{
+    #need install xsel
+    #sed -n 5p ~/mylinuxbuild/bin/notes | xsel
+    echo "str.................echo..." | xsel
+}
+
+# bashrc
+function b()
+{
+    vi ~/.bashrc
+}
+
+# vimrc
+function v()
+{
+    vi ~/.vimrc
+}
+
+# edit itself
+function e()
+{
+    vi ~/bin/functions
+}
+
+function r()
+{
+    vi ~/bin/release_me.sh
+}
+
+# edit dbg.h
+function d()
+{
+    vi ~/bin/dbg.h
+}
+
+function po()
+{
+    vim ~/bin/postfile
+}
+
+# backup or builder my vim envirenment.
+function back()
+{
+    time=$(date +%Y-%m-%d)
+    folder=vim-builder-${time}
+    file_dir=~/${folder}
+
+    if [ "$1" = "b" ] || [ "$1" = "-b" ] || [ "$1" = "-bc" ] || [ "$1" = "bc" ]; then
+        if [ ! -d "${file_dir}" ]; then
+            mkdir ${file_dir};
+        fi
+        cp ~/.bashrc \
+            ~/.vimrc \
+            ~/.vimrc_other \
+            ~/.gitconfig \
+            ~/.gitmessage \
+            ~/.profile \
+            ~/rbpost \
+            ${file_dir}/ ;
+        cp -R ~/bin/ \
+            ~/.vim/ \
+            ~/.ssh/ \
+            ~/tar/ \
+            ${file_dir}/
+        echo -e $FG_GREEN
+        echo -e " Backuped my vim envirenment to ${FG_YELLOW}${file_dir}/"
+        echo -e $F6_END
+    elif [ "$1" = "c" ] || [ "$1" = "-c" ] || [ "$1" = "cl" ] || [ "$1" = "-cl" ]; then
+        # case of <TIME> not null.
+        if [ -n "$2" ]; then
+            clean_time=$2;
+            clean_file=~/vim-builder-${clean_time};
+        else
+            clean_file=${file_dir};
+        fi
+        rm -rf ${clean_file};
+        echo -e $FG_GREEN
+        echo -e " Cleaned my backed envirenment from ${FG_YELLOW}${clean_file}/"
+        echo -e $F6_END
+    else
+        echo -e $FG_YELLOW
+        echo -e "Backup My Envirenment: back [OPTION]"
+        echo -e $FG_GREEN
+        echo -e "\t-b/-bc             backup my envirenment into ${folder} directory."
+        echo -e "\t-c/-cl <TIME>      remove backup dir and file created <TIME>."
+        echo -e $FG_RED
+        echo -e "\t${FG_RED}Note: Default value of <TIME> is today,format like 2018-01-19"
+        echo -e $F6_END
+    fi
+}
+
+# CC {{{1
+function cc()
+{
+   local j=0
+   local k=0
+   local count=3
+   local BEEN_PROCESSED=1
+   local NOT_PROCESSED=0
+   local processed_flag=$NOT_PROCESSED
+
+   # get current processing dir
+   local current_dir=`pwd`
+
+   # get modified files into array_modified_paths
+   cd $PROJ_ROOT_PATH/core/code/future &>/dev/null; cotmp &>/dev/null;
+
+   for i in $(git status -s | grep ' M ' | cut -d ' ' -f3)
+   do
+       array_modified_paths[j]=$i;
+       j=`expr $j + 1`;
+   done
+
+   # get modles name under future/, and if under them has a Makefile, to make -C clean it.
+   for line in ${array_modified_paths[@]}
+   do
+       root_node=$(echo $line | cut -d '/' -f1)
+
+       if [ "$root_node" = "vlangarp" ]; then
+           root_node="vlangarp/vlan"
+       # ISS/common
+       elif [ "$root_node" = "ISS" ]; then
+           # cmccmc  cmes  cmlog  cmrpc  csmme  customer  msr  system  tool  web
+           root_node=$(echo $line | cut -d '/' -f3)
+
+           if [ "$root_node" = "customer" ]; then
+               root_node="ISS/common/customer/eoid"
+           # ISS/common/tool
+           elif [ "$root_node" = "tool" ]; then
+               # cmoid  configzip  lua  mibcompiler  msrscan
+               root_node=$(echo $line | cut -d '/' -f4)
+           fi
+       elif [ "$CUSTOMER_FOLDER" = "trendnet" ]; then
+           # do not compile this directory in TRENDnet
+           if [ "$root_node" = "seciwf" ] || [ "$root_node" = "security" ]; then
+               processed_flag=$BEEN_PROCESSED
+           fi
+       fi
+
+       # echo -e ${FG_RED}"DEBUG: root_node is ($root_node)"${F6_END}
+
+       if [ -f $PROJ_ROOT_PATH/core/code/future/$root_node/Makefile ]; then
+
+           # process make must under PROJ_ROOT_PATH
+           if [ `pwd` != $PROJ_ROOT_PATH ]; then
+               cd $PROJ_ROOT_PATH &>/dev/null;
+           fi
+
+           # get already clean paths, cause multiple files may be modified in the same directory,
+           # but modules should be cleaned only once.
+           for processed_node in ${array_root_nodes[@]}
+           do
+               if [ "$processed_node" == "$root_node" ]; then
+
+                   processed_flag=$BEEN_PROCESSED
+                   break;
+               fi
+           done
+
+           if [ $processed_flag != $BEEN_PROCESSED ]; then
+               echo -e ${FG_DARKGREEN}------------------------------------------------------------
+               echo -e "cleaning "`pwd`"/core/code/future/$root_node"
+               echo -e ------------------------------------------------------------${F6_END}
+               make -C core/code/future/$root_node clean
+
+               if [ $? != 0 ]; then
+                   cd $current_dir &>/dev/null;
+                   return 1
+               fi
+           #else
+               #echo ------------------------------------------------------------
+               #echo "processed "`pwd`"/core/code/future/$root_node"
+               #echo ------------------------------------------------------------
+           fi
+
+           array_root_nodes[k]=$root_node
+           k=`expr $k + 1`;
+           processed_flag=$NOT_PROCESSED
+
+       fi
+   done
+
+   #for ((i=$count;i>=0;i--))
+   #do
+       #tput sc; tput civis
+       #echo -ne $(tput setf $((i+1)))"["$(date +'%Y-%m-%d %H:%M:%S')"]"$(tput sgr0)
+       #echo -ne $(tput setf $((count-i)))" compile watting ..."$(tput sgr0)
+       #echo -ne $(tput setf $((count-i));tput bold)" ${i} seconds"$(tput sgr0)
+       #sleep 1
+       #tput rc
+   #done
+
+   #tput el; tput cnorm; tput setf 7
+
+   # process make must under PROJ_ROOT_PATH
+   if [ `pwd` != $PROJ_ROOT_PATH ]; then
+       cd $PROJ_ROOT_PATH &>/dev/null;
+   fi
+
+   if [ "$CUSTOMER_FOLDER" != "trendnet" ]; then
+       touch -m -c core/code/future/cli/tools/src/cmdy.y
+   fi
+
+   make core fw.all; tfcp
+
+   cd $PROJ_ROOT_PATH/core/code/future &>/dev/null; cotmp &>/dev/null;
+   cd $current_dir &>/dev/null;
+   return 0
+}
+
+function cotmp()
+{
+    # get current processing dir
+    local current_dir=`pwd`
+    local j=0
+
+    local tmpfiles=(
+    "cli/src/clicmds.c"
+    "cli/tools/exe/cmdscan"
+    "cli/tools/exe/defpreproc"
+    "webnm/tool/Htmlgen/exe/HTMLGEN"
+    "cli/tools/obj/cmdy.c"
+    "cli/tools/obj/cmdl.c"
+    "dlinkmib/mibs/release_info/cust_mib_verinfo.mib"
+    "clidefs/backdoor_cmds.csv"
+    "clidefs/non_backdoor_cmds.csv"
+    "ISS/common/tool/msrscan/exe/MSRSCAN"
+    "dlinkmib/mibs/dlink.mib"
+    )
+
+    cd $PROJ_ROOT_PATH/core/code/future &>/dev/null;
+    for i in $(git status -s | grep ' M ' | cut -d ' ' -f3)
+    do
+        array_modified_paths[j]=$i;
+        echo -ne ${FG_GREEN}Modified\(git\): ${FG_BLUE}${array_modified_paths[$j]}${F6_END}
+
+        for ((k=0; k<${#tmpfiles[@]}; k++))
+        do
+            if [ -f ${tmpfiles[$k]} ] && [ ${tmpfiles[$k]} == ${array_modified_paths[$j]} ];then
+                git co ${tmpfiles[$k]}
+                echo -ne "${FG_RED} - checkout${F6_END}"
+            fi
+        done
+
+        j=`expr $j + 1`;
+        echo -ne "\n"
+    done
+    cd $current_dir &>/dev/null;
+    return 0
+}

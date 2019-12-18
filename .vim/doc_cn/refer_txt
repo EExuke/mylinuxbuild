@@ -1,0 +1,6 @@
+https://www.cnblogs.com/tangshiguang/p/6735354.html
+
+1. wget https://nchc.dl.sourceforge.net/project/vimcdoc/vimcdoc/1.5.0/vimcdoc-1.5.0.tar.gz
+2. tar -zxvf vimcdoc-1.5.0.tar.gz
+3. cd ~/.vim/doc/; ln -s /home/czd/.vim/doc_cn/vimcdoc-1.5.0/doc/* ./
+4. vim and :help

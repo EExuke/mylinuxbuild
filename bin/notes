@@ -1,0 +1,98 @@
+########################################################################################################
+#http://crdredm.nettech-global.com/projects/crdc-sw3/wiki/Firmware
+ tftp 0x81000000 uImage.vc; sf probe 0; sf erase 0x100000 0x180000; sf write 0x81000000 0x100000 0x180000; reset
+ tftp 0x81000000 squashfs.vc;sf probe 0;sf erase 0x0280000 0x0d00000; sf write 0x81000000 0x0280000 0x0d00000; bootm b4100000
+#########################################################################################################
+#   scrt 烧文件系统 																					#
+#																										#
+#	tftp 0x81000000 squashfs.vc;																		#
+#	sf probe 0;sf erase 0x0280000 0x0d00000; sf write 0x81000000 0x0280000 0x0d00000; bootm b4100000	#
+#																										#
+#########################################################################################################
+#   emmc Start Index Information																		#
+#																										#
+#   0x00000000-0x00080000 (512K)  Boot																	#
+#   0x00080000-0x000C0000 (256K)  Env																	#
+#   0x000C0000-0x00100000 (256K)  BoardInfo																#
+#   0x00100000-0x00280000 (1.5M)  Os-1																	#
+#   0x00280000-0x00F80000 (13M)   Rootfs-1																#
+#   0x00F80000-0x01100000 (1.5M)  Os-2																	#
+#   0x01100000-0x01E00000 (13M)   Rootfs-2																#
+#   0x01E00000-0x02000000 (2M)    Jffs2																	#
+#																										#
+#########################################################################################################
+	tftp 0x81000000 squashfs.vc; 				/* Download */
+	sf probe 0;sf erase 0x0280000 0x0d00000; 	/* 定位 擦除 */
+	sf write 0x81000000 0x0280000 0x0d00000; 	/* Write */
+	bootm b4100000 								/* Start boot */
+#################################################----  cmd  ----###################################################
+
+#Linux env build from: https://www.github.com/caozhendong/mylinuxbuild
+#-----------------------------------------------------------------------------------------------------------------#
+# 													   Note      												  #
+#
+#  一 Coding and Debug 常用快捷键：
+# 	F2 ：右侧显示当前文件中函数
+# 	F3 ：下侧动态显示函数来源
+# 	F4 ：左侧显示当前目录中其他文件
+# 	F5 : 同时显示上述三框
+# 	
+# 	需要先在项目目录下生成tags ，（用：ctags -R *   或者  Sync -b  ）
+# 	Ctrl+] : 下跳到当前函数的来源
+# 	Ctrl+} : 上跳到当前函数的被调用处
+# 	Ctrl+t ： 回跳
+# 	[[    ：光标移至函数开头
+#
+# 	Ctrl+\+c /（或, s c）: 查看该函数的被调用处
+# 	Ctrl+\+s /（或, s s）: 全局搜索当前函数
+# 
+#
+# 	：vsp /dir/file  ： 左右分窗同时现实两个文件
+# 	，+t : 插入文件开头
+# 	，+1 2 3 4 5 6 7 8 ： 加Debug打印信息
+#
+#  二 终端快捷键：
+# 	sw ： 目录跳转
+# 	e ： 编辑快捷指令
+# 	cmd ：本Note 
+# 	v ： 编辑vimrc文件
+# 	meld file1 file2 : 比较两个合并文件的异同(need sudo apt-get install meld )
+# 	gi  ： grep 搜索查找字符串
+# 	f ：find 查找文件
+# 	dir ： 切换环境目录模式
+#
+#
+#  三 需要的插件：
+# 	vim-gui-common ： 剪切板共享
+# 	ctags ： 函数跳转工具
+# 	cscope ： C代码查看辅助插件
+#
+#
+#  四 git提交代码&postreview
+# 	git st .
+# 	git diff .
+# 	git diff ... >/filename
+# 	rbpost ...  (or Review web : 172.22.102.205 to add diff)
+#
+# 	after "Ship it!":
+# 		1. git pull  先更新
+# 		2. git commit .  -> 填写模板 ->wq
+# 		3. git show .  (查看确认)
+# 		4. git push    (提交)
+#
+# 	git checout .
+# 	git apply filename
+#
+#
+# 五 编译
+# 	项目目录下 make run ： 运行x86
+#
+# 六 Linux下烧录
+# 	安装串口工具 minicom
+# 	运行： sudo minicom -D /dev/ttyUSB0 -b 115200 
+# 	重启tftp： sudo /etc/init.d/xinetd start或者restart
+# 
+#
+#
+#
+#
