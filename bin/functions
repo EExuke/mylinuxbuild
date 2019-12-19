@@ -614,9 +614,11 @@ function tfcp()
 # copy to system copyBoard
 function c()
 {
-    #need install xsel
+    #1.copy to windos, need install xsel
     #sed -n 5p ~/mylinuxbuild/bin/notes | xsel
-    echo "str.................echo..." | xsel
+    #echo "str...................." | xsel
+    #2.copy to linux, need install xclip
+    cat ~/mylinuxbuild/bin/notec | xclip -selection clipboard
 }
 
 # bashrc
