@@ -27,7 +27,7 @@
 	bootm b4100000 								/* Start boot */
 #################################################----  cmd  ----###################################################
 
-#Linux env build from: https://www.github.com/caozhendong/mylinuxbuild
+#Linux env build from: https://www.github.com/EExuke/mylinuxbuild
 #-----------------------------------------------------------------------------------------------------------------#
 # 													   Note      												  #
 #
