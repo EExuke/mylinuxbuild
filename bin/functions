@@ -419,7 +419,7 @@ function cmd()
 function n()
 {
     #"n Id" : create or open note book
-    vim ~/mylinuxbuild/bin/noteste$1
+    vim ~/mylinuxbuild/bin/note$1
 }
 
 # My tfcp {{{1
