@@ -611,6 +611,16 @@ function tfcp()
     esac
 }
 # My Quick Commands {{{1
+# python to py
+function py()
+{
+	python $1
+}
+function py3()
+{
+	python3 $1
+}
+
 # copy to system copyBoard
 function c()
 {
