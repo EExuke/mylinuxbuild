@@ -34,6 +34,11 @@ func SetCopyright()
         call append(1, "\ # Copyright (C) 2010-2011 Cameo Communications, Inc.")
         call append(2, "\ ############################################################################ ##")
         call append(3, "\ #")
+    elseif expand("%:e") == 'py'
+        call append(0, "\############################################################################# ##")
+        call append(1, "\# Copyright (C) 2019-2020 Cameo Communications, Inc.")
+        call append(2, "\############################################################################# ##")
+        call append(3, "\#")
     elseif expand("%:e") == 'vim'
         call append(0, "\" ============================================================================")
         call append(1, "\" Copyright (C) 2010-2011 Cameo Communications, Inc.")
@@ -55,6 +60,8 @@ func AutoSetTitle()
         call SetShellTitle()
     elseif expand("%:e") == 'h'
         call SetHTitle()
+    elseif expand("%:e") == 'py'
+        call SetPythonTitle()
     elseif expand("%:e") == 'vim'
         call SetVimTitle()
     endif
@@ -196,3 +203,22 @@ let &cpo = s:cpo_save
 unlet s:cpo_save
 
 " vim:set foldenable foldmethod=marker:
+
+" Python-FILE TITILE {{{1
+func SetPythonTitle()
+    let i=4
+    call append(i, "# --------------------------------------------------------------------------")
+    call append(i+1, "#     AUTHOR                   : EExuke")
+    call append(i+2, "#     FILE NAME                : ".expand('<afile>:t'))
+    call append(i+3, "#     FILE DESCRIPTION         : Python file")
+    call append(i+4, "#     FIRST CREATION DATE      : ".strftime("%Y/%m/%d"))
+    call append(i+5, "# --------------------------------------------------------------------------")
+    call append(i+6, "#     Version                  : 1.0")
+    call append(i+7, "#     Last Change              : ".strftime("%Y/%m/%d"))
+    call append(i+8, "## ************************************************************************** ##")
+    call append(i+9, "")
+    call append(i+10, "\#-----------------------------------------------------------")
+    call append(i+11, "\#                  MAIN PROCESS")
+    call append(i+12, "\#-----------------------------------------------------------")
+    call cursor(i+13,0)
+endfunc
