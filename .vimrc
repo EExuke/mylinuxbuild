@@ -183,7 +183,7 @@ if has("cscope")
 endif
 "}}}
 " TOOLS: Auto PLUGIN Head Settings {{{1
-autocmd BufNewFile *.cpp,*.vim,*.sh,*.[ch] exec ":call AutoSetTitle()"
+autocmd BufNewFile *.cpp,*.vim,*.sh,*.py,*.[ch] exec ":call AutoSetTitle()"
 "}}}
 
 "----------------------------------------------------------
