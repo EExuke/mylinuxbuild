@@ -614,10 +614,6 @@ function tfcp()
 # python to py
 function py()
 {
-	python $1
-}
-function py3()
-{
 	python3 $1
 }
 
@@ -626,16 +622,18 @@ function c()
 {
 	#1.copy to windos, need install xsel
 	#2.copy to linux, need install xclip
-	case $1 in
-		1)  #copy note1 to clipboard
-			cat ~/mylinuxbuild/bin/note1 | xclip -selection clipboard
-			;;
-		*)  #copy notec to clipboard
-			#sed -n 5p ~/mylinuxbuild/bin/notes | xsel
-			#echo "str...................." | xsel
-			cat ~/mylinuxbuild/bin/notec | xclip -selection clipboard
-			;;
-	esac
+	if [ ! $1 ]; then
+		#copyBoardopy notec to clipboard
+		#sed -n 5p ~/mylinuxbuild/bin/notes | xsel
+		#echo "str...................." | xsel
+		cat ~/mylinuxbuild/bin/notec | xclip -selection clipboard
+	elif [ ! $2 ]; then
+		#copy note$1 to clipboard
+		cat ~/mylinuxbuild/bin/note$1 | xclip -selection clipboard
+	else
+		#copy $2 line of note$1 to clipboard
+		sed -n $2p ~/mylinuxbuild/bin/note$1 | xclip -selection clipboard
+	fi
 }
 
 # bashrc
