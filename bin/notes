@@ -50,6 +50,8 @@
 # 	：vsp /dir/file  ： 左右分窗同时现实两个文件
 # 	，+t : 插入文件开头
 # 	，+1 2 3 4 5 6 7 8 ： 加Debug打印信息
+# 	, +c+s 或 ,+c+"空格" ：多行快捷注释
+# 	, +f 或 :MRU ：查看最近查看过的文件
 #
 #  二 终端快捷键：
 # 	sw ： 目录跳转
@@ -79,9 +81,12 @@
 # 		2. git commit .  -> 填写模板 ->wq
 # 		3. git show .  (查看确认)
 # 		4. git push    (提交)
-#
-# 	git checout .
-# 	git apply filename
+# 	diff的清除与导入：
+# 		git checout .
+# 		git apply filename
+# 	查看文件修改者和修改信息：
+# 		git annotate /home/xuke/PATH...
+# 		git show <commit ID> 或 git sh <commit ID>
 #
 #
 # 五 编译
