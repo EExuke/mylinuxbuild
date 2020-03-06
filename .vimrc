@@ -136,14 +136,14 @@ nmap <F2> :TrinityToggleTagList<CR>
 "}}}
 " PLUGIN: showmarks Settings {{{1
 " 默认开启showmarks
-let showmarks_enable = 1
-" 只显示全部的大写和小写标记
-let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-" 对文件类型为help、quickfix和non-modifiable(不可修改)的缓冲区，则不显示标记的位置
-let showmarks_ignore_type = "hqm"
-" 高亮行上下层标记
-let showmarks_hlline_lower = 1
-let showmarks_hlline_upper = 1
+"let showmarks_enable = 1
+"" 只显示全部的大写和小写标记
+"let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+"" 对文件类型为help、quickfix和non-modifiable(不可修改)的缓冲区，则不显示标记的位置
+"let showmarks_ignore_type = "hqm"
+"" 高亮行上下层标记
+"let showmarks_hlline_lower = 1
+"let showmarks_hlline_upper = 1
 "}}}
 " ---------------------------------------------------------
 "  TOOLS CONFIGURATION
