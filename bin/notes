@@ -37,7 +37,7 @@
 # 	F4 ：左侧显示当前目录中其他文件
 # 	F5 : 同时显示上述三框
 # 	
-# 	需要先在项目目录下生成tags ，（用：ctags -R *   或者  Sync -b  ）
+# 	需要先在项目目录下生成tags ，（用：ctags -R *   或者  Sync -b  ）(Java:jtags, Python:ptags)
 # 	Ctrl+] : 下跳到当前函数的来源
 # 	Ctrl+} : 上跳到当前函数的被调用处
 # 	Ctrl+t ： 回跳
