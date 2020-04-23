@@ -88,6 +88,9 @@
 # 		git annotate /home/xuke/PATH...
 # 		git show <commit ID> 或 git sh <commit ID>
 #
+# tig: git的可视化工具
+# 		sudo apt-get install tig
+# 		<使用说明可查>
 #
 # 五 编译
 # 	项目目录下 make run ： 运行x86
