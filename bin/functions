@@ -280,26 +280,52 @@ function f()
     fi
 }
 
-function g()
+function mygrep()
 {
-    if [ $# = 1 ]; then
-        grep -Irns -- "$1" *
+    # g/gi A      : grep A -Iirns *
+    if [ $# = 2 ]; then
+        grep $1 -- "$2" *
+        echo -e ${FG_RED}Command:${FG_YELLOW} grep $1 -- \""$2"\" *${F6_END}
     fi
 
-    if [ $# = 2 ]; then
-        grep --include="$2" "$1" -Irns *
+    # Note: ${2/\//} will cut '/' in $2, ex. $2: ./a >> .a
+
+    # g/gi A b/   : grep A -Iirns b/ (b/ must has the character '/')
+    # g/gi A c    : grep A --include="c" -Iirns ./
+    if [ $# = 3 ]; then
+        if [ "$3" == "${3/\//}" ]; then
+            grep --include="$3" "$2" $1 *
+            echo -e "${FG_RED}Command:${FG_YELLOW} grep --include="$3" \""$2"\" $1 *${F6_END}"
+        else
+            grep $1 -- "$2" "$3"
+            echo -e "${FG_RED}Command:${FG_YELLOW} grep $1 -- \""$2"\" "$3"${F6_END}"
+        fi
     fi
+
+    # only support "g/gi A b/ c" || "g/gi A c b/" now
+    if [ $# = 4 ]; then
+        if [ "$4" != "${4/\//}" ] && [ "$3" == "${3/\//}" ]; then
+            # input "g value *.c <path>"
+            # grep --include="*.c" "value" -Irns <path>
+            grep --include="$3" "$2" $1 "$4"
+            echo -e "${FG_RED}Command:${FG_YELLOW} grep --include="$3" \""$2"\" $1 "$4"${F6_END}"
+        elif [ "$3" != "${3/\//}" ] && [ "$4" == "${4/\//}" ]; then
+            # input "g value <path> *.c"
+            # grep --include="*.c" "value" -Irns <path>
+            grep --include="$4" "$2" $1 "$3"
+            echo -e "${FG_RED}Command:${FG_YELLOW} grep --include="$4" \""$2"\" $1 "$3"${F6_END}"
+        fi
+    fi
+}
+
+function g()
+{
+    mygrep -Irns "$@"
 }
 
 function gi()
 {
-    if [ $# = 1 ]; then
-        grep -Iirns -- "$1" *
-    fi
-
-    if [ $# = 2 ]; then
-        grep --include="$2" "$1" -Iirns *
-    fi
+    mygrep -Iirns "$@"
 }
 
 function clone()

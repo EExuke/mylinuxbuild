@@ -176,6 +176,11 @@ fi
     #. ~/workspace/test/shell/myrelease.sh;
 #fi
 
+#load rfc.sh
+if [ -f ~/bin/rfc.sh ]; then
+    . ~/bin/rfc.sh;
+fi
+
 if [ -f ~/bin/functions ]; then
     . ~/bin/functions
     dir 1       # choose which enviroment

@@ -44,6 +44,11 @@ func SetCopyright()
         call append(1, "\" Copyright (C) 2010-2011 Cameo Communications, Inc.")
         call append(2, "\" ============================================================================")
         call append(3, "")
+    elseif expand("%:t") == 'Makefile'
+        call append(0, "\# ==========================================")
+        call append(1, "\# © 2019 Zhendong Cao. All Rights Reserved.")
+        call append(2, "\# ==========================================")
+        call append(3, "")
     else
         call append(0,"/**************************************************************************** **")
         call append(1, " * Copyright (C) 2010-2011 Cameo Communications, Inc.")
@@ -62,6 +67,8 @@ func AutoSetTitle()
         call SetHTitle()
     elseif expand("%:e") == 'py'
         call SetPythonTitle()
+    elseif expand("%:t") == 'Makefile'
+        call SetMKTitle()
     elseif expand("%:e") == 'vim'
         call SetVimTitle()
     endif
@@ -156,6 +163,38 @@ func SetHTitle()
     call append(i+20, "")
     call append(i+21, "#endif /* End of _".toupper(expand("%:t:r"))."_H_ */")
     call cursor(i+16,0)
+endfunc
+
+" Makefile TITILE {{{1
+func SetMKTitle()
+    let i=3
+    call append(i+1, "DIR_OBJ = ./obj")
+    call append(i+2, "DIR_SRC = ./src")
+    call append(i+3, "INC_SRC = ./inc")
+    call append(i+4, "")
+    call append(i+5, "SRC = $(wildcard ${DIR_SRC}/*.c)")
+    call append(i+6, "OBJ = $(patsubst %.c, ${DIR_OBJ}/%.o, $(notdir $(SRC)))")
+    call append(i+7, "")
+    call append(i+8, "BIN_TARGET = ")
+    call append(i+9, "")
+    call append(i+10, "CC = gcc")
+    call append(i+11, "CFLAGS = -g -Wall -I $(INC_SRC)")
+    call append(i+12, "${BIN_TARGET}: ${OBJ}")
+    call append(i+13, "	$(warning Building $(BIN_TARGET) ...)")
+    call append(i+14, "	@$(CC) $(OBJ) -o $@")
+    call append(i+15, "")
+    call append(i+16, "${DIR_OBJ}/%.o: ${DIR_SRC}/%.c")
+    call append(i+17, "	$(warning Comping $< ...)")
+    call append(i+18, "	@$(CC) $(CFLAGS) -c $< -o $@")
+    call append(i+19, "")
+    call append(i+20, "# Prevent naming conflicts such as the existence of a file named clean.")
+    call append(i+21, ".PHONY: clean")
+    call append(i+22, "")
+    call append(i+23, "clean:")
+    "call append(i+24, "	$(warning Clean $(OBJ), $(BIN_TARGET) ...)")
+    call append(i+24, "	@find ${DIR_OBJ} -name *.o -exec rm -rf {} \\;")
+    call append(i+25, "	@rm -rf $(BIN_TARGET)")
+    call cursor(i+9,13)
 endfunc
 " VIM-FILE TITILE {{{1
 func SetVimTitle()

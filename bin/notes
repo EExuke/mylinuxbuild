@@ -68,6 +68,7 @@
 # 	vim-gui-common ： 剪切板共享
 # 	ctags ： 函数跳转工具
 # 	cscope ： C代码查看辅助插件
+# 	eleline.vim 美化vim状态栏
 #
 #
 #  四 git提交代码&postreview
