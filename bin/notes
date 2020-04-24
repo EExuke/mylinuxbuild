@@ -102,6 +102,9 @@
 # 	重启tftp： sudo /etc/init.d/xinetd start或者restart
 # 
 #
+# 七 好用的终端
+# 	terminator:
+# 		支持窗口分屏，透明/自定义背景，指定双击分隔符等
 #
 #
 #
