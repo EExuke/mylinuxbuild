@@ -135,6 +135,8 @@ nmap <F3> :TrinityToggleSourceExplorer<CR>
 nmap <F2> :TrinityToggleTagList<CR>
 "}}}
 " PLUGIN: showmarks Settings {{{1
+let g:snips_email="EExuke@qq.com"
+let g:snips_author="EExuke"
 " 默认开启showmarks
 "let showmarks_enable = 1
 "" 只显示全部的大写和小写标记
