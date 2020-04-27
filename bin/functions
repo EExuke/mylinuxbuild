@@ -747,6 +747,21 @@ function back()
     fi
 }
 
+
+# test_b {{{1
+function test_b()
+{
+    sw te;
+
+    if [ $# != 0 ]; then
+        mkdir $1; cd $1;
+    fi
+
+    mkdir src inc obj;
+    vim Makefile;
+    touch src/"$1".c inc/"$1".h
+}
+
 # CC {{{1
 function cc()
 {
