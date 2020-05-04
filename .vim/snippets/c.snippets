@@ -85,3 +85,14 @@ snippet main
 		return 0;
 	}
 	${2}
+#switch ()
+snippet switch
+	switch (${1:/*varable*/})
+	{
+		case ${2:/*case 1*/}
+			${3:/*do something*/}
+			break;
+		default:
+			${4:/*do default*/}
+	}
+	${5}
