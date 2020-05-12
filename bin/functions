@@ -246,6 +246,9 @@ function sw()
         en|env|envirenment )
             cd /home/xuke/mylinuxbuild/
             ;;
+        te|temp)
+            cd /home/xuke/Templates/
+            ;;
         * )
             cd "$1"
             ;;
