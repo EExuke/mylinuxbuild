@@ -185,12 +185,12 @@ if [ -f ~/bin/functions ]; then
     . ~/bin/functions
     dir 1       # choose which enviroment
 
-    dir trendnet  # choose trendnet
+    #dir trendnet  # choose trendnet
     #dir soarnex
     #dir dlink
     #dir buffalo
     #dir generic
-    #dir learnnote
+    dir learnspace
 fi
 
-export PATH=$PATH:/usr/local/arm/4.3.2/bin
+export PATH=$PATH:/usr/local/arm/4.3.2/bin:.

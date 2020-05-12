@@ -118,6 +118,11 @@ nmap <leader>si :cs find i <C-R>=expand("<cfile>")<cr><cr>
 nmap <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
 nmap <leader>zz <C-w>o
 nmap <leader>gs :GetScripts<cr>
+"InterestingWords多单词高亮："
+nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
+nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
+nnoremap <silent> m :call WordNavigation('forward')<cr>
+nnoremap <silent> M :call WordNavigation('backward')<cr>
 "}}}
 " PLUGIN: SrcExpl Settings {{{1
 nmap <C-I> <C-W>j:call g:SrcExpl_Jump()<CR>
