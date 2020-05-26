@@ -1,5 +1,5 @@
 " ============================================================================
-" Copyright (C) 2010-2011 Cameo Communications, Inc.
+" Copyright (C) 2010-2011 Inhand Communications, Inc.
 " ============================================================================
 
 " ----------------------------------------------------------------------------
@@ -59,9 +59,9 @@ func IncludeMyDebugHeader()
 	call append(line("."), "#include \"/home/xuke/bin/dbg.h\"")
 endfunc
 
-" Auto add the CAMEO_TAG into source code.
+" Auto add the InhandTag into source code.
 func PrintIssueTag()
-	call append(line("."), "\/* CAMEOTAG: xuke modified on ".strftime("%Y/%m/%d")." for fixing M# */")
+	call append(line("."), "\/* InhandTag: xuke modified on ".strftime("%Y/%m/%d")." for fixing M# */")
 endfunc
 
 " restore 'cpo'

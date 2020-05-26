@@ -8,7 +8,7 @@
  */
 #define  SUPPORT_COLOR_DEBUG
 
-/* CAMEOTAG: zhendong 2018-03-28
+/* INHANDTAG: zhendong 2018-03-28
  * Supporting the display colors in the C program code.
  *   -----------------------------------------------------------
  *    UL -- [F]UnderLine   BA -- [F]Black        RE -- [F]Red
@@ -72,7 +72,7 @@
 #endif
 #endif
 
-/* CAMEOTAG: zhendong 2018-03-28
+/* INHANDTAG: zhendong 2018-03-28
  *  ----------------------------------------------------------------
  * 1. filename funcname(line)                   : message<color>
  * 2. filename compiletime funcname(line)       : message<color>
