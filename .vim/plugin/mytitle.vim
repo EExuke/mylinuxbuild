@@ -6,7 +6,7 @@
 " ============================================================================
 "    Filename                 : mytitle.vim
 "    Version                  : 1.0
-"    Author                   : Zhendong Cao
+"    Author                   : EExuke
 "    Last Change              : 2019/7/1 by EExuke
 "    Description              : This program is free software.
 " ============================================================================
@@ -46,7 +46,7 @@ func SetCopyright()
         call append(3, "")
     elseif expand("%:t") == 'Makefile'
         call append(0, "\# ==========================================")
-        call append(1, "\# © 2019 Zhendong Cao. All Rights Reserved.")
+        call append(1, "\# © 2019 EExuke. All Rights Reserved.")
         call append(2, "\# ==========================================")
         call append(3, "")
     else

@@ -234,6 +234,9 @@ function sw()
         r|rootfs )
             try_cd target/rootfs
             ;;
+        re )
+            cd /home/xuke/release
+            ;;
         e|erps )
             try_cd core/code/future/erps
             ;;
