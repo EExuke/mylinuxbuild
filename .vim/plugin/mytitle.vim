@@ -46,7 +46,7 @@ func SetCopyright()
         call append(3, "")
     elseif expand("%:t") == 'Makefile'
         call append(0, "\# ==========================================")
-        call append(1, "\# © 2019 EExuke. All Rights Reserved.")
+        call append(1, "\# © 2020 EExuke. All Rights Reserved.")
         call append(2, "\# ==========================================")
         call append(3, "")
     else
