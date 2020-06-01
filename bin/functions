@@ -643,6 +643,12 @@ function tfcp()
     esac
 }
 # My Quick Commands {{{1
+# to open IRouter web
+function WR()
+{
+	firefox https://192.168.39.1
+}
+
 # python to py
 function py()
 {
