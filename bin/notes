@@ -70,7 +70,7 @@
 #  三 需要的插件：
 # 	vim-gui-common ： 剪切板共享
 # 	ctags ： 函数跳转工具
-# 	cscope ： C代码查看辅助插件
+# 	cscope ： C代码查看辅助插件(项目目录下执行： cscope -Rbkq )
 #
 #
 #  四 git提交代码&postreview
