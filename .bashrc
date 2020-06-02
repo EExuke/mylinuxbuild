@@ -120,6 +120,12 @@ alias lh='ls -hl'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# svn alias
+alias sdf='svn diff'
+alias sup='svn update'
+alias sst='svn status'
+alias slo='svn log'
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
