@@ -1,3 +1,17 @@
+# file header
+snippet hdr
+	/*******************************************************************************
+	 * MODULE NAME         : ${1:system}
+	 * TARGET ENVIRONMENT  : Any
+	 * FILE NAME           : `expand('%:NAMEt')`
+	 * FIRST CREATION DATE : `strftime("%Y/%m/%d")`
+	 * ----------------------------------------------------------------------------
+	 * @Author             : [`g:snips_author`]
+	 * @E_mail             : [`g:snips_email`]
+	 * @E_mailVersion      : 1.0
+	 * @fcopyright Copyright`strftime("%Y")` EExuke Inhand.
+	 ******************************************************************************/
+	${2}
 # Prototype
 snippet proto
 	${1:class_name}.prototype.${2:method_name} =
