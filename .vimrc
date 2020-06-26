@@ -248,3 +248,7 @@ autocmd BufNewFile *.cpp,*.vim,Makefile,*.sh,*.py,*.[ch] exec ":call AutoSetTitl
 "endfunc 	
 " ------------------------------------------------------------------
 "}}}
+"{{{
+"vim 透明背景
+hi Normal ctermfg=252 ctermbg=none
+"}}}
