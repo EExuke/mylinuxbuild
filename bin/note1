@@ -14,3 +14,9 @@ $ crontab -e
 xuke@inhand.com.cn
 EEkexu997028
 
+# 编译时 <bd.h> 文件找不到
+"db.h" 文件需要自己编译 system/db 生成
+
+# 代码检查工具
+cppcheck 
+$ cppcheck . 2 > ./cppck.log

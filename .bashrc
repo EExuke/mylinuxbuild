@@ -122,9 +122,10 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # svn alias
 alias sdf='svn diff'
-alias sup='svn update'
-alias sst='svn status'
-alias slo='svn log'
+alias sdi='svn diff -r'    #+logid 查看当前版本与logid版本的区别, 若加"logid_old:logid_new"则比较此两个版本的区别(注意顺序)
+alias sup='sudo svn update'
+alias sst='svn status | grep ^M'
+alias slo='svn log -v | less'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -194,9 +195,9 @@ if [ -f ~/bin/functions ]; then
     #dir trendnet  # choose trendnet
     #dir soarnex
     #dir dlink
-    #dir buffalo
+    dir VG9
     #dir generic
-    dir learnspace
+    #dir learnspace
 fi
 
-export PATH=$PATH:/usr/local/arm/4.3.2/bin:.
+export PATH=$PATH:/usr/local/arm/4.3.2/bin:.:/opt/ipq4029-arm_cortex-a7_gcc-4.8-linaro_uClibc-1.0.14_eabi/bin:~/colordiff/usr/local/bin
