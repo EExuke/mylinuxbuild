@@ -1,0 +1,15 @@
+# 扁平化主题和图标安装：
+sudo apt-get install unity-tweak-tool -y
+# download theme:
+sudo add-apt-repository ppa:noobslab/themes
+sudo apt-get update
+sudo apt-get install flatabulous-theme
+# download icons:
+sudo add-apt-repository ppa:noobslab/icons
+sudo apt-get update
+sudo apt-get install ultra-flat-icons
+
+# set :
+unity-tweak-tool
+Theme: Flatabulous
+Icons: Ultra-flat
