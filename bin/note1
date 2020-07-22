@@ -20,3 +20,7 @@ EEkexu997028
 # 代码检查工具
 cppcheck 
 $ cppcheck . 2 > ./cppck.log
+
+# vbox挂载共享文件
+# sudo mount -t vboxsf 共享文件夹名称（在设置页面设置的） 挂载的目录
+sudo mount -t vboxsf share2ubuntu /home/xuke/share2win
