@@ -1,5 +1,5 @@
 " ============================================================================
-" Copyright (C) 2001-2020 Inhand Communications, Inc.
+" Copyright (C) 2001-2020 Inhand Networks, Inc.
 " ============================================================================
 
 " ----------------------------------------------------------------------------
@@ -31,17 +31,17 @@ set cpo&vim
 func SetCopyright()
     if &filetype == 'sh'
         call append(0, "\ ############################################################################# ##")
-        call append(1, "\ # Copyright (C) 2001-2020 Inhand Communications, Inc.")
+        call append(1, "\ # Copyright (C) 2001-2020 Inhand Networks, Inc.")
         call append(2, "\ ############################################################################ ##")
         call append(3, "\ #")
     elseif expand("%:e") == 'py'
         call append(0, "\############################################################################# ##")
-        call append(1, "\# Copyright (C) 2001-2020 Inhand Communications, Inc.")
+        call append(1, "\# Copyright (C) 2001-2020 Inhand Networks, Inc.")
         call append(2, "\############################################################################# ##")
         call append(3, "\#")
     elseif expand("%:e") == 'vim'
         call append(0, "\" ============================================================================")
-        call append(1, "\" Copyright (C) 2001-2020 Inhand Communications, Inc.")
+        call append(1, "\" Copyright (C) 2001-2020 Inhand Networks, Inc.")
         call append(2, "\" ============================================================================")
         call append(3, "")
     elseif expand("%:t") == 'Makefile'
@@ -51,7 +51,7 @@ func SetCopyright()
         call append(3, "")
     else
         call append(0,"/**************************************************************************** **")
-        call append(1, " * Copyright (C) 2001-2020 Inhand Communications, Inc.")
+        call append(1, " * Copyright (C) 2001-2020 Inhand Networks, Inc.")
         call append(2, " **************************************************************************** **/")
         call append(3, "")
     endif
