@@ -665,6 +665,12 @@ function tfcp()
     #esac
 }
 # My Quick Commands {{{1
+# telnet ip
+function tl()
+{
+	c c 5
+	telnet 192.168.39.$1
+}
 # build test VG9
 function bd()
 {
@@ -698,9 +704,12 @@ function c()
 	elif [ ! $2 ]; then
 		#copy note$1 to clipboard
 		cat /home/xuke/mylinuxbuild/bin/note$1 | xclip -selection clipboard
-	else
+	elif [ ! $3 ]; then
 		#copy $2 line of note$1 to clipboard
 		sed -n $2p /home/xuke/mylinuxbuild/bin/note$1 | xclip -selection clipboard
+	else
+		#copy $2-$3 line of note$1 to clipboard
+		sed -n $2,$3p /home/xuke/mylinuxbuild/bin/note$1 | xclip -selection clipboard
 	fi
 }
 
