@@ -18,7 +18,9 @@
 	last = log --graph --abbrev-commit -1 --stat
 [user]
 	name = xuke
-	email = iceke@foxmail.com
+	email = xuke@inhand.com.cn
+[credential]
+	    helper = store
 [core]
 	editor = vim
 [commit]
