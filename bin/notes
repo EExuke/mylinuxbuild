@@ -91,10 +91,13 @@
 # 	查看文件修改者和修改信息：
 # 		git annotate /home/xuke/PATH...
 # 		git show <commit ID> 或 git sh <commit ID>
+# 	子模块的分支状态信息文件：
+# 		.git/modules/<modules_name>/HEAD
 #
 # tig: git的可视化工具
 # 		sudo apt-get install tig
 # 		<使用说明可查>
+#
 #
 # 五 编译
 # 	项目目录下 make run ： 运行x86
@@ -109,5 +112,6 @@
 # 	terminator:
 # 		支持窗口分屏，透明/自定义背景，指定双击分隔符等
 #
-#
+# 八 实用网络工具
+# 	网络客户端：nc <ip> <port> 
 #
