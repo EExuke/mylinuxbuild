@@ -62,8 +62,17 @@
 # 	cmd ：本Note 
 # 	v ： 编辑vimrc文件
 # 	meld file1 file2 : 比较两个合并文件的异同(need sudo apt-get install meld )
-# 	gi  ： grep 搜索查找字符串
-# 	f ：find 查找文件
+# 	比较两个二进制文件，可以使用vimdiff。
+# 		vimdiff应该还是比较好用的，类似windows 平台的windiff
+# 		vim -bd base.ko base2.ko
+# 		打开后就可以在两个窗口里面显示两个文件
+# 		ctrl + W +L  把输入焦点切换到右边的窗口，激活右边的窗口后输入的命令就是针对右窗口了
+# 		:%!xxd -g 1  切换成十六进制的一个字节的模式
+# 		ctrl + W +H  把输入焦点切换到左边的窗口 
+# 		:%!xxd -g 1 
+# 		] + c  查找上一个不同点
+# 		[ + c  查找下一个不同点
+#
 # 	dir ： 切换环境目录模式
 # (type '别名' ：查看命令含义解释)
 #
@@ -112,6 +121,9 @@
 # 	terminator:
 # 		支持窗口分屏，透明/自定义背景，指定双击分隔符等
 #
-# 八 实用网络工具
+# 八 实用命令
 # 	网络客户端：nc <ip> <port> 
+# 	文件编码类型转换（解决linux下显示win编码文件乱码问题）
+# 		iconv　 -f 　GB2312　 -t　 UTF-8　 test1.m　 -o 　test1.m
+# 		------------原本编码-------新编码---原文件名-------新生成文件名
 #

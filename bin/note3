@@ -1,36 +1,63 @@
 ########################################################################################
 # note 3
 ########################################################################################
-# grep的规则表达式:
+# AWS iot:
+sdkTest/sub
 
-^  #锚定行的开始 如：'^grep'匹配所有以grep开头的行。
+xk_Policy
+{
+	"Version": "2012-10-17",
+	"Statement": [
+	{
+		"Effect": "Allow",
+		"Action": "iot:*",
+		"Resource": "*"
+	}
+	]
+}
 
-$  #锚定行的结束 如：'grep$'匹配所有以grep结尾的行。
 
-.  #匹配一个非换行符的字符 如：'gr.p'匹配gr后接一个任意字符，然后是p。
+# 移植:
+我们可以从sdk源码中提取出我们需要的部分组成我们实际使用的代码
+(1)新建文件夹aws_iot_test
+(2)将aws-iot-device-sdk-embedded-C 中 certs external_libs include platform src 这5个文件夹复制到该文件夹下
+(3)将aws-iot-device-sdk-embedded-C/samples/linux/subscribe_publish_sample 中文件复制到该文件夹下
+(4)修改Makefile
+修改APP_NAME 为自己应用名，如aws_iot_test
+修改IOT_CLIENT_DIR 为 .
+(5)修改主程序文件名
+将subscribe_publish_sample.c文件名改为 自己应用名.c
+mv subscribe_publish_sample.c aws_iot_test.c
+(6)修改主程序中certs 文件路径
+aws_iot_test.c中44行 char certDirectory[PATH_MAX + 1] = “../../../certs”;为 ./certs
+(7)make 运行测试 aws_iot_test 和1.5中结果一致说明，说明当前代码可用
 
-*  #匹配零个或多个先前字符 如：'*grep'匹配所有一个或多个空格后紧跟grep的行。
+交叉编译到嵌入式linux平台
+到/external_libs/mbedTLS目录下 ，执行交叉编译
+	cd /external_libs/mbedTLS
+	make clean
+	make CC=arm-linux-uclibcgnueabi-gcc
 
-.*   #一起用代表任意字符。
+交叉编译测试程序
+	修改Makefile
+	将CC=gcc 替换为
+	CC=arm-linux-uclibcgnueabi-gcc
+	回到程序根目录执行make
 
-[]   #匹配一个指定范围内的字符，如'[Gg]rep'匹配Grep和grep。
+之后移植到项目的/system/中，并加入编译
+	inhand/configs/VG9-system.configs中增加：+CONFIG_AWS_IOT_TEST=y
+	rules/Aall.mk    +include rules/aws_iot_test.mk
+	rules/configs.mk    +obj-$(CONFIG_AWS_IOT_TEST) += aws_iot_test
+	添加 rules/aws_iot_test.mk
 
-[^]  #匹配一个不在指定范围内的字符，如：'[^A-FH-Z]rep'匹配不包含A-R和T-Z的一个字母开头，紧跟rep的行。
+将测试程序和certs文件夹放到目标机同一目录下运行!
+	在aws_iot_test.mk中用 cp 实现
 
-..  #标记匹配字符，如'love'，love被标记为1。
 
-\<      #锚定单词的开始，如:'\<grep'匹配包含以grep开头的单词的行。
 
-\>      #锚定单词的结束，如'grep\>'匹配包含以grep结尾的单词的行。
+#与AWS iot 对接 https://blog.csdn.net/m0_37263637/article/details/81103497
+     aws/ certs external_libs include platform src 
+	     *权限不足的项：
+		 -创建规则 解析数据以推送或处理
+		 -创建作业 需要文档  (作业一次向一个或多个设备发送远程操作)
 
-x\{m\}  #重复字符x，m次，如：'0\{5\}'匹配包含5个o的行。
-
-x\{m,\}  #重复字符x,至少m次，如：'o\{5,\}'匹配至少有5个o的行。
-
-x\{m,n\}  #重复字符x，至少m次，不多于n次，如：'o\{5,10\}'匹配5--10个o的行。
-
-\w    #匹配文字和数字字符，也就是[A-Za-z0-9]，如：'G\w*p'匹配以G后跟零个或多个文字或数字字符，然后是p。
-
-\W    #\w的反置形式，匹配一个或多个非单词字符，如点号句号等。
-
-\b    #单词锁定符，如: '\bgrep\b'只匹配grep。

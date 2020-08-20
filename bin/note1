@@ -9,10 +9,12 @@ $ crontab -e
 #
 #########################################################################################################
 
-
 # E-mail
 xuke@inhand.com.cn
 EEkexu997028
+# jira
+xuke
+密码为一般密码
 
 # 编译时 <bd.h> 文件找不到
 "db.h" 文件需要自己编译 system/db 生成
@@ -24,3 +26,22 @@ $ cppcheck . 2 > ./cppck.log
 # vbox挂载共享文件
 # sudo mount -t vboxsf 共享文件夹名称（在设置页面设置的） 挂载的目录
 sudo mount -t vboxsf share2ubuntu /home/xuke/share2win
+
+# 代码折叠
+# zf:折叠; za：展开；可跟段选项符号} % ap 等
+# 如: zf%  zf}  zfap
+
+# 对比文件不同：diff file1 file2
+
+#大多数m4文件都在/usr/share/aclocal/目录下，
+#但实际上configure的默认aclocal路径为/usr/local/share/aclocal，
+#那么可以有两种方法，第一，将/usr/share/aclocal/下的*.m4文件都拷贝到usr/local/share/aclocal/目录下；第二，指定aclocal的安装路径；
+
+# alarmd下很多头文件找不到（目前是手动解决）
+
+# 中文环境对编译的影响：
+# 编译后， tools/kernel.sh读取linux/linux/vmlinux 文件时 grep 需要填中文, awk 参数改为$2 
+
+# IR300 git branchs:
+# release --debug
+# develop --new function develop
