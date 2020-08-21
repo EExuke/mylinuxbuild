@@ -126,4 +126,8 @@
 # 	文件编码类型转换（解决linux下显示win编码文件乱码问题）
 # 		iconv　 -f 　GB2312　 -t　 UTF-8　 test1.m　 -o 　test1.m
 # 		------------原本编码-------新编码---原文件名-------新生成文件名
+# 	命令行翻译：
+# 		git clone https://gitee.com/qiyou/mzfanyi.git
+# 		cd /usr/bin/
+# 		sudo ln -s /home/xuke/bin/mzfanyi.sh fy
 #
