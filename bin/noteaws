@@ -97,3 +97,33 @@ if(SUCCESS != rc) {
 }
 
 
+
+
+###########################################
+# AWS IOT SDK C++
+按文档下载后,切换子模块分支，并更新各个子模块
+在build中编译：
+cmake -DCMAKE_INSTALL_PREFIX="/home/xuke/sdk-cpp-workspace"  -DBUILD_DEPS=ON ../ -DCMAKE_CXX_COMPILER=arm-linux-g++ -DCMAKE_C_COMPILER=arm-linux-gcc
+cmake --build . --target install
+#uClibc 不支持 backtrace 会报错，目前通过屏蔽backtrace解决编译问题
+
+# 交叉编译：
+# specify toolchain directory
+SET(TOOLCHAIN_DIR /home/toolchain/dir/here/bin)
+# specify cross compilation target
+SET(TARGET_CROSS arm-linu-)`
+# pthread:
+set(CMAKE_THREAD_LIBS_INIT "-lpthread")
+set(CMAKE_HAVE_THREADS_LIBRARY 1)
+set(CMAKE_USE_WIN32_THREADS_INIT 0)
+set(CMAKE_USE_PTHREADS_INIT 1)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+
+set(OPENSSL_ROOT_DIR "/home/xuke/workspace/VG9/system/openssl-1.0.2u")
+set(LibCrypto_LIBRARY "/home/xuke/workspace/VG9/system/openssl-1.0.2u/libcrypto.a")
+set(LibCrypto_SHARED_LIBRARY "/home/xuke/workspace/VG9/system/openssl-1.0.2u/libcrypto.so")
+set(LibCrypto_STATIC_LIBRARY "/home/xuke/workspace/VG9/system/openssl-1.0.2u/libcrypto.a")
+
+set(CURL_LIBRARY "/home/xuke/workspace/VG9/system/curl-7.23.1/lib/.libs/libcurl.so")
+
+

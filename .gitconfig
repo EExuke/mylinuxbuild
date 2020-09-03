@@ -20,7 +20,7 @@
 	name = xuke
 	email = xuke@inhand.com.cn
 [credential]
-	    helper = store
+	helper = store
 [core]
 	editor = vim
 [commit]

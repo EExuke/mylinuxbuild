@@ -102,6 +102,12 @@
 # 		git show <commit ID> 或 git sh <commit ID>
 # 	子模块的分支状态信息文件：
 # 		.git/modules/<modules_name>/HEAD
+# 	首次克隆仓库及其模块，使用：
+# 		git clone --recursive 仓库地址
+# 	拉取子模块：
+# 		git submodule update --init --rbpostecursive
+# 	更新子模块：
+# 		git submodule update --recursive --Reviewemote
 #
 # tig: git的可视化工具
 # 		sudo apt-get install tig
