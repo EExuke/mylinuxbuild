@@ -80,7 +80,7 @@ function git_branch
 }
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}'$B_DG'[\u'$B_YL'♔ '$B_BU'\h'$T_BU': '$T_DG'\w'$T_PR'$(git_branch)'$B_DG']'$C_ED'\$ '
+    PS1='${debian_chroot:+($debian_chroot)}'$B_DG'[\u'$B_YL'♔'$B_BU'\h'$T_BU': '$T_DG'\w'$T_PR'$(git_branch)'$B_DG']'$C_ED'\$ '
 else
     PS1='[${debian_chroot:+($debian_chroot)}\u@\h:\w]\$ '
 fi
@@ -196,8 +196,10 @@ if [ -f ~/bin/functions ]; then
     #dir soarnex
     #dir dlink
     dir VG9
+    #dir inrouter300
     #dir generic
     #dir learnspace
 fi
 
-export PATH=$PATH:/usr/local/arm/4.3.2/bin:.:/opt/ipq4029-arm_cortex-a7_gcc-4.8-linaro_uClibc-1.0.14_eabi/bin:~/colordiff/usr/local/bin
+export PATH=$PATH:/usr/local/arm/4.3.2/bin:/opt/ipq4029-arm_cortex-a7_gcc-4.8-linaro_uClibc-1.0.14_eabi/bin:~/colordiff/usr/local/bin:/usr/lib
+#export PATH=/opt/buildroot-2015.11/usr/bin:$PATH
