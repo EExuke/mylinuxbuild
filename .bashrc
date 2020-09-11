@@ -201,5 +201,7 @@ if [ -f ~/bin/functions ]; then
     #dir learnspace
 fi
 
-export PATH=$PATH:/usr/local/arm/4.3.2/bin:/opt/ipq4029-arm_cortex-a7_gcc-4.8-linaro_uClibc-1.0.14_eabi/bin:~/colordiff/usr/local/bin:/usr/lib
-#export PATH=/opt/buildroot-2015.11/usr/bin:$PATH
+export PATH=$PATH:/home/xuke/colordiff/usr/local/bin:/usr/lib
+export PATH=$PATH:/opt/ipq4029-arm_cortex-a7_gcc-4.8-linaro_uClibc-1.0.14_eabi/bin
+#export PATH=$PATH:/opt/buildroot-2012.05/output/host/usr/bin
+#export PATH=$PATH:/opt/buildroot-2015.11/usr/bin
