@@ -228,8 +228,8 @@ function sw()
         s|sys )
             try_cd system/
             ;;
-        r|rootfs )
-            try_cd target/rootfs
+        r|router )
+            try_cd router/
             ;;
         re )
             cd /home/xuke/release
@@ -474,11 +474,12 @@ function tfcp()
 	echo "remove old FW:"
 	ls /home/xuke/tftpboot/*.bin | cut -d '/' -f5
 	rm /home/xuke/tftpboot/1_backup/*.bin
+	sudo rm /tftpboot/*.bin /tftpboot/root
 	mv /home/xuke/tftpboot/*.bin /home/xuke/tftpboot/1_backup/
 	cp ./images/test/*.bin /home/xuke/tftpboot/
 	echo "Update FW to:"
 	ls /home/xuke/tftpboot/*.bin | cut -d '/' -f5
-	date
+	date | cowsay
 	echo "------------------------------------------------------------"
     # Added for auto load FW images when put boot_command 6 on 2017/09/12
     #local DES_1210_52ME_IMG=5A5A5A0A.img
@@ -669,20 +670,26 @@ function tfcp()
 function tl()
 {
 	c c 5
-	telnet 192.168.39.$1
+	telnet 192.168.$1
+}
+# build test IR9
+function bd9()
+{
+	rm -rf /home/xuke/workspace/OldFw_back/*.bin
+	mv ../images/test/*.bin ../../OldFw_back/
+	./build.sh test IR9
 }
 # build test VG9
-function bd()
+function bd7()
 {
 	rm -rf /home/xuke/workspace/OldFw_back/*.bin
 	mv ../images/test/*.bin ../../OldFw_back/
 	./build.sh test VG9
 }
-
-# to open IRouter web
-function WR()
+# build test IR300
+function bd3()
 {
-	firefox https://192.168.39.1
+	./build.sh test 3XX
 }
 
 # python to py
