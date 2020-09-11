@@ -9,6 +9,8 @@ $ crontab -e
 #
 #########################################################################################################
 
+# IP
+	10.5.18.31-10.5.18.33 	GW: 10.5.18.254 	dns: 61.139.2.69, 114.114.114.114
 # E-mail
 xuke@inhand.com.cn
 EEkexu997028
@@ -16,8 +18,9 @@ EEkexu997028
 xuke
 密码为一般密码
 
-# 编译时 <bd.h> 文件找不到
-"db.h" 文件需要自己编译 system/db 生成
+# Web 在线快速调试
+	1.直接进入设备后台，修改/www/ 下的页面jsp代码;
+	2.vim修改后，将文件放入tftp server , 然后设备后台在/www 中使用tftp -gr file IP 获取替换修改的jsp文件
 
 # 代码检查工具
 cppcheck 
@@ -39,7 +42,7 @@ sudo mount -t vboxsf share2ubuntu /home/xuke/share2win
 
 # alarmd下很多头文件找不到（目前是手动解决）
 
-# 中文环境对编译的影响：
+# Ir300编译脚本:中文环境对编译的影响：
 # 编译后， tools/kernel.sh读取linux/linux/vmlinux 文件时 grep 需要填中文, awk 参数改为$2 
 
 # IR300 git branchs:

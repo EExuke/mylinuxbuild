@@ -188,6 +188,11 @@ if [ -f ~/bin/rfc.sh ]; then
     . ~/bin/rfc.sh;
 fi
 
+#virtualBox共享文件夹
+if [ -f ~/share2win ]; then
+	sudo mount -t vboxsf share2ubuntu /home/xuke/share2win
+fi
+
 if [ -f ~/bin/functions ]; then
     . ~/bin/functions
     dir 1       # choose which enviroment

@@ -103,6 +103,7 @@ if(SUCCESS != rc) {
 # AWS IOT SDK C++
 按文档下载后,切换子模块分支，并更新各个子模块
 在build中编译：
+cmake -DCMAKE_INSTALL_PREFIX="/home/xuke/sdk-cpp-workspace"  -DBUILD_DEPS=ON ../aws-iot-device-sdk-cpp-v2
 cmake -DCMAKE_INSTALL_PREFIX="/home/xuke/sdk-cpp-workspace"  -DBUILD_DEPS=ON ../ -DCMAKE_CXX_COMPILER=arm-linux-g++ -DCMAKE_C_COMPILER=arm-linux-gcc
 cmake --build . --target install
 #uClibc 不支持 backtrace 会报错，目前通过屏蔽backtrace解决编译问题
@@ -126,4 +127,16 @@ set(LibCrypto_STATIC_LIBRARY "/home/xuke/workspace/VG9/system/openssl-1.0.2u/lib
 
 set(CURL_LIBRARY "/home/xuke/workspace/VG9/system/curl-7.23.1/lib/.libs/libcurl.so")
 
+# cmake 添加头文件目录
+https://www.cnblogs.com/binbinjx/p/5626916.html
+# cmake 添加库文件：
+target_link_libraries(${SHADOW_SYNC_PROJECT_NAME} IotShadow-cpp)
+target_link_libraries(${SHADOW_SYNC_PROJECT_NAME} /home/xuke/workspace/VG9/inhand/libipc/libipc.so)
+target_link_libraries(${SHADOW_SYNC_PROJECT_NAME} /home/xuke/workspace/VG9/system/libevent-2.1.8-stable/.libs/libevent.so)
+target_link_libraries(${SHADOW_SYNC_PROJECT_NAME} /home/xuke/workspace/VG9/system/openssl-1.0.2u/libcrypto.so.1.0.0)
+target_link_libraries(${SHADOW_SYNC_PROJECT_NAME} /home/xuke/workspace/VG9/system/openssl-1.0.2u/libssl.so.1.0.0)
+target_link_libraries(${SHADOW_SYNC_PROJECT_NAME} /home/xuke/workspace/VG9/inhand/libshared/libshared.so)
+target_link_libraries(${SHADOW_SYNC_PROJECT_NAME} /home/xuke/workspace/VG9/inhand/libischip/libischip.so)
 
+# 引用ih_ipc时，添加-Wno-variadic-macros：
+target_compile_options(${SHADOW_SYNC_PROJECT_NAME} PRIVATE -Wall -Wno-long-long -pedantic -Werror -Wno-variadic-macros)
