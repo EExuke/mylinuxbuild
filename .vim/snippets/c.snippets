@@ -26,10 +26,8 @@ snippet funh
 # include file
 snippet Inc
 	#include <${1:stdio}.h>
-	${2}
 snippet inc
 	#include "${1:`Filename("$1")`}.h"
-	${2}
 # macro defines
 snippet def
 	#define ${1}    ${2}
@@ -69,7 +67,7 @@ snippet while
 	}
 	${3}
 snippet for
-	for (${1:/* initialize */}; ${2:/* condition */}; ${3:/* loop */}) {
+	for (${1:i}=0; $1<${2:/*Max*/}; $1${3:++}) {
 		${4:/* code */}
 	}
 	${5}

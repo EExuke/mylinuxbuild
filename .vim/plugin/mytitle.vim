@@ -74,6 +74,8 @@ func AutoSetTitle()
     endif
     if &filetype == 'c'
         call SetCTitle()
+    elseif expand("%:e")  == 'cpp'
+        call SetCPPTitle()
     endif
 endfunc
 
@@ -145,6 +147,34 @@ func SetCTitle()
     call append(i+27, "}")
     "call append(i+30, "#endif /* End of _".toupper(expand("%:t:r"))."_C_ */")
     call cursor(i+28,0)
+endfunc
+" CPP-FILE TITILE {{{1
+func SetCPPTitle()
+    let i=4
+    call SetCHComTitle()
+    call append(i+10, " *     FILE DESCRIPTION       :")
+    call append(i+11, "** ************************************************************************** */")
+    "call append(i+12, "#ifndef _".toupper(expand("%:t:r"))."_C_")
+    "call append(i+13, "#define _".toupper(expand("%:t:r"))."_C_")
+    call append(i+12, "")
+    call append(i+13, "#include <iostream>")
+    call append(i+14, "")
+    call append(i+15, "using namespace std;")
+    call append(i+16, "")
+    call append(i+17, "\/****************************************************************************")
+    call append(i+18, " *  Function Name : main")
+    call append(i+19, " *  Description   : The Main Function.")
+    call append(i+20, " *  Input(s)      : argc - The numbers of input value.")
+    call append(i+21, " *                : argv - The pointer to input specific parameters.")
+    call append(i+22, " *  Output(s)     : NULL")
+    call append(i+23, " *  Returns       : 0")
+    call append(i+24, " ****************************************************************************/")
+    call append(i+25, "int main(int argc, const char *argv[])")
+    call append(i+26, "{")
+    call append(i+27, "    return 0;")
+    call append(i+28, "}")
+    "call append(i+30, "#endif /* End of _".toupper(expand("%:t:r"))."_C_ */")
+    call cursor(i+29,0)
 endfunc
 " H-FILE TITILE {{{1
 func SetHTitle()
