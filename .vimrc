@@ -48,6 +48,9 @@ set   cursorline                 "突出当前行
 set   magic                      "正则表达式匹配形式
 set   tags=tags;
 set   list lcs=tab:\¦\ ,trail:·,extends:»,precedes:«,nbsp:%
+set   fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set   termencoding=utf-8
+set   encoding=utf-8
 colorscheme mycolor_gray_modified
 "}}}
 " ---------------------------------------------------------
