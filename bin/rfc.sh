@@ -22,7 +22,7 @@ F_DG="\033[36m"   F_WT="\033[37m"   B_BL="\033[40m"
 B_RE="\033[41m"   B_GR="\033[42m"   B_YL="\033[43m"
 B_BU="\033[44m"   B_PR="\033[45m"   B_DG="\033[46m"
 
-RFC_TXT_FOLDER=/home/czd/envbuild/rfc
+RFC_TXT_FOLDER=/home/xuke/mylinuxbuild/rfc
 #-----------------------------------------------------------
 #                RFC FUNCTIONS
 #-----------------------------------------------------------
