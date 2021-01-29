@@ -22,6 +22,24 @@
 	sf write 0x81000000 0x0280000 0x0d00000; 	/* Write */
 	bootm b4100000 								/* Start boot */
 #################################################----  cmd  ----###################################################
+#   进入uboot:
+#   (VG710) # 【看到VG710调试串口的U-Boot打印后， 按q+回车组合键进入uboot命令行， 注意确认uboot的版本】
+#   在uboot下升级uboot
+#   (VG710) # tftpboot VG9-uboot-2012.07.r235.bin    【下载uboot】
+#
+#   done
+#	Bytes transferred = 496083 (791d3 hex)
+#	(VG710) # mmc write 84000000 1a22 3c9   【烧写uboot】
+#	MMC write: dev # 0, block # 6690, count 969 ... 969 blocks write: OK
+#	(VG710) # reset  【烧写完毕，重启系统】
+#
+#	在uboot下用tftpboot下载固件root， 并使用bootm启动root
+#   【root就是编译过程中自动生成的打包好的可启动固件， 包含：内核、ramdisk及设备树等镜像， 在/tftpboot/目录下可以找到】
+#   (VG710) # tftpboot root    【下载root】
+#   (VG710) # bootm    【bootm启动root】
+#
+#   tftpboot root; bootm
+#########################################################################################################
 
 #Linux env build from: https://www.github.com/EExuke/mylinuxbuild
 #-----------------------------------------------------------------------------------------------------------------#
@@ -129,6 +147,7 @@
 #
 # 八 实用命令
 # 	网络客户端：nc <ip> <port> 
+# 	快速杀死进程：pkill <psName> 或 killall <psName>
 # 	进程查看器：htop
 # 	文件编码类型转换（解决linux下显示win编码文件乱码问题）
 # 		iconv　 -f 　GB2312　 -t　 UTF-8　 test1.m　 -o 　test1.m
@@ -138,3 +157,16 @@
 # 		cd /usr/bin/
 # 		sudo ln -s /home/xuke/bin/mzfanyi.sh fy
 #
+# 	tcpdump抓包：
+# 		tcpdump tcp -i eth1 -t -s 0 -c 100 and dst port ! 22 and src net 192.168.1.0/24 -w ./target.cap
+# 			(1)tcp: ip icmp arp rarp 和 tcp、udp、icmp这些选项等都要放到第一个参数的位置，用来过滤数据报的类型
+# 			(2)-i eth1 : 只抓经过接口eth1的包
+# 			(3)-t : 不显示时间戳
+# 			(4)-s 0 : 抓取数据包时默认抓取长度为68字节。加上-S 0 后可以抓到完整的数据包
+# 			(5)-c 100 : 只抓取100个数据包
+# 			(6)dst port ! 22 : 不抓取目标端口是22的数据包
+# 			(7)src net 192.168.1.0/24 : 数据包的源网络地址为192.168.1.0/24
+# 			(8)-w ./target.cap : 保存成cap文件，方便用ethereal(即wireshark)分析
+# 			(9)-r 从文件读取显示
+# 			(10)-X 显示包内容负载
+# 			...
