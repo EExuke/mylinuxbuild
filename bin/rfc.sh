@@ -299,7 +299,7 @@ function rfc_open ()
 #                 MAIN PROCESS
 #-----------------------------------------------------------
 # https://www.rfc-editor.org/
-function rfc ()
+function rfc_download ()
 {
 	if [ "$1" != "" ]; then
 		case $1 in
@@ -327,6 +327,19 @@ function rfc ()
 		esac
 	else
 		rfc_help_info
+	fi
+}
+
+function rfc ()
+{
+	if [ "$1" != "" ]; then
+		if [ "$1" != "-n" ]; then
+			firefox http://www.rfcreader.com/\#search/$1
+		elif [ "$2" != "" ]; then
+			firefox http://www.rfcreader.com/\#rfc$2
+		fi
+	else
+		echo -e "${F_DG}rfc${F6_E} ${F_GR}<RFC Title>${F6_E} \n    [-n] ${F_GR}<RFC number>${F6_E} "
 	fi
 }
 
