@@ -13,7 +13,14 @@ snippet map
 	std::map<${1:key}, ${2:value}> map${3};
 # std::vector
 snippet vector
-	std::vector<${1:char}> v${2};
+	std::vector<${1:char}> vec${2};
+# std::array
+snippet array
+	std::array<${1:char}, ${2:num}> array${3};
+snippet deque
+	std::deque<> deque${};
+snippet list
+	std::list<> list${};
 # Namespace
 snippet ns
 	namespace ${1:`Filename('', 'my')`} {
