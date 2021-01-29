@@ -3,6 +3,11 @@
 #########################################################################################################
 # in 后台密码：
 root-^@(^5555@inhand
+64391099@inhand
+
+# vbox挂载共享文件
+# sudo mount -t vboxsf 共享文件夹名称（在设置页面设置的） 挂载的目录
+sudo mount -t vboxsf share2ubuntu /home/xuke/share2win
 
 # SVN：
 SVN账号：xuke
