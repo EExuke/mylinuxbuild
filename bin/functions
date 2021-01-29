@@ -46,7 +46,7 @@ function Sync()
 
         find -L . -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.lua" -o -name "*.def" > cscope.files
         cscope -bkq -i cscope.files
-        ctags -R *
+        ctags-exuberant -R *
         sw -;
     elif [ "$1" = "c" ] || [ "$1" = "-c" ]; then
         if [ ! $2 ]; then
@@ -470,17 +470,20 @@ function n()
 # Added for copy FW into tftpboot auto on 2017/8/4
 function tfcp()
 {
-	echo "------------------------------------------------------------"
+	echo "------------------------------------------------------------" | lolcat
 	echo "remove old FW:"
 	ls /home/xuke/tftpboot/*.bin | cut -d '/' -f5
 	rm /home/xuke/tftpboot/1_backup/*.bin
-	sudo rm /tftpboot/*.bin /tftpboot/root
 	mv /home/xuke/tftpboot/*.bin /home/xuke/tftpboot/1_backup/
 	cp ./images/test/*.bin /home/xuke/tftpboot/
+	cp /tftpboot/root /home/xuke/share2win/
+	sudo rm /tftpboot/*.bin
+	echo "Update root to:"
+	ls -ahl /home/xuke/share2win/root
 	echo "Update FW to:"
-	ls /home/xuke/tftpboot/*.bin | cut -d '/' -f5
-	date | cowsay
-	echo "------------------------------------------------------------"
+	ls -ahl /home/xuke/tftpboot/*.bin
+	date | cowsay | lolcat
+	echo "------------------------------------------------------------" | lolcat
     # Added for auto load FW images when put boot_command 6 on 2017/09/12
     #local DES_1210_52ME_IMG=5A5A5A0A.img
     #local DGS_1210_SERS_IMG=0A5A5A5A.img
@@ -671,6 +674,18 @@ function tl()
 {
 	c c 5
 	telnet 192.168.$1
+}
+function tln()
+{
+	c c 5
+	telnet $1
+}
+# build test IR8
+function bd8()
+{
+	rm -rf /home/xuke/workspace/OldFw_back/*.bin
+	mv ../images/test/*.bin ../../OldFw_back/
+	./build.sh test IR8
 }
 # build test IR9
 function bd9()
