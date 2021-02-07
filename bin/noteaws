@@ -104,23 +104,66 @@ if(SUCCESS != rc) {
 按文档下载后,切换子模块分支，并更新各个子模块
 在build中编译：
 cmake -DCMAKE_INSTALL_PREFIX="/home/xuke/sdk-cpp-workspace"  -DBUILD_DEPS=ON ../aws-iot-device-sdk-cpp-v2
-cmake -DCMAKE_INSTALL_PREFIX="/home/xuke/sdk-cpp-workspace"  -DBUILD_DEPS=ON ../ -DCMAKE_CXX_COMPILER=arm-linux-g++ -DCMAKE_C_COMPILER=arm-linux-gcc
+cmake -DCMAKE_INSTALL_PREFIX="/home/xuke/workspace/ir8/system"  -DBUILD_DEPS=ON ../ -DCMAKE_CXX_COMPILER=arm-linux-g++ -DCMAKE_C_COMPILER=arm-linux-gcc
 cmake --build . --target install
+cmake -DCMAKE_INSTALL_PREFIX="/home/xuke/workspace/ir8/system"  -DBUILD_DEPS=ON ../ -DCMAKE_CXX_COMPILER=arm-linux-g++ -DCMAKE_C_COMPILER=arm-linux-gcc -DBUILD_SHRED_LIBS
 #uClibc 不支持 backtrace 会报错，目前通过屏蔽backtrace解决编译问题
+
+#移植静态库：
+1、添加库文件:
+	LIB += ${DIR_LIB}/libIotJobs-cpp.a
+	LIB += ${DIR_LIB}/libaws-crt-cpp.a
+	LIB += ${DIR_LIB}/libaws-c-mqtt.a
+	LIB += ${DIR_LIB}/libaws-c-auth.a
+	LIB += ${DIR_LIB}/libaws-c-http.a
+	LIB += ${DIR_LIB}/libaws-c-compression.a
+	LIB += ${DIR_LIB}/libaws-c-cal.a
+	LIB += ${DIR_LIB}/libaws-c-io.a
+	LIB += ${DIR_LIB}/libs2n.a
+	LIB += /home/xuke/workspace/ir8/system/openssl-1.0.2u/libcrypto.a
+	LIB += ${DIR_LIB}/libaws-c-event-stream.a
+	LIB += ${DIR_LIB}/libaws-checksums.a
+	LIB += ${DIR_LIB}/libaws-c-common.a
+2、构建include头文件：
+	aws/
+	ct-verif.h
+	openssl/
+	s2n.h
+3、构建lib库文件:
+	libaws-c-auth.a
+	libaws-c-http.a
+	libIotIdentity-cpp.a
+	libaws-c-cal.a
+	libaws-c-io.a
+	libIotJobs-cpp.a
+	libaws-c-common.a
+	libaws-c-mqtt.a 
+	libIotShadow-cpp.a
+	libaws-c-compression.a
+	libaws-crt-cpp.a
+	libs2n.a
+	libaws-c-event-stream.a
+	libDiscovery-cpp.a
+	libaws-checksums.a
+	libexecinfo.a
+4、指定C++11:
+	CFLAGS = -std=c++11
+
 
 # 交叉编译：
 # specify toolchain directory
 SET(TOOLCHAIN_DIR /home/toolchain/dir/here/bin)
 # specify cross compilation target
-SET(TARGET_CROSS arm-linu-)`
+SET(TARGET_CROSS arm-linu-)
 # pthread:
-set(CMAKE_THREAD_LIBS_INIT "-lpthread")
+set(CMAKE_THREAD_LIBS_INIT "-pthread")
 set(CMAKE_HAVE_THREADS_LIBRARY 1)
 set(CMAKE_USE_WIN32_THREADS_INIT 0)
 set(CMAKE_USE_PTHREADS_INIT 1)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 
 set(OPENSSL_ROOT_DIR "/home/xuke/workspace/VG9/system/openssl-1.0.2u")
+set(LibCrypto_INCLUDE_DIR "/home/xuke/workspace/VG9/system/openssl-1.0.2u/include")
 set(LibCrypto_LIBRARY "/home/xuke/workspace/VG9/system/openssl-1.0.2u/libcrypto.a")
 set(LibCrypto_SHARED_LIBRARY "/home/xuke/workspace/VG9/system/openssl-1.0.2u/libcrypto.so")
 set(LibCrypto_STATIC_LIBRARY "/home/xuke/workspace/VG9/system/openssl-1.0.2u/libcrypto.a")
@@ -129,6 +172,7 @@ set(CURL_LIBRARY "/home/xuke/workspace/VG9/system/curl-7.23.1/lib/.libs/libcurl.
 
 # cmake 添加头文件目录
 https://www.cnblogs.com/binbinjx/p/5626916.html
+include_directories(../../../thirdparty/comm/include)
 # cmake 添加库文件：
 target_link_libraries(${SHADOW_SYNC_PROJECT_NAME} IotShadow-cpp)
 target_link_libraries(${SHADOW_SYNC_PROJECT_NAME} /home/xuke/workspace/VG9/inhand/libipc/libipc.so)

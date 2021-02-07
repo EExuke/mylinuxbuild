@@ -1,17 +1,9 @@
-case 1. Module: description
+#include "compat.h"
+#include "sysrepo.h"
 
-[Model][New/Fix/Enhance/Refine][I#][M#][TM#]
-Bug:
-Cause:
-Solution:
+LDLIBS += -lsysrepo -lyang -lpcre -lrt $(LIB_IPC) $(LIB_SHARE) $(LIB_EVENT) -L$(SYSTEM_PATH)/sysrepo/build -L$(SYSTEM_PATH)/libyang/build
 
-case 2. Module: description
 
-[Model][New/Fix/Enhance/Refine][I#][M#][TM#]
-*
-*
-*
+struct lys_module *lyd_node_module ( const struct lyd_node *node);
+struct lyd_node *lyd_first_sibling (struct lyd_node *node);
 
-case 3. format source code without change
-case 4. advance bootloader version to 1.00.012
-case 5. advance firmware version to 2.10.005

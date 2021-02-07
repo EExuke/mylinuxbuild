@@ -9,6 +9,7 @@ $ crontab -e
 #
 #########################################################################################################
 
+64391099@inhand
 # IP
 	10.5.18.31-10.5.18.33 	GW: 10.5.18.254 	dns: 61.139.2.69, 114.114.114.114
 # E-mail
@@ -39,8 +40,6 @@ sudo mount -t vboxsf share2ubuntu /home/xuke/share2win
 #大多数m4文件都在/usr/share/aclocal/目录下，
 #但实际上configure的默认aclocal路径为/usr/local/share/aclocal，
 #那么可以有两种方法，第一，将/usr/share/aclocal/下的*.m4文件都拷贝到usr/local/share/aclocal/目录下；第二，指定aclocal的安装路径；
-
-# alarmd下很多头文件找不到（目前是手动解决）
 
 # Ir300编译脚本:中文环境对编译的影响：
 # 编译后， tools/kernel.sh读取linux/linux/vmlinux 文件时 grep 需要填中文, awk 参数改为$2 
