@@ -268,3 +268,5 @@ hi Normal ctermfg=252 ctermbg=none
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 "}}}
+"yang color"
+au BufNewFile,BufRead *.yang set filetype=cpp

@@ -1,0 +1,12 @@
+# Netconf
+mgNetConfBrow: 调试收发netconf协议功能;易于客户使用的NETCONF客户应用程序，其使您可以恢复、修改、安装和删除网络中任何NETCONF服务器设备的配置。
+mgYangDesigner: 设计YANG模板;编辑和验证YANG和YIN模块。
+mgYangExplorer: 调试收发YANG数据交互;快速查看定义所选节点/子树或文本树表示。
+
+#设备侧YANG/NETCONF工具链
+sysrepo        YANG/XML存储数据库
+libyang        YANG解析库    https://github.com/CESNET/libyang
+libssh         SSH库
+libnetconf2    NETCONF协议库
+netopeer2      NETCONF命令行
+
