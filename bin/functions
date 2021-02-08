@@ -470,6 +470,7 @@ function n()
 # Added for copy FW into tftpboot auto on 2017/8/4
 function tfcp()
 {
+	sw
 	echo "------------------------------------------------------------" | lolcat
 	echo "remove old FW:"
 	ls /home/xuke/tftpboot/*.bin | cut -d '/' -f5
