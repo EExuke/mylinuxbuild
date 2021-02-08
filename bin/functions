@@ -476,6 +476,7 @@ function tfcp()
 	rm /home/xuke/tftpboot/1_backup/*.bin
 	mv /home/xuke/tftpboot/*.bin /home/xuke/tftpboot/1_backup/
 	cp ./images/test/*.bin /home/xuke/tftpboot/
+	rm ./images/tmp/mImage*
 	cp /tftpboot/root /home/xuke/share2win/
 	sudo rm /tftpboot/*.bin
 	echo "Update root to:"
@@ -695,6 +696,7 @@ function tln()
 # build test IR8
 function bd8()
 {
+	sw s
 	rm -rf /home/xuke/workspace/OldFw_back/*.bin
 	mv ../images/test/*.bin ../../OldFw_back/
 	./build.sh test ER8
