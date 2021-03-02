@@ -678,7 +678,7 @@ function se()
 		firefox "https://www.baidu.com/s?wd=$1"
 		echo -e "searching: $1 \n"
 	else
-		echo -e "${F_DG}s${F6_E} ${F_GR}<Input contents for searching>${F6_E}"
+		echo -e "${F_DG}se${F6_E} ${F_GR}<Input contents for searching>${F6_E}"
 	fi
 }
 
