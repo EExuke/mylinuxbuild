@@ -675,11 +675,17 @@ function tfcp()
 # search
 function se()
 {
-	if [[ "$1" != "" ]]; then
+	if [[ "$1" == "cweb" ]]; then
+		firefox "http://c.biancheng.net"
+		echo -e "[$1] open tag: C语言中文网 \n"
+	elif [[ "$1" == "mind" ]]; then
+		firefox "http://www.mindline.cn/webapp"
+		echo -e "[$1] open tag: MindLine \n"
+	elif [[ "$1" == "" ]]; then
+		echo -e "${F_DG}se${F6_E} ${F_GR}<Input contents for searching>${F6_E}"
+	else
 		firefox "https://www.baidu.com/s?wd=$1"
 		echo -e "searching: $1 \n"
-	else
-		echo -e "${F_DG}se${F6_E} ${F_GR}<Input contents for searching>${F6_E}"
 	fi
 }
 
