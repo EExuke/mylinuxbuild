@@ -283,9 +283,9 @@ function p()
     fi
 }
 
-function p6()
+function ff()
 {
-    ping6 $*
+    firefox $*
 }
 
 function f()
