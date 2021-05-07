@@ -27,3 +27,7 @@
 	template = /home/xuke/.gitmessage
 [push]
 	default = simple
+[newline]
+	autocrlf = false
+	filemode = false
+	safecrlf = true
