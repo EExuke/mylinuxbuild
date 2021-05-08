@@ -681,6 +681,9 @@ function se()
 	elif [[ "$1" == "mind" ]]; then
 		firefox "http://www.mindline.cn/webapp"
 		echo -e "[$1] open tag: MindLine \n"
+	elif [[ "$1" == "rnb" ]]; then
+		firefox "https://c.runoob.com"
+		echo -e "[$1] open tag: Runoob \n"
 	elif [[ "$1" == "" ]]; then
 		echo -e "${F_DG}se${F6_E} ${F_GR}<Input contents for searching>${F6_E}"
 	else
