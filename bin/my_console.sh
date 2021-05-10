@@ -30,10 +30,10 @@ PASSWD_1="root-^@(^5555@inhand"
 PASSWD_2="64391099@inhand"
 
 
-echo ${PASSWD_2} | xclip -selection clipboard
 
 while [ true ]
 	do
+		echo ${PASSWD_2} | xclip -selection clipboard
 		telnet 192.168.39.40;
 		sleep 3;
 		echo -e "${F_GR}auto reconnecting...${F6_E}";
