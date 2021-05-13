@@ -29,13 +29,17 @@ PASSWD_1="root-^@(^5555@inhand"
 
 PASSWD_2="64391099@inhand"
 
-
+count=0
 
 while [ true ]
 	do
 		echo ${PASSWD_2} | xclip -selection clipboard
 		telnet 192.168.39.40;
-		sleep 3;
+		sleep 5;
+		count=$[${count}+1];
+		if [[ 0 -eq ${count}%3 ]]; then
+			gxmessage -center -fg green -font "Sans 12" -geometry 400x150 -buttons "OK" -title "my_console" "设备升级可能已完成!\n[${count}]";
+		fi
 		echo -e "${F_GR}auto reconnecting...${F6_E}";
 	done
 
