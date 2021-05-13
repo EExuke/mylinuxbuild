@@ -97,8 +97,10 @@
 #
 #  三 需要的插件：
 # 	vim-gui-common ： 剪切板共享
-# 	ctags ： 函数跳转工具
-# 	cscope ： C代码查看辅助插件(项目目录下执行： cscope -Rbkq )
+# 	xclip: 复制内容到剪切板工具(c)
+# 	ctags： 函数跳转工具
+# 	cscope： C代码查看辅助插件(项目目录下执行： cscope -Rbkq )
+# 	gxmessage: 弹窗工具
 #
 #
 #  四 git提交代码&postreview
@@ -156,6 +158,9 @@
 # 		git clone https://gitee.com/qiyou/mzfanyi.git
 # 		cd /usr/bin/
 # 		sudo ln -s /home/xuke/bin/mzfanyi.sh fy
+# 	弹窗工具:gxmessage
+# 		sudo apt install gxmessage
+# 		gxmessage -timeout 5 -center -fg blue -font "Sans 12" -geometry 400x150 -buttons "OK,Wait 10 mins" -default "Wait" -title "eye protect" " 请保护眼睛 请做眼保健操!"
 #
 # 	tcpdump抓包：
 # 		tcpdump tcp -i eth1 -t -s 0 -c 100 and dst port ! 22 and src net 192.168.1.0/24 -w ./target.cap
