@@ -714,6 +714,7 @@ function bd8()
 	rm -rf /home/xuke/workspace/OldFw_back/*.bin
 	mv ../images/test/*.bin ../../OldFw_back/
 	./build.sh test ER8
+	gxmessage -center -fg green -font "Sans 18" -geometry 400x150 -buttons "OK" -title "bd8" "FW编译完成啦!"
 }
 # build test IR9
 function bd9()
