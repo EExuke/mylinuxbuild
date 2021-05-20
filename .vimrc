@@ -89,7 +89,7 @@ let mapleader=","
 "}}}
 " FUNCTION: Personal Map-key {{{1
 nmap <F6> :NERDTreeFind<cr><cr>
-nmap <leader>t gg<CR>:call TitleDet()<CR>
+nmap <leader>ta gg<CR>:call AddTitle()<CR>
 "nmap <leader>lkup <Plug>LookupFile<cr>
 nmap <leader>f  :MRU<cr>
 map  <leader><space>  :s/\s\+$//ge<cr>
