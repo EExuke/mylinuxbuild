@@ -19,7 +19,7 @@ if(NETWORK_ATTEMPTING_RECONNECT == rc) {
 }
 
 # QOS0
-rc = aws_iot_mqtt_publish(&client, "sdkTest/sub", 11, &PARAMFAIL_TESTSTATE_IDLEsQOS0);
+rc = aws_iot_mqtt_publish(&client, "sdkTest/sub", 11, &paramsQOS0);
 if(publishCount > 0) {
 	publishCount--;
 }
