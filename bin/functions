@@ -684,11 +684,15 @@ function se()
 	elif [[ "$1" == "rnb" ]]; then
 		firefox "https://c.runoob.com"
 		echo -e "[$1] open tag: Runoob \n"
+	elif [[ "$1" == "design" ]]; then
+		firefox "http://huatu.98youxi.com/home/newfile"
+		echo -e "[$1] open tag: 迅捷画图 \n"
 	elif [[ "$1" == "" ]]; then
 		echo -e "${F_DG}se${F6_E} ${F_GR}<Input contents for searching>${F6_E}"
 		echo -e "   ${F_GR}cweb (open C语言中文网)${F6_E}"
 		echo -e "   ${F_GR}mind (open MindLine)${F6_E}"
 		echo -e "   ${F_GR}rnb  (open Runoob)${F6_E}"
+		echo -e "   ${F_GR}design  (open 迅捷画图)${F6_E}"
 	else
 		firefox "https://www.baidu.com/s?wd=$1"
 		echo -e "searching: $1 \n"
