@@ -768,6 +768,12 @@ function c()
 	fi
 }
 
+# move file to trash
+function del()
+{
+	mv $1 /home/xuke/.local/share/Trash/info/
+}
+
 # bashrc
 function b()
 {
