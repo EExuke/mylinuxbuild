@@ -174,4 +174,6 @@
 # 			(8)-w ./target.cap : 保存成cap文件，方便用ethereal(即wireshark)分析
 # 			(9)-r 从文件读取显示
 # 			(10)-X 显示包内容负载
+# 			(11)show detail tcpdump -XX -vvv -nn
+# 			(12)-e: show ethernet data
 # 			...
