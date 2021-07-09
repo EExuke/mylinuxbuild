@@ -33,11 +33,12 @@ count=0
 
 while [ true ]
 	do
-		echo ${PASSWD_2} | xclip -selection clipboard
-		telnet 192.168.39.40;
-		sleep 5;
+		#echo ${PASSWD_2} | xclip -selection clipboard
+		#telnet 10.5.18.33;
+		auto_login.exp
+		sleep 3;
 		count=$[${count}+1];
-		if [[ 0 -eq ${count}%3 ]]; then
+		if [[ 0 -eq ${count}%2 ]]; then
 			gxmessage -center -fg green -font "Sans 12" -geometry 400x150 -buttons "OK" -title "my_console" "设备升级可能已完成!\n[${count}]";
 		fi
 		echo -e "${F_GR}auto reconnecting...${F6_E}";

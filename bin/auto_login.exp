@@ -1,0 +1,21 @@
+#!/usr/bin/expect -f
+#-----------------------------------------------------------
+#                  MAIN PROCESS
+#-----------------------------------------------------------
+set timeout  3600
+set IP       "10.5.18.33"
+set USERNAME "root"
+set PWD      "123456"
+
+#set PWD "123456"
+
+spawn telnet ${IP}
+
+expect "ER805 login:"
+	send "${USERNAME}\r"
+expect "Password:"
+	send "${PWD}\r"
+expect "~ #"
+	send "cd /tmp/backups/aws_certs/\r";
+interact
+
