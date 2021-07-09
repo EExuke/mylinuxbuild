@@ -2,7 +2,9 @@
 #-----------------------------------------------------------
 #                  MAIN PROCESS
 #-----------------------------------------------------------
-set timeout  3600
+# every step timeout:
+set timeout  300
+
 set IP       "10.5.18.33"
 set USERNAME "root"
 set PWD      "123456"
