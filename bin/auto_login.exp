@@ -6,7 +6,7 @@
 set timeout  300
 
 set IP       "10.5.18.33"
-set USERNAME "root"
+set USERNAME "adm"
 set PWD      "123456"
 
 #set PWD "123456"
@@ -17,7 +17,11 @@ expect "ER805 login:"
 	send "${USERNAME}\r"
 expect "Password:"
 	send "${PWD}\r"
-expect "~ #"
+expect "* ER805#"
+	send "inh\r";
+expect "*:"
+	send "64391099@inhand\r";
+expect "/www #"
 	send "cd /tmp/backups/aws_certs/\r";
 interact
 
