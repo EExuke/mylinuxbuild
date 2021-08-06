@@ -1,0 +1,31 @@
+#-----------------------------------------------------------
+#                  MAIN PROCESS
+#-----------------------------------------------------------
+send "\r"
+
+expect {
+	"login:" break
+}
+send "adm\r"
+
+expect {
+	"Password:" break
+}
+send "123456\r"
+
+expect {
+	"ER805#" break
+}
+send "inh\r";
+
+expect {
+	"Input password:" break
+}
+send "64391099@inhand\r";
+
+expect {
+	"/www #" break
+}
+send "cd /tmp/backups/aws_certs/\r"
+
+exit

@@ -128,6 +128,7 @@
 # 		git submodule update --init --rbpostecursive
 # 	更新子模块：
 # 		git submodule update --recursive --Reviewemote
+# 	使用git log --author=“author” 可以查找某一个作者所有的提交
 #
 # tig: git的可视化工具
 # 		sudo apt-get install tig
@@ -148,6 +149,7 @@
 # 		支持窗口分屏，透明/自定义背景，指定双击分隔符等
 #
 # 八 实用命令
+# 	打开文件位置:nautilus filename
 # 	网络客户端：nc <ip> <port> 
 # 	快速杀死进程：pkill <psName> 或 killall <psName>
 # 	进程查看器：htop
