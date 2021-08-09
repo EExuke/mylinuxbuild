@@ -723,9 +723,11 @@ function bd8()
 # build test IR9
 function bd9()
 {
+	sw s
 	rm -rf /home/xuke/workspace/OldFw_back/*.bin
 	mv ../images/test/*.bin ../../OldFw_back/
 	./build.sh test IR9
+	gxmessage -center -fg green -font "Sans 18" -geometry 400x150 -buttons "OK" -title "bd9" "FW编译完成啦!"
 }
 # build test VG9
 function bd7()
