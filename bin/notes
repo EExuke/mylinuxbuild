@@ -179,3 +179,5 @@
 # 			(11)show detail tcpdump -XX -vvv -nn
 # 			(12)-e: show ethernet data
 # 			...
+# 	qrencode:二维码生成工具
+# 		
