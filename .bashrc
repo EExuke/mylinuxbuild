@@ -188,11 +188,6 @@ if [ -f ~/bin/rfc.sh ]; then
     . ~/bin/rfc.sh;
 fi
 
-#virtualBox共享文件夹
-if [ -f ~/share2win ]; then
-	sudo mount -t vboxsf share2ubuntu /home/xuke/share2win
-fi
-
 if [ -f ~/bin/functions ]; then
     . ~/bin/functions
     dir 1       # choose which enviroment
@@ -200,13 +195,18 @@ if [ -f ~/bin/functions ]; then
     #dir trendnet  # choose trendnet
     #dir soarnex
     #dir dlink
-    dir VG9
-    #dir inrouter300
+	#dir VG9
+	dir ir8
+	#dir inrouter300
     #dir generic
     #dir learnspace
 fi
 
-export PATH=$PATH:/home/xuke/colordiff/usr/local/bin:/usr/lib
-export PATH=$PATH:/opt/ipq4029-arm_cortex-a7_gcc-4.8-linaro_uClibc-1.0.14_eabi/bin
+#export PYTHONPATH=/usr/local/lib/python2.7/dist-packages
+
+export STAGING_DIR=/opt/ipq4029-arm_cortex-a7_gcc-5.2.0_glibc-2.19_eabi/bin
+export PATH=$PATH:/home/xuke/colordiff/usr/local/bin:/usr/local/bin:./:/usr/lib
+#export PATH=$PATH:/opt/ipq4029-arm_cortex-a7_gcc-4.8-linaro_uClibc-1.0.14_eabi/bin
+export PATH=$PATH:/opt/ipq4029-arm_cortex-a7_gcc-5.2.0_glibc-2.19_eabi/bin #IR800
 #export PATH=$PATH:/opt/buildroot-2012.05/output/host/usr/bin
-#export PATH=$PATH:/opt/buildroot-2015.11/usr/bin
+#export PATH=$PATH:/opt/buildroot-2015.11/usr/bin #IR300
