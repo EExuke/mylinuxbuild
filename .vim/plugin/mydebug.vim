@@ -56,7 +56,7 @@ func PrintDebug_black()
 	call append(line("."), "my_debug_black_msg(\"\");")
 endfunc
 func IncludeMyDebugHeader()
-	call append(line("."), "#include \"/home/xuke/bin/dbg.h\"")
+	call append(line(".")-1, "#include \"/home/xuke/bin/dbg.h\"")
 endfunc
 
 " Auto add the InhandTag into source code.

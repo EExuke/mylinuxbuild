@@ -1,0 +1,83 @@
+#markdown 语法：
+
+标题：
+# test1
+## test2
+### test3
+
+清单：
+- list1
+- list2
+
+序号：
+1. num1
+2. num2
+
+粗体：
+**Boarb**
+
+斜体：
+*斜体*
+
+链接：
+[链接](http://note.youdao.com/iyoudao/?p=2411)
+
+图片：
+![图片](https://www.veer.com/photo/169155873)
+
+分割线：
+***
+
+高亮标记：
+==标记==
+
+分割线：
+---
+
+代码框：
+```
+代码框
+void main()
+{
+    printf("hellow markdown!");
+    return;
+}
+```
+
+表格：
+header 1 | header 2
+---|---
+row 1 col 1 | row 1 col 2
+row 2 col 1 | row 2 col 2
+
+
+```math
+E = mc^2
+```
+
+
+```
+graph LR
+A-->B
+```
+
+
+```
+sequenceDiagram
+A->>B: How are you?
+B->>A: Great!
+A->>B: bye!
+```
+
+
+```
+gantt
+dateFormat YYYY-MM-DD
+section S1
+T1: 2014-01-01, 9d
+section S2
+T2: 2014-01-11, 9d
+section S3
+T3: 2014-01-02, 9d
+```
+
