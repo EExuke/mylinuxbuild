@@ -80,7 +80,7 @@ function git_branch
 }
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}'$B_DG'[\u'$B_YL'♔'$B_BU'\h'$T_BU': '$T_DG'\w'$T_PR'$(git_branch)'$B_DG']'$C_ED'\$ '
+    PS1='${debian_chroot:+($debian_chroot)}'$B_DG'[\u'$B_YL'♔'$B_BU'\h'$T_BU':'$T_DG'\w'$T_PR'$(git_branch)'$B_DG']'$C_ED'\$ '
 else
     PS1='[${debian_chroot:+($debian_chroot)}\u@\h:\w]\$ '
 fi
@@ -126,6 +126,9 @@ alias sdi='svn diff -r'    #+logid 查看当前版本与logid版本的区别, �
 alias sup='sudo svn update'
 alias sst='svn status | grep ^M'
 alias slo='svn log -v | less'
+
+# my cmd alias
+alias py='python3'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -190,16 +193,16 @@ fi
 
 if [ -f ~/bin/functions ]; then
     . ~/bin/functions
-    dir 1       # choose which enviroment
+    dir 2       # choose which enviroment
 
     #dir trendnet  # choose trendnet
     #dir soarnex
     #dir dlink
 	#dir VG9
-	dir ir8
+	#dir ir8
 	#dir inrouter300
     #dir generic
-    #dir learnspace
+	dir learnspace
 fi
 
 #export PYTHONPATH=/usr/local/lib/python2.7/dist-packages

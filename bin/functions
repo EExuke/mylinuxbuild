@@ -742,12 +742,6 @@ function bd3()
 	./build.sh test 3XX
 }
 
-# python to py
-function py()
-{
-	python3 $1
-}
-
 # copy to system copyBoard
 function c()
 {
