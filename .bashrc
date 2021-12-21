@@ -129,6 +129,7 @@ alias slo='svn log -v | less'
 
 # my cmd alias
 alias py='python3'
+alias nx='netwox'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
