@@ -209,7 +209,7 @@ function sw()
             try_cd core/code/future/ISS/common/msr
             ;;
         l|lr )
-            try_cd core/code/future/LR
+            cd /home/xuke/learnspace
             ;;
         cl|clr )
             try_cd core/code/customer/${CUSTOMER_FOLDER}/LR
