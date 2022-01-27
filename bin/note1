@@ -29,7 +29,10 @@ $ cppcheck . 2 > ./cppck.log
 
 # vbox挂载共享文件
 # sudo mount -t vboxsf 共享文件夹名称（在设置页面设置的） 挂载的目录
-sudo mount -t vboxsf share2ubuntu /home/xuke/share2win
+echo 1 | sudo -S mount -t vboxsf share2ubuntu /home/xuke/share2win
+
+# 自启动脚本：
+# vim /etc/rc.local
 
 # 代码折叠
 # zf:折叠; za：展开；可跟段选项符号} % ap 等
@@ -47,3 +50,9 @@ sudo mount -t vboxsf share2ubuntu /home/xuke/share2win
 # IR300 git branchs:
 # release --debug
 # develop --new function develop
+
+# Linux下添加路由：https://www.cnblogs.com/wanghuaijun/p/8059664.html
+route add -net 192.56.76.0 netmask 255.255.255.0 dev eth0#添加一条静态路由
+route add default gw 192.168.0.1#添加默认路由
+route del -net 192.168.1.0/24 gw 192.168.0.1#删除一条路由
+route -n#查看路由表

@@ -36,7 +36,7 @@ while [ true ]
 		#echo ${PASSWD_2} | xclip -selection clipboard
 		#telnet 10.5.18.33;
 		auto_login.exp
-		sleep 3;
+		sleep 8;
 		count=$[${count}+1];
 		if [[ 0 -eq ${count}%2 ]]; then
 			gxmessage -center -fg green -font "Sans 12" -geometry 400x150 -buttons "OK" -title "my_console" "设备升级可能已完成!\n[${count}]";
