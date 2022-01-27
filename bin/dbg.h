@@ -82,33 +82,33 @@
 #ifdef PRINT_WITH_COMPILE_TIME
 #ifdef PRINT_WITH_ENDIAN
     #define MYPRINT(x, msg, args...)  \
-        printf(PU"%s "DG"%s:%s"YE" %s"CL"("GR"%d"CL"): "x msg CL"\n\r", \
+        printf(PU "%s " DG "%s:%s" YE " %s" CL "(" GR "%d" CL "): " x msg CL "\n\r", \
                 filename(__FILE__), OSIX_HOST == OSIX_LITTLE_ENDIAN ? "LE" : "BE", __TIME__,  __FUNCTION__, __LINE__, ##args)
     #define MYPRINT_NO_FEED(x, msg, args...)  \
-        printf(PU"%s "DG"%s:%s"YE" %s"CL"("GR"%d"CL"): "x msg CL, \
-                filename(__FILE__), OSIX_HOST == OSIX_LITTLE_ENDIAN ? "LE" : "BE", __TIME__,  __FUNCTION__, __LINE__, ##args)
+        printf(PU "%s " DG "%s:%s" YE " %s" CL "(" GR "%d" CL "): " x msg CL, \
+                filename(__FILE__), OSIX_HOST == OSIX_LITTLE_ENDIAN ? "LE " : "BE ", __TIME__,  __FUNCTION__, __LINE__, ##args)
 #else
     #define MYPRINT(x, msg, args...)  \
-        printf(PU"%s "DG"%s"YE" %s"CL"("GR"%d"CL"): "x msg CL"\n\r", \
+        printf(PU "%s " DG "%s" YE " %s" CL "(" GR "%d" CL "): " x msg CL "\n\r", \
                 filename(__FILE__), __TIME__, __FUNCTION__, __LINE__, ##args)
     #define MYPRINT_NO_FEED(x, msg, args...)  \
-        printf(PU"%s "DG"%s"YE" %s"CL"("GR"%d"CL"): "x msg CL, \
+        printf(PU "%s " DG "%s" YE " %s" CL "(" GR "%d" CL "): " x msg CL, \
                 filename(__FILE__), __TIME__, __FUNCTION__, __LINE__, ##args)
 #endif
 #else  /*else PRINT_WITH_COMPILE_TIME*/
 #ifdef PRINT_WITH_ENDIAN
     #define MYPRINT(x, msg, args...)  \
-        printf(PU"%s "DG"%s"YE" %s"CL"("GR"%d"CL"): "x msg CL"\n\r", \
-                filename(__FILE__), OSIX_HOST == OSIX_LITTLE_ENDIAN ? "LE" : "BE",  __FUNCTION__, __LINE__, ##args)
+        printf(PU "%s " DG "%s" YE " %s" CL "(" GR "%d" CL "): " x msg CL "\n\r", \
+                filename(__FILE__), OSIX_HOST == OSIX_LITTLE_ENDIAN ? "LE " : "BE ",  __FUNCTION__, __LINE__, ##args)
     #define MYPRINT_NO_FEED(x, msg, args...)  \
-        printf(PU"%s "DG"%s"YE" %s"CL"("GR"%d"CL"): "x msg CL, \
-                filename(__FILE__), OSIX_HOST == OSIX_LITTLE_ENDIAN ? "LE" : "BE",  __FUNCTION__, __LINE__, ##args)
+        printf(PU "%s " DG "%s" YE " %s" CL "(" GR "%d" CL "): " x msg CL, \
+                filename(__FILE__), OSIX_HOST == OSIX_LITTLE_ENDIAN ? "LE " : "BE ",  __FUNCTION__, __LINE__, ##args)
 #else
     #define MYPRINT(x, msg, args...)  \
-        printf(PU"%s"YE" %s"CL"("GR"%d"CL"): "x msg CL"\n\r", \
+        printf(PU "%s" YE " %s" CL "(" GR "%d" CL "): " x msg CL "\n\r", \
                 filename(__FILE__),  __FUNCTION__, __LINE__, ##args)
     #define MYPRINT_NO_FEED(x, msg, args...)  \
-        printf(PU"%s"YE" %s"CL"("GR"%d"CL"): "x msg CL, \
+        printf(PU "%s" YE " %s" CL "(" GR "%d" CL "): " x msg CL, \
                 filename(__FILE__),  __FUNCTION__, __LINE__, ##args)
 #endif
 #endif /*ifdef PRINT_WITH_COMPILE_TIME*/
