@@ -252,12 +252,10 @@ autocmd BufNewFile *.cpp,*.vim,Makefile,*.sh,*.py,*.[ch] exec ":call AutoSetTitl
 "endfunc 	
 " ------------------------------------------------------------------
 "}}}
-"{{{
-"vim 透明背景
+"vim 透明背景{{{
 hi Normal ctermfg=252 ctermbg=none
 "}}}
-"{{{
-"pathogen插件管理器配置
+"pathogen插件管理器配置{{{
 "execute pathogen#infect()
 ""syntastic配置
 "set statusline+=%#warningmsg#
@@ -269,5 +267,3 @@ hi Normal ctermfg=252 ctermbg=none
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 "}}}
-"yang color"
-au BufNewFile,BufRead *.yang set filetype=cpp
