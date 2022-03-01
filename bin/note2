@@ -1,9 +1,25 @@
-#include "compat.h"
-#include "sysrepo.h"
+# ping add payload
+ping -I openvpn1 10.0.0.1 -s 16 -p 01
+# show
+tcpdump icmp -nn -XX -vvv
 
-LDLIBS += -lsysrepo -lyang -lpcre -lrt $(LIB_IPC) $(LIB_SHARE) $(LIB_EVENT) -L$(SYSTEM_PATH)/sysrepo/build -L$(SYSTEM_PATH)/libyang/build
+# tcpdump 分析：
+14:54:05.135755 IP (tos 0x0, ttl 64, id 37728, offset 0, flags [none], proto ICMP (1), length 29)
+    10.0.0.3 > 10.0.0.1: ICMP echo request, id 41839, seq 0, length 9
+	0x0000:  [IP头:4500 001d 9360 0000 4001 d37c 0a00 0003        E....`..@..|....
+	0x0010:  0a00 0001] [ICMP:08ff 8c90 a36f 0000 c7]         .........o...
 
+14:54:05.137745 IP (tos 0x0, ttl 64, id 24352, offset 0, flags [none], proto ICMP (1), length 29)
+    10.0.0.1 > 10.0.0.3: ICMP echo reply, id 41839, seq 0, length 9
+	0x0000:  [IP头:4500 001d 5f20 0000 4001 07bd 0a00 0001        E..._...@.......
+	0x0010:  0a00 0003] [ICMP:00ff 9490 a36f 0000 c7]
 
-struct lys_module *lyd_node_module ( const struct lyd_node *node);
-struct lyd_node *lyd_first_sibling (struct lyd_node *node);
+# 匹配数据string, 标记mark
+iptables -t mangle -A OUTPUT -p icmp --icmp-type echo-request -s 10.5.18.33 -d 114.114.114.114 -m string --string "mark123" --algo bm -j MARK --set-mark 0x1
+iptables -t mangle -A ICMP-MARK-MATCH -p icmp --icmp-type echo-request -s 10.0.0.1 -d 10.0.0.3 -m string --string "mark1" --algo bm -j MARK --set-mark 0x1
+
+# 查看标记结果
+conntrack -L -p icmp
+
+conntrack -L |grep icmp
 
