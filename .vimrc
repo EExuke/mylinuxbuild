@@ -267,3 +267,17 @@ hi Normal ctermfg=252 ctermbg=none
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 "}}}
+" Omni 自动补全{{{
+set ofu=syntaxcomplete#Complete
+imap <silent> <C-f> <C-X><c-O>
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " 显示函数参数列表
+let OmniCpp_MayCompleteDot = 1   " 输入 .  后自动补全
+let OmniCpp_MayCompleteArrow = 1 " 输入 -> 后自动补全
+let OmniCpp_MayCompleteScope = 1 " 输入 :: 后自动补全
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+au CompleteDone * pclose " 自动关闭补全窗口
+"}}}
+
