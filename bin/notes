@@ -1,44 +1,20 @@
 ########################################################################################################
-#
+# C56 Reworks update:
+# 1.tftp方式升级reworks：
+# 	配置ip; 配置update_tool为tftpboot方式; 执行 run udpre 开始升级; reset重启
+# 2.ftp方式升级reworks:
+# 	update_iso "ftp://c5601:1@10.0.0.133/reworks.elf",0x802
+# 3.ftp方式升级fpga：
+# 	进入reworks,使用update_iso "?" 升级fpga软件;
 #########################################################################################################
 #   scrt 烧文件系统 																					#
 #	tftp 0x81000000 squashfs.vc;																		#
 #	sf probe 0;sf erase 0x0280000 0x0d00000; sf write 0x81000000 0x0280000 0x0d00000; bootm b4100000	#
 #########################################################################################################
-#   emmc Start Index Information																		#
-#																										#
-#   0x00000000-0x00080000 (512K)  Boot																	#
-#   0x00080000-0x000C0000 (256K)  Env																	#
-#   0x000C0000-0x00100000 (256K)  BoardInfo																#
-#   0x00100000-0x00280000 (1.5M)  Os-1																	#
-#   0x00280000-0x00F80000 (13M)   Rootfs-1																#
-#   0x00F80000-0x01100000 (1.5M)  Os-2																	#
-#   0x01100000-0x01E00000 (13M)   Rootfs-2																#
-#   0x01E00000-0x02000000 (2M)    Jffs2																	#
-#																										#
-#########################################################################################################
 	tftp 0x81000000 squashfs.vc; 				/* Download */
 	sf probe 0;sf erase 0x0280000 0x0d00000; 	/* 定位 擦除 */
 	sf write 0x81000000 0x0280000 0x0d00000; 	/* Write */
 	bootm b4100000 								/* Start boot */
-#################################################----  cmd  ----###################################################
-#   进入uboot:
-#   (VG710) # 【看到VG710调试串口的U-Boot打印后， 按q+回车组合键进入uboot命令行， 注意确认uboot的版本】
-#   在uboot下升级uboot
-#   (VG710) # tftpboot VG9-uboot-2012.07.r235.bin    【下载uboot】
-#
-#   done
-#	Bytes transferred = 496083 (791d3 hex)
-#	(VG710) # mmc write 84000000 1a22 3c9   【烧写uboot】
-#	MMC write: dev # 0, block # 6690, count 969 ... 969 blocks write: OK
-#	(VG710) # reset  【烧写完毕，重启系统】
-#
-#	在uboot下用tftpboot下载固件root， 并使用bootm启动root
-#   【root就是编译过程中自动生成的打包好的可启动固件， 包含：内核、ramdisk及设备树等镜像， 在/tftpboot/目录下可以找到】
-#   (VG710) # tftpboot root    【下载root】
-#   (VG710) # bootm    【bootm启动root】
-#
-#   tftpboot root; bootm
 #########################################################################################################
 
 #Linux env build from: https://www.github.com/EExuke/mylinuxbuild
@@ -59,7 +35,6 @@
 #
 # 	Ctrl+\+c /（或, s c）: 查看该函数的被调用处
 # 	Ctrl+\+s /（或, s s）: 全局搜索当前函数
-# 
 #
 # 	：vsp /dir/file  ： 左右分窗同时现实两个文件
 # 	，+t : 插入文件开头
@@ -73,6 +48,9 @@
 # 	q{register} : 宏录制，q停止
 # 	@{register} : 执行录制的宏,可在前面加执行次数
 # 	q{REGISTER} : "大写"，可追加补充宏录制
+#
+# 	!: 不退出当前文件，执行shell命令
+# 	%：代表当前文件
 #
 #  二 终端快捷键：
 # 	sw ： 目录跳转
@@ -102,18 +80,10 @@
 # 	cscope： C代码查看辅助插件(项目目录下执行： cscope -Rbkq )
 # 	gxmessage: 弹窗工具
 #
-#
-#  四 git提交代码&postreview
+#  四 git提交代码
 # 	git st .
 # 	git diff .
 # 	git diff ... >/filename
-# 	rbpost ...  (or Review web : 172.22.102.205 to add diff)
-#
-# 	after "Ship it!":
-# 		1. git pull  先更新
-# 		2. git commit .  -> 填写模板 ->wq
-# 		3. git show .  (查看确认)
-# 		4. git push    (提交)
 # 	diff的清除与导入：
 # 		git checout .
 # 		git apply filename
@@ -129,20 +99,45 @@
 # 	更新子模块：
 # 		git submodule update --recursive --Reviewemote
 # 	使用git log --author=“author” 可以查找某一个作者所有的提交
-#
-# tig: git的可视化工具
+# 	tig: git的可视化工具
 # 		sudo apt-get install tig
 # 		<使用说明可查>
 #
+# 五 程序安装包打包
+# 	sh自解压脚本方式:
+# 		1.编辑自解压脚本ins.sh:
+# 			#!/bin/bash
+# 			src_path="./src"
+# 			preline=10
+# 			line=`wc -l $0 | awk '{print $1}'`
+# 			line=$[${line} - ${preline}]
+# 			tail -n $line $0 | tar zx -C ${src_path}
+# 			cd ${src_path}/
+# 			#do something for copy or install...
+# 			exit 0
+# 			#
+# 			#补全preline+1行
+# 		2.制作压缩包:
+# 			tar cvzf XXX.tar.gz XXX/
+# 		3.拼接文件:
+# 			cat ins.sh XXX.tar.gz > XXX_install.sh
+# 			chmod +x XXX_install.sh
+# 	deb包方式:
+# 		1.创建程序同名目录, 并在其中分别创建DEBIAN、usr/local/bin/ 目录;
+# 		2.在DEBIAN/ 下创建control文件并写入如下内容：
+# 			package:<程序名>
+# 			version:1.0
+# 			architecture:i386
+# 			maintainer:wit
+# 			description:deb package demo test
+# 		3.将可执行程序复制到创建的 usr/local/bin/ 目录下；
+# 		4.打包: dpkg -b <包目录名> <安装包名.deb>
+# 		5.安装: dpkg -i <安装包名>
+# 		6.卸载: dpkg -p/-r <程序名>; //-p卸载并删除配置文件, -r卸载
 #
-# 五 编译
-# 	项目目录下 make run ： 运行x86
-#
-# 六 Linux下烧录
-# 	安装串口工具 minicom
-# 	运行： sudo minicom -D /dev/ttyUSB0 -b 115200 
-# 	重启tftp： sudo /etc/init.d/xinetd start或者restart
-# 
+# 六 常用工具
+# 	串口工具 minicom
+# 		运行： sudo minicom -D /dev/ttyUSB0 -b 115200 
 #
 # 七 好用的终端
 # 	terminator:
@@ -189,4 +184,4 @@
 # 			...
 # 	qrencode:二维码生成工具
 # 	figlet: 打印横幅字体; 可使用-f+格式制定横幅格式，使用showfigfonts命令查看支持的格式；-k不粘连；
-# 		
+#
