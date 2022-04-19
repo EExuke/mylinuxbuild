@@ -151,4 +151,30 @@
     fflush(stdout); \
 } while (0)
 
+
+/* printf cursor ctrl */
+// 清屏
+#define PRT_CLEAR()          printf("\033[2J")
+// 上移光标
+#define PRT_MOVEUP(x)        printf("\033[%dA", (x))
+// 下移光标
+#define PRT_MOVEDOWN(x)      printf("\033[%dB", (x))
+// 左移光标
+#define PRT_MOVELEFT(y)      printf("\033[%dD", (y))
+// 右移光标
+#define PRT_MOVERIGHT(y)     printf("\033[%dC",(y))
+// 定位光标
+#define PRT_MOVETO(x,y)      printf("\033[%d;%dH", (x), (y))
+// 光标复位
+#define PRT_RESET_CURSOR()   printf("\033[H")
+// 隐藏光标
+#define PRT_HIDE_CURSOR()    printf("\033[?25l")
+// 显示光标
+#define PRT_SHOW_CURSOR()    printf("\033[?25h")
+//清除从光标到行尾的内容
+#define PRT_CLEAR_LINE()     printf("\033[K")
+//反显
+#define PRT_HIGHT_LIGHT()    printf("\033[7m")
+#define PRT_UN_HIGHT_LIGHT() printf("\033[27m")
+
 #endif /* __BIN_DBG_H__ */
