@@ -200,7 +200,7 @@ autocmd BufNewFile *.cpp,*.vim,Makefile,*.sh,*.py,*.[ch] exec ":call AutoSetTitl
 "----------------------------------------------------------
 "  ADD BY EExuke
 "----------------------------------------------------------
-" FEILHEAD: add the feil Head {{{1
+" FEILHEAD: add the file Head {{{1
 " ---------------------------------------------------------
 "  Add by EExuke 
 "  Github : github.com/EExuke
