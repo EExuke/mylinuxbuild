@@ -3,25 +3,18 @@
 #                  MAIN PROCESS
 #-----------------------------------------------------------
 # every step timeout:
-set timeout  300
+set timeout  100
+# 输出屏蔽
+#log_user     0
 
-set IP       "10.5.18.33"
-set USERNAME "adm"
-set PWD      "123456"
+set IP       "192.168.0.6"
+set USERNAME "xuke"
+set PWD      "1"
 
-#set PWD "123456"
+spawn ssh ${IP}
 
-spawn telnet ${IP}
-
-expect "ER805 login:"
-	send "${USERNAME}\r"
-expect "Password:"
+expect "* password:"
 	send "${PWD}\r"
-expect "* ER805#"
-	send "inh\r";
-expect "*:"
-	send "64391099@inhand\r";
-expect "/www #"
-	send "cd /tmp/backups/aws_certs/\r";
+
 interact
 
