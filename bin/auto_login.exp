@@ -11,7 +11,7 @@ set IP       "192.168.0.6"
 set USERNAME "xuke"
 set PWD      "1"
 
-spawn ssh ${IP}
+spawn ssh $USERNAME@${IP}
 
 expect "* password:"
 	send "${PWD}\r"
