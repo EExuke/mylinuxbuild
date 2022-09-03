@@ -77,6 +77,9 @@ inoremap <C-l> <Esc><C-W>l
 " ---------------------------------------------------------
 " PLUGIN: NERDTree Settings {{{1
 let g:NERDTreeWinPos = "left"
+" NOTE: fix chars width of dir Arrows and file open: ./lib/nerdtree/ui.vim: UI._indentLevelFor(line)
+"let g:NERDTreeDirArrowExpandable = "+"
+"let g:NERDTreeDirArrowCollapsible = "~"
 "}}}
 " PLUGIN: TagList Settings {{{1
 let g:Tlist_Use_Right_Window = 1
