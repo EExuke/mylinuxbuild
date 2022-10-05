@@ -80,7 +80,8 @@ function git_branch
 }
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}'$B_DG'[\u'$B_YL'♔'$B_BU'\h'$T_BU':'$T_DG'\w'$T_PR'$(git_branch)'$B_DG']'$C_ED'\$ '
+    #PS1='${debian_chroot:+($debian_chroot)}'$B_DG'[\u'$B_YL'♔'$B_BU'\h'$T_BU':'$T_DG'\w'$T_PR'$(git_branch)'$B_DG']'$C_ED'\$ '
+    PS1='${debian_chroot:+($debian_chroot)}'$B_DG'[\u'$B_YL'♔'$B_BU'ubuntu18'$T_BU':'$T_DG'\w'$T_PR'$(git_branch)'$B_DG']'$C_ED'\$ '
 else
     PS1='[${debian_chroot:+($debian_chroot)}\u@\h:\w]\$ '
 fi
@@ -193,21 +194,13 @@ if [ -f ~/bin/rfc.sh ]; then
 fi
 
 if [ -f ~/bin/functions ]; then
-    . ~/bin/functions
-    dir 2       # choose which enviroment
+	. ~/bin/functions
+	dir 3       # choose which enviroment: 1:~/workspace/; 2:~/workroom/; 3:~/
 
-    #dir trendnet  # choose trendnet
-    #dir soarnex
-    #dir dlink
-	#dir VG9
-	#dir ir8
-	#dir inrouter300
-    #dir generic
+	#dir workspace
+	#dir workroom
 	dir learnspace
 fi
 
-#export TERM=linux
-
-export PATH=$PATH:/usr/local/bin:./:/usr/lib
-#export PATH=$PATH:/opt/arm-linux-gnueabihf/bin
-export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin #树莓派
+export PATH=$PATH:/usr/local/bin:./:/usr/lib:~/win_cmd
+#export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin #树莓派
