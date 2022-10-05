@@ -202,5 +202,7 @@ if [ -f ~/bin/functions ]; then
 	dir learnspace
 fi
 
+export TERM=linux
+
 export PATH=$PATH:/usr/local/bin:./:/usr/lib:~/win_cmd
 #export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin #树莓派
