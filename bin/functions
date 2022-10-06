@@ -456,18 +456,130 @@ function vv()
 }
 
 # My Notes {{{1
-function cmd()
-{
-    vim /home/xuke/mylinuxbuild/my_notes/notes
-}
-
 function n()
 {
 	#"n Id" : create or open note book
 	if [[ $1 == "" ]]; then
-		echo -e "${FG_GREEN}n <Num>: create or open noteN book${F6_END}"
+		tree ~/mylinuxbuild/my_notes
+		echo -e "${FG_GREEN}n <Index> [headline endline]: create or open noteN book${F6_END}"
+	elif [[ $2 == "" ]]; then
+		vim /home/xuke/mylinuxbuild/my_notes/note$1
+	elif [[ $3 == "" ]]; then
+		sed -n "$2, $2p" /home/xuke/mylinuxbuild/my_notes/note$1
+	elif [[ $4 == "" ]]; then
+		sed -n "$2, $3p" /home/xuke/mylinuxbuild/my_notes/note$1
 	fi
-	vim /home/xuke/mylinuxbuild/my_notes/note$1
+}
+
+# copy to system copyBoard
+function c()
+{
+	#1.copy to windos, need install xsel
+	#2.copy to linux, need install xclip
+	if [ ! $1 ]; then
+		#copyBoardopy notec to clipboard
+		#sed -n 5p ~/mylinuxbuild/my_notes/notes | xsel
+		#echo "str...................." | xsel
+		cat /home/xuke/mylinuxbuild/my_notes/notec | xclip -selection clipboard
+	elif [ ! $2 ]; then
+		#copy note$1 to clipboard
+		cat /home/xuke/mylinuxbuild/my_notes/note$1 | xclip -selection clipboard
+	elif [ ! $3 ]; then
+		#copy $2 line of note$1 to clipboard
+		sed -n $2p /home/xuke/mylinuxbuild/my_notes/note$1 | xclip -selection clipboard
+	else
+		#copy $2-$3 line of note$1 to clipboard
+		sed -n $2,$3p /home/xuke/mylinuxbuild/my_notes/note$1 | xclip -selection clipboard
+	fi
+}
+
+#CROSS COMPILE
+function mk()
+{
+	if [[ $1 == "" ]]; then
+		unset ARCH
+		unset CC
+		unset CROSS_COMPILE
+		make clean
+		make
+		echo "Finished" | figlet
+	elif [[ $1 == "pi" ]]; then
+		#树莓派
+		export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+		export ARCH=arm
+		export CC=arm-linux-gnueabihf-gcc
+		export CROSS_COMPILE=arm-linux-gnueabihf-
+		make clean
+		make
+		echo "Finished" | figlet
+	fi
+}
+
+# search
+function se()
+{
+	if [[ "$1" == "cweb" ]]; then
+		firefox "http://c.biancheng.net"
+		echo -e "[$1] open tag: C语言中文网 \n"
+	elif [[ "$1" == "gitee" ]]; then
+		firefox "https://gitee.com/EExuke/dashboard/projects"
+		echo -e "[$1] open tag: Gitee \n"
+	elif [[ "$1" == "rnb" ]]; then
+		firefox "https://c.runoob.com"
+		echo -e "[$1] open tag: Runoob \n"
+	elif [[ "$1" == "mind" ]]; then
+		firefox "http://www.mindline.cn/webapp"
+		echo -e "[$1] open tag: MindLine \n"
+	elif [[ "$1" == "design" ]]; then
+		firefox "http://huatu.98youxi.com/home/newfile"
+		echo -e "[$1] open tag: 迅捷画图 \n"
+	elif [[ "$1" == "" ]]; then
+		echo -e "${F_DG}se${F6_E} ${F_GR}<Input contents for searching>${F6_E}"
+		echo -e "   ${F_GR}cweb   (open C语言中文网)${F6_E}"
+		echo -e "   ${F_GR}gitee  (open Gitee仓库)${F6_E}"
+		echo -e "   ${F_GR}rnb    (open Runoob)${F6_E}"
+		echo -e "   ${F_GR}mind   (open MindLine)${F6_E}"
+		echo -e "   ${F_GR}design (open 迅捷画图)${F6_E}"
+	else
+		firefox "https://www.baidu.com/s?wd=$1"
+		echo -e "searching: $1 \n"
+	fi
+}
+
+function rfc ()
+{
+	if [ "$1" != "" ]; then
+		if [ "$1" != "-n" ]; then
+			firefox http://www.rfcreader.com/\#search/$1
+		elif [ "$2" != "" ]; then
+			firefox http://www.rfcreader.com/\#rfc$2
+		fi
+	else
+		echo -e "${F_DG}rfc${F6_E} ${F_GR}<RFC Title>${F6_E} \n    [-n] ${F_GR}<RFC number>${F6_E} "
+	fi
+}
+
+# telnet ip
+function tln()
+{
+	c c 5
+	telnet $1
+}
+
+# build test IR8
+function bd8()
+{
+	sw s
+	rm -rf /home/xuke/workspace/OldFw_back/*.bin
+	mv ../images/test/*.bin ../../OldFw_back/
+	./build.sh test ER8
+	gxmessage -center -fg green -font "Sans 18" -geometry 400x150 -buttons "OK" -title "bd8" "FW编译完成啦!"
+}
+
+# move file to trash
+function del()
+{
+	mv $1 /home/xuke/.local/share/Trash/info/
 }
 
 # My tfcp {{{1
@@ -675,135 +787,9 @@ function tfcp()
     #esac
 }
 # My Quick Commands {{{1
-function mk()
+function cmd()
 {
-	if [[ $1 == "" ]]; then
-		unset ARCH
-		unset CC
-		unset CROSS_COMPILE
-		make clean
-		make
-		echo "Finished" | figlet
-	elif [[ $1 == "pi" ]]; then
-		#树莓派
-		export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
-		export ARCH=arm
-		export CC=arm-linux-gnueabihf-gcc
-		export CROSS_COMPILE=arm-linux-gnueabihf-
-		make clean
-		make
-		echo "Finished" | figlet
-	fi
-}
-
-# search
-function se()
-{
-	if [[ "$1" == "cweb" ]]; then
-		firefox "http://c.biancheng.net"
-		echo -e "[$1] open tag: C语言中文网 \n"
-	elif [[ "$1" == "gitee" ]]; then
-		firefox "https://gitee.com/EExuke/dashboard/projects"
-		echo -e "[$1] open tag: Gitee \n"
-	elif [[ "$1" == "rnb" ]]; then
-		firefox "https://c.runoob.com"
-		echo -e "[$1] open tag: Runoob \n"
-	elif [[ "$1" == "mind" ]]; then
-		firefox "http://www.mindline.cn/webapp"
-		echo -e "[$1] open tag: MindLine \n"
-	elif [[ "$1" == "design" ]]; then
-		firefox "http://huatu.98youxi.com/home/newfile"
-		echo -e "[$1] open tag: 迅捷画图 \n"
-	elif [[ "$1" == "" ]]; then
-		echo -e "${F_DG}se${F6_E} ${F_GR}<Input contents for searching>${F6_E}"
-		echo -e "   ${F_GR}cweb   (open C语言中文网)${F6_E}"
-		echo -e "   ${F_GR}gitee  (open Gitee仓库)${F6_E}"
-		echo -e "   ${F_GR}rnb    (open Runoob)${F6_E}"
-		echo -e "   ${F_GR}mind   (open MindLine)${F6_E}"
-		echo -e "   ${F_GR}design (open 迅捷画图)${F6_E}"
-	else
-		firefox "https://www.baidu.com/s?wd=$1"
-		echo -e "searching: $1 \n"
-	fi
-}
-
-function rfc ()
-{
-	if [ "$1" != "" ]; then
-		if [ "$1" != "-n" ]; then
-			firefox http://www.rfcreader.com/\#search/$1
-		elif [ "$2" != "" ]; then
-			firefox http://www.rfcreader.com/\#rfc$2
-		fi
-	else
-		echo -e "${F_DG}rfc${F6_E} ${F_GR}<RFC Title>${F6_E} \n    [-n] ${F_GR}<RFC number>${F6_E} "
-	fi
-}
-
-# telnet ip
-function tln()
-{
-	c c 5
-	telnet $1
-}
-
-# build test IR8
-function bd8()
-{
-	sw s
-	rm -rf /home/xuke/workspace/OldFw_back/*.bin
-	mv ../images/test/*.bin ../../OldFw_back/
-	./build.sh test ER8
-	gxmessage -center -fg green -font "Sans 18" -geometry 400x150 -buttons "OK" -title "bd8" "FW编译完成啦!"
-}
-# build test IR9
-function bd9()
-{
-	sw s
-	rm -rf /home/xuke/workspace/OldFw_back/*.bin
-	mv ../images/test/*.bin ../../OldFw_back/
-	./build.sh test IR9
-	gxmessage -center -fg green -font "Sans 18" -geometry 400x150 -buttons "OK" -title "bd9" "FW编译完成啦!"
-}
-# build test VG9
-function bd7()
-{
-	rm -rf /home/xuke/workspace/OldFw_back/*.bin
-	mv ../images/test/*.bin ../../OldFw_back/
-	./build.sh test VG9
-}
-# build test IR300
-function bd3()
-{
-	./build.sh test 3XX
-}
-
-# copy to system copyBoard
-function c()
-{
-	#1.copy to windos, need install xsel
-	#2.copy to linux, need install xclip
-	if [ ! $1 ]; then
-		#copyBoardopy notec to clipboard
-		#sed -n 5p ~/mylinuxbuild/my_notes/notes | xsel
-		#echo "str...................." | xsel
-		cat /home/xuke/mylinuxbuild/my_notes/notec | xclip -selection clipboard
-	elif [ ! $2 ]; then
-		#copy note$1 to clipboard
-		cat /home/xuke/mylinuxbuild/my_notes/note$1 | xclip -selection clipboard
-	elif [ ! $3 ]; then
-		#copy $2 line of note$1 to clipboard
-		sed -n $2p /home/xuke/mylinuxbuild/my_notes/note$1 | xclip -selection clipboard
-	else
-		#copy $2-$3 line of note$1 to clipboard
-		sed -n $2,$3p /home/xuke/mylinuxbuild/my_notes/note$1 | xclip -selection clipboard
-	fi
-}
-
-# move file to trash
-function del()
-{
-	mv $1 /home/xuke/.local/share/Trash/info/
+    vim /home/xuke/mylinuxbuild/my_notes/notes
 }
 
 # bashrc
@@ -890,7 +876,6 @@ function back()
         echo -e $F6_END
     fi
 }
-
 
 # test_b {{{1
 function test_b()
