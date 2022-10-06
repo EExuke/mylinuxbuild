@@ -458,13 +458,16 @@ function vv()
 # My Notes {{{1
 function cmd()
 {
-    vi /home/xuke/bin/notes
+    vim /home/xuke/mylinuxbuild/my_notes/notes
 }
 
 function n()
 {
-    #"n Id" : create or open note book
-    vim /home/xuke/mylinuxbuild/bin/note$1
+	#"n Id" : create or open note book
+	if [[ $1 == "" ]]; then
+		echo -e "${FG_GREEN}n <Num>: create or open noteN book${F6_END}"
+	fi
+	vim /home/xuke/mylinuxbuild/my_notes/note$1
 }
 
 # My tfcp {{{1
@@ -766,18 +769,18 @@ function c()
 	#2.copy to linux, need install xclip
 	if [ ! $1 ]; then
 		#copyBoardopy notec to clipboard
-		#sed -n 5p ~/mylinuxbuild/bin/notes | xsel
+		#sed -n 5p ~/mylinuxbuild/my_notes/notes | xsel
 		#echo "str...................." | xsel
-		cat /home/xuke/mylinuxbuild/bin/notec | xclip -selection clipboard
+		cat /home/xuke/mylinuxbuild/my_notes/notec | xclip -selection clipboard
 	elif [ ! $2 ]; then
 		#copy note$1 to clipboard
-		cat /home/xuke/mylinuxbuild/bin/note$1 | xclip -selection clipboard
+		cat /home/xuke/mylinuxbuild/my_notes/note$1 | xclip -selection clipboard
 	elif [ ! $3 ]; then
 		#copy $2 line of note$1 to clipboard
-		sed -n $2p /home/xuke/mylinuxbuild/bin/note$1 | xclip -selection clipboard
+		sed -n $2p /home/xuke/mylinuxbuild/my_notes/note$1 | xclip -selection clipboard
 	else
 		#copy $2-$3 line of note$1 to clipboard
-		sed -n $2,$3p /home/xuke/mylinuxbuild/bin/note$1 | xclip -selection clipboard
+		sed -n $2,$3p /home/xuke/mylinuxbuild/my_notes/note$1 | xclip -selection clipboard
 	fi
 }
 
