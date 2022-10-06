@@ -675,6 +675,27 @@ function tfcp()
     #esac
 }
 # My Quick Commands {{{1
+function mk()
+{
+	if [[ $1 == "" ]]; then
+		unset ARCH
+		unset CC
+		unset CROSS_COMPILE
+		make clean
+		make
+		echo "Finished" | figlet
+	elif [[ $1 == "pi" ]]; then
+		#树莓派
+		export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+		export ARCH=arm
+		export CC=arm-linux-gnueabihf-gcc
+		export CROSS_COMPILE=arm-linux-gnueabihf-
+		make clean
+		make
+		echo "Finished" | figlet
+	fi
+}
+
 # search
 function se()
 {
@@ -720,11 +741,6 @@ function rfc ()
 }
 
 # telnet ip
-function tl()
-{
-	c c 5
-	telnet 192.168.$1
-}
 function tln()
 {
 	c c 5
