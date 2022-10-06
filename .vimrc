@@ -45,6 +45,7 @@ set   noswapfile                 "缓冲区不使用交换文件
 set   nowrap                     "设置不折行
 set   ignorecase                 "搜索模式里忽略大小写
 set   cursorline                 "突出当前行
+"set   cursorcolumn               "突出当前列
 set   magic                      "正则表达式匹配形式
 set   tags=tags;
 set   list lcs=tab:\¦\ ,trail:·,extends:»,precedes:«,nbsp:%
@@ -52,6 +53,8 @@ set   fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set   termencoding=utf-8
 set   encoding=utf-8
 colorscheme mycolor_gray_modified
+highlight cursorline    cterm=NONE ctermbg=darkGray ctermfg=NONE guibg=NONE guifg=NONE "突出显示行配色
+highlight cursorcolumn  cterm=NONE ctermbg=darkGray ctermfg=NONE guibg=NONE guifg=NONE "突出显示列配色
 "}}}
 " ---------------------------------------------------------
 "  ACTION SETTINGS
