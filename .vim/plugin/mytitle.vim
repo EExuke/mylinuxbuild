@@ -1,5 +1,5 @@
 " ============================================================================
-" Copyright (C) 2001-2020 Inhand Networks, Inc.
+" Copyright (C) 2001-2022 Inhand Networks, Inc.
 " ============================================================================
 
 " ----------------------------------------------------------------------------
@@ -31,27 +31,27 @@ set cpo&vim
 func SetCopyright()
     if &filetype == 'sh'
         call append(0, "\ ############################################################################# ##")
-        call append(1, "\ # Copyright (C) 2001-2020 Inhand Networks, Inc.")
+        call append(1, "\ # Copyright (C) 2001-2022 Inhand Networks, Inc.")
         call append(2, "\ ############################################################################ ##")
         call append(3, "\ #")
     elseif expand("%:e") == 'py'
         call append(0, "\############################################################################# ##")
-        call append(1, "\# Copyright (C) 2001-2020 Inhand Networks, Inc.")
+        call append(1, "\# Copyright (C) 2001-2022 Inhand Networks, Inc.")
         call append(2, "\############################################################################# ##")
         call append(3, "\#")
     elseif expand("%:e") == 'vim'
         call append(0, "\" ============================================================================")
-        call append(1, "\" Copyright (C) 2001-2020 Inhand Networks, Inc.")
+        call append(1, "\" Copyright (C) 2001-2022 Inhand Networks, Inc.")
         call append(2, "\" ============================================================================")
         call append(3, "")
     elseif expand("%:t") == 'Makefile'
         call append(0, "\# ==========================================")
-        call append(1, "\# © 2020 EExuke. All Rights Reserved.")
+        call append(1, "\# © 2022 EExuke. All Rights Reserved.")
         call append(2, "\# ==========================================")
         call append(3, "")
     else
         call append(0,"/**************************************************************************** **")
-        call append(1, " * Copyright (C) 2001-2020 Inhand Networks, Inc.")
+        call append(1, " * Copyright (C) 2001-2022 Inhand Networks, Inc.")
         call append(2, " **************************************************************************** **/")
         call append(3, "")
     endif
@@ -211,22 +211,23 @@ func SetMKTitle()
     call append(i+9, "")
     call append(i+10, "CC = gcc")
     call append(i+11, "CFLAGS = -g -Wall -I $(INC_SRC)")
-    call append(i+12, "${BIN_TARGET}: ${OBJ}")
-    call append(i+13, "	$(warning Building $(BIN_TARGET) ...)")
-    call append(i+14, "	@$(CC) $(OBJ) -o $@")
-    call append(i+15, "")
-    call append(i+16, "${DIR_OBJ}/%.o: ${DIR_SRC}/%.c")
-    call append(i+17, "	$(warning Comping $< ...)")
-    call append(i+18, "	@$(CC) $(CFLAGS) -c $< -o $@")
-    call append(i+19, "")
-    call append(i+20, "# Prevent naming conflicts such as the existence of a file named clean.")
-    call append(i+21, ".PHONY: clean")
-    call append(i+22, "")
-    call append(i+23, "clean:")
+    call append(i+12, "")
+    call append(i+13, "${BIN_TARGET}: ${OBJ}")
+    call append(i+14, "	$(warning Building $(BIN_TARGET) ...)")
+    call append(i+15, "	@$(CC) $(OBJ) -o $@")
+    call append(i+16, "")
+    call append(i+17, "${DIR_OBJ}/%.o: ${DIR_SRC}/%.c")
+    call append(i+18, "	$(warning Comping $< ...)")
+    call append(i+19, "	@$(CC) $(CFLAGS) -c $< -o $@")
+    call append(i+20, "")
+    call append(i+21, "# Prevent naming conflicts such as the existence of a file named clean.")
+    call append(i+22, ".PHONY: clean")
+    call append(i+23, "")
+    call append(i+24, "clean:")
     "call append(i+24, "	$(warning Clean $(OBJ), $(BIN_TARGET) ...)")
-    call append(i+24, "	@find ${DIR_OBJ} -name *.o -exec rm -rf {} \\;")
-    call append(i+25, "	@rm -rf $(BIN_TARGET)")
-    call cursor(i+9,13)
+    call append(i+25, "	@find ${DIR_OBJ} -name *.o -exec rm -rf {} \\;")
+    call append(i+26, "	@rm -rf $(BIN_TARGET)")
+    call cursor(i+9, 13)
 endfunc
 " VIM-FILE TITILE {{{1
 func SetVimTitle()
