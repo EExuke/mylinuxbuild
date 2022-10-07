@@ -461,13 +461,13 @@ function n()
 	#"n Id" : create or open note book
 	if [[ $1 == "" ]]; then
 		tree ~/mylinuxbuild/my_notes
-		echo -e "${FG_GREEN}n <Index> [headline endline]: create or open noteN book${F6_END}"
+		echo -e "${FG_GREEN}Usage: n <Index> [headline endline]: create or open noteN book${F6_END}"
 	elif [[ $2 == "" ]]; then
-		vim /home/xuke/mylinuxbuild/my_notes/note$1
+		vim /home/xuke/mylinuxbuild/my_notes/note_$1
 	elif [[ $3 == "" ]]; then
-		sed -n "$2, $2p" /home/xuke/mylinuxbuild/my_notes/note$1
+		sed -n "$2, $2p" /home/xuke/mylinuxbuild/my_notes/note_$1
 	elif [[ $4 == "" ]]; then
-		sed -n "$2, $3p" /home/xuke/mylinuxbuild/my_notes/note$1
+		sed -n "$2, $3p" /home/xuke/mylinuxbuild/my_notes/note_$1
 	fi
 }
 
@@ -478,18 +478,18 @@ function c()
 	#2.copy to linux, need install xclip
 	if [ ! $1 ]; then
 		#copyBoardopy notec to clipboard
-		#sed -n 5p ~/mylinuxbuild/my_notes/notes | xsel
+		#sed -n 5p ~/mylinuxbuild/my_notes/note_cmd | xsel
 		#echo "str...................." | xsel
-		cat /home/xuke/mylinuxbuild/my_notes/notec | xclip -selection clipboard
+		cat /home/xuke/mylinuxbuild/my_notes/note_c | xclip -selection clipboard
 	elif [ ! $2 ]; then
-		#copy note$1 to clipboard
-		cat /home/xuke/mylinuxbuild/my_notes/note$1 | xclip -selection clipboard
+		#copy note_$1 to clipboard
+		cat /home/xuke/mylinuxbuild/my_notes/note_$1 | xclip -selection clipboard
 	elif [ ! $3 ]; then
-		#copy $2 line of note$1 to clipboard
-		sed -n $2p /home/xuke/mylinuxbuild/my_notes/note$1 | xclip -selection clipboard
+		#copy $2 line of note_$1 to clipboard
+		sed -n $2p /home/xuke/mylinuxbuild/my_notes/note_$1 | xclip -selection clipboard
 	else
-		#copy $2-$3 line of note$1 to clipboard
-		sed -n $2,$3p /home/xuke/mylinuxbuild/my_notes/note$1 | xclip -selection clipboard
+		#copy $2-$3 line of note_$1 to clipboard
+		sed -n $2,$3p /home/xuke/mylinuxbuild/my_notes/note_$1 | xclip -selection clipboard
 	fi
 }
 
@@ -789,7 +789,7 @@ function tfcp()
 # My Quick Commands {{{1
 function cmd()
 {
-    vim /home/xuke/mylinuxbuild/my_notes/notes
+    vim /home/xuke/mylinuxbuild/my_notes/note_cmd
 }
 
 # bashrc
