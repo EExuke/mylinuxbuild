@@ -39,25 +39,10 @@ F6_END="\033[0m"
 function Sync()
 {
     if [ "$1" = "b" ] || [ "$1" = "-b" ]; then
-        if [ ! $2 ]; then
-            sw cscope;
-        else
-            sw $2;
-        fi
-
-        find -L . -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.lua" -o -name "*.def" > cscope.files
         cscope -bkq -i cscope.files
-        ctags-exuberant -R *
-        sw -;
+        ctags -R *
     elif [ "$1" = "c" ] || [ "$1" = "-c" ]; then
-        if [ ! $2 ]; then
-            sw cscope;
-        else
-            sw $2;
-        fi
-
         rm -f cscope.files cscope.in.out cscope.out cscope.po.out tags
-        sw -;
     else
         echo -e $FG_YELLOW
         echo -e "Usage: Sync [OPTION]"
