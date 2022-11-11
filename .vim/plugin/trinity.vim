@@ -104,7 +104,7 @@ function! <SID>Trinity_InitTagList()
     " Do not close tags for other files
     " Do not show folding tree
     " Always display one file tags
-    let g:Tlist_WinWidth = 35
+    "let g:Tlist_WinWidth = 35
     "let g:Tlist_Sort_Type = "order"
     let g:Tlist_Compact_Format = 1
     "let g:Tlist_Exit_OnlyWindow = 1
@@ -195,7 +195,7 @@ endfunction " }}}
 function! <SID>Trinity_InitNERDTree()
 
     " Set the window width
-    let g:NERDTreeWinSize = 28
+    "let g:NERDTreeWinSize = 28
     " Auto centre
     " Not Highlight the cursor line
     let g:NERDTreeAutoCenter = 0

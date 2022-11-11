@@ -75,17 +75,25 @@ inoremap <C-j> <Esc><C-W>j
 inoremap <C-k> <Esc><C-W>k
 inoremap <C-l> <Esc><C-W>l
 "}}}
+" ACTION: Window Contrl {{{1
+"C is Ctrl; A is Alt; S is Shift;
+nmap <C-Up> :vertical res +1<cr>
+nmap <C-Down> :vertical res -1<cr>
+"}}}
 " ---------------------------------------------------------
 "  PLUGIN SETTINGS
 " ---------------------------------------------------------
 " PLUGIN: NERDTree Settings {{{1
 let g:NERDTreeWinPos = "left"
+" Set the window width
+let g:NERDTreeWinSize = 24
 " NOTE: fix chars width of dir Arrows and file open: ./lib/nerdtree/ui.vim: UI._indentLevelFor(line)
 "let g:NERDTreeDirArrowExpandable = "+"
 "let g:NERDTreeDirArrowCollapsible = "~"
 "}}}
 " PLUGIN: TagList Settings {{{1
 let g:Tlist_Use_Right_Window = 1
+let g:Tlist_WinWidth = 26
 "}}}
 " ---------------------------------------------------------
 "  MAPPING SETTINGS
@@ -135,8 +143,8 @@ nnoremap <silent> m :call WordNavigation('forward')<cr>
 nnoremap <silent> M :call WordNavigation('backward')<cr>
 "}}}
 " PLUGIN: SrcExpl Settings {{{1
-nmap <C-I> <C-W>j:call g:SrcExpl_Jump()<CR>
-nmap <C-O> :call g:SrcExpl_GoBack()<CR>
+"nmap <C-I> <C-W>j:call g:SrcExpl_Jump()<CR>
+"nmap <C-O> :call g:SrcExpl_GoBack()<CR>
 "}}}
 " PLUGIN: Trinity Settings {{{1
 if g:NERDTreeWinPos == "left"
@@ -204,7 +212,7 @@ autocmd BufNewFile *.cpp,*.vim,Makefile,*.sh,*.py,*.[ch] exec ":call AutoSetTitl
 "}}}
 
 "----------------------------------------------------------
-"  ADD BY EExuke
+"  ADD FOR OTHER
 "----------------------------------------------------------
 " FEILHEAD: add the file Head {{{1
 " ---------------------------------------------------------
