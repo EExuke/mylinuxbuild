@@ -85,8 +85,8 @@ nmap <C-Down> :vertical res -1<cr>
 " ---------------------------------------------------------
 " PLUGIN: NERDTree Settings {{{1
 let g:NERDTreeWinPos = "left"
-" Set the window width
 let g:NERDTreeWinSize = 24
+let g:NERDTreeShowHidden = 1
 " NOTE: fix chars width of dir Arrows and file open: ./lib/nerdtree/ui.vim: UI._indentLevelFor(line)
 "let g:NERDTreeDirArrowExpandable = "+"
 "let g:NERDTreeDirArrowCollapsible = "~"

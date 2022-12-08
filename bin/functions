@@ -162,6 +162,9 @@ function sw()
         "" )
             try_cd
             ;;
+        a|APLE )
+            try_cd APLE_APUE_code/
+            ;;
         b|boot )
             try_cd boot/uboot_bcm_switch/uboot boot/uboot_rtk_switch/u-boot-2011.12
             ;;
