@@ -1,0 +1,44 @@
+# RT-Thread coding manual
+
+## 杂项结构与接口说明{{{
+- 	rt_kprintf():
+- 		标准输出打印函数，对应linux的printf()函数;
+# }}}
+
+## 线程管理{{{
+- 	rt_thread_create():
+- 		创建一个动态线程;
+- 	rt_thread_init():
+- 		初始化一个静态线程;
+- 	rt_thread_delete():
+- 		删除一个动态线程;
+- 	rt_thread_detach():
+- 		脱离一个静态线程;
+- 	rt_thread_startup():
+- 		启动线程;
+- 	rt_thread_delay():
+- 		线程运行延时;
+- 	rt_thread_control():
+- 		线程运行时控制，控制;
+# }}}
+
+## 线程间同步
+
+## 线程间通信
+
+## 定时器管理
+
+## 内存管理
+
+## 中断管理
+
+## I/O设备模型
+
+## 设备驱动
+
+## 动态模块库
+
+## POSIX接口
+
+## 电源管理组件
+

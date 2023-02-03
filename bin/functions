@@ -177,9 +177,8 @@ function sw()
         cli )
             try_cd inhand/cli
             ;;
-        w|www )
-            try_cd inhand/www
-            #try_cd core/code/future/ISS/common/web/htmlpages
+        w|work )
+            cd ~/workspace
             ;;
         n|np )
             try_cd core/code/customer/${CUSTOMER_FOLDER}/npapi
