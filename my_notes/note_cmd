@@ -190,3 +190,20 @@
 # 	qrencode:二维码生成工具
 # 	figlet: 打印横幅字体; 可使用-f+格式制定横幅格式，使用showfigfonts命令查看支持的格式；-k不粘连；
 #
+# 	bc计算器:
+# 		设置小数点后位数: scale=4
+# 		进制转换:
+# 			ibase=16
+# 			obase=10
+#
+# 	cloc代码统计工具:
+# 		cloc <dir>
+#
+# 	ls反选:
+# 		ls | grep -v "[a-z]+"
+#
+# 	查看动态依赖库:
+# 		ldd <app>;  readelf -d <app>;  objdump -x <app>
+# 	指定依赖库路径:
+# 		LD_LIBRARY_PATH
+#

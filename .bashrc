@@ -204,5 +204,10 @@ fi
 
 #export TERM=linux
 
+#可执行程序路径 PATH
 export PATH=$PATH:/usr/local/bin:./:/usr/lib:~/win_cmd
 #export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin #树莓派
+
+#依赖库路径 LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/usr/lib
+
