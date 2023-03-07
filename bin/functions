@@ -566,7 +566,16 @@ function bd8()
 # move file to trash
 function del()
 {
-	mv $1 /home/xuke/.local/share/Trash/info/
+	if [[ $# == 0 ]]; then
+		echo -e "${FG_GREEN}Usage: del <filenames> ${F6_END}"
+	else
+		Trash_dir=/home/xuke/.my_trash
+		for i in $@
+		do
+			echo -e "${FG_GREEN}remove ${i} \tto\t ${Trash_dir}/${F6_END}"
+			mv ${i} ${Trash_dir}
+		done
+	fi
 }
 
 # My tfcp {{{1
