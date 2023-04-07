@@ -23,6 +23,12 @@
 	helper = store
 [core]
 	editor = vim
+	;quotepath = false
+[gui]
+	;encoding = gb2312
+[i18n]
+	;commitencoding = gb2312
+	;logoutputencoding = gb2312
 [commit]
 	template = /home/xuke/.gitmessage
 [push]

@@ -197,9 +197,9 @@ if [ -f ~/bin/functions ]; then
 	. ~/bin/functions
 	dir 3       # choose which enviroment: 1:~/workspace/; 2:~/workroom/; 3:~/
 
-	#dir workspace
+	dir workspace
 	#dir workroom
-	dir learnspace
+	#dir learnspace
 fi
 
 #export TERM=linux

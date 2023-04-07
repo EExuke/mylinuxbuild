@@ -39,8 +39,9 @@ F6_END="\033[0m"
 function Sync()
 {
     if [ "$1" = "b" ] || [ "$1" = "-b" ]; then
+        find -L . -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.lua" -o -name "*.def" > cscope.files
         cscope -bkq -i cscope.files
-        ctags -R *
+        ctags-exuberant -R *
     elif [ "$1" = "c" ] || [ "$1" = "-c" ]; then
         rm -f cscope.files cscope.in.out cscope.out cscope.po.out tags
     else
@@ -162,8 +163,8 @@ function sw()
         "" )
             try_cd
             ;;
-        a|APLE )
-            try_cd APLE_APUE_code/
+        a|app )
+            try_cd AD56/MC-AD5602_FT_APP/mainApp
             ;;
         b|boot )
             try_cd boot/uboot_bcm_switch/uboot boot/uboot_rtk_switch/u-boot-2011.12
@@ -213,11 +214,11 @@ function sw()
         rpc )
             try_cd core/code/future/ISS/common/cmrpc
             ;;
-        s|sys )
-            try_cd system/
+        s|storage )
+            cd ~/workspace/Misc_libs/storage_app_stack/
             ;;
-        r|router )
-            try_cd router/
+        r|rootfs )
+            cd ~/workspace/Misc_libs/Rootfs/storage_rootfs_stack/
             ;;
         re )
             cd /home/xuke/release
@@ -249,8 +250,11 @@ function sw()
         800|IR800 )
             try_cd inhand/InCross/arch/InRouter800
             ;;
-        900|IR900 )
-            try_cd inhand/InCross/arch/InRouter900
+        c70|C70 )
+            cd ~/workspace/C70/software/RC-C70_ZYNQ_APP
+            ;;
+        bx2|BX2 )
+            cd ~/workspace/BX2/trunk/RC-BX2_FT_APP/
             ;;
         * )
             cd "$1"
@@ -277,6 +281,7 @@ function ff()
 
 function f()
 {
+    #注意路径正确性，不能在符号链接的假路径使用
     if [ $# = 1 ]; then
         find `pwd` -name "$1"
     fi
@@ -443,6 +448,11 @@ function vv()
 }
 
 # My Notes {{{1
+function cmd()
+{
+    vim /home/xuke/mylinuxbuild/my_notes/note_cmd
+}
+
 function n()
 {
 	#"n Id" : create or open note book
@@ -456,6 +466,18 @@ function n()
 	elif [[ $4 == "" ]]; then
 		sed -n "$2, $3p" /home/xuke/mylinuxbuild/my_notes/note_$1
 	fi
+}
+#}}}
+# My cp functions {{{1
+# for copy FW into tftp dir auto on 2017/8/4
+function tfcp()
+{
+	echo -e "$FG_GREEN------------------------------------------------------------$F6_END"
+	echo -e "${FG_GREEN}Update mainApp to ~/tftpboot/:${F6_END}"
+	cp ./Obj/mainApp ~/tftpboot/
+	ls -alh ~/tftpboot/mainApp
+	date | cowsay
+	echo -e "$FG_GREEN------------------------------------------------------------$F6_END"
 }
 
 # copy to system copyBoard
@@ -480,29 +502,83 @@ function c()
 	fi
 }
 
-#CROSS COMPILE
+# for copy $1 into tftpboot auto
+function cpin()
+{
+	echo -e "$FG_GREEN------------------------------------------------------------$F6_END"
+	if [[ $1 != "" ]]; then
+		echo -e "${FG_GREEN}Update $1 to ~/tftpboot/:${F6_END}"
+		cp $1 ~/tftpboot/
+		filename=`echo $1 | awk -F / '{print $NF}'`
+		ls -alh ~/tftpboot/${filename}
+		date | cowsay
+	else
+		ls ~/tftpboot/
+		echo "Usage: cpin <filename>" | cowsay
+	fi
+	echo -e "$FG_GREEN------------------------------------------------------------$F6_END"
+}
+
+# for copy $1 from tftpboot auto
+function cpout()
+{
+	echo -e "$FG_GREEN------------------------------------------------------------$F6_END"
+	if [[ $1 != "" ]]; then
+		echo -e "${FG_GREEN}Copy $1 from ~/tftpboot/:${F6_END}"
+		cp ~/tftpboot/$1 ./
+		ls -alh ./$1
+		date | cowsay
+	else
+		ls ~/tftpboot/
+		echo "Usage: cpout <filename>" | cowsay
+	fi
+	echo -e "$FG_GREEN------------------------------------------------------------$F6_END"
+}
+#}}}
+#CROSS COMPILE {{{
 function mk()
 {
-	if [[ $1 == "" ]]; then
-		unset ARCH
+	if [[ "$1" == "x86" ]]; then
 		unset CC
+		unset CXX
+		unset CPP
+		unset AS
+		unset LD
+		unset GDB
+		unset STRIP
+		unset RANLIB
+		unset OBJCOPY
+		unset OBJDUMP
+		unset AR
+		unset NM
+		unset M4
+		unset TARGET_PREFIX
+		unset CFLAGS
+		unset CXXFLAGS
+		unset LDFLAGS
+		unset CPPFLAGS
+		unset ARCH
+		unset PLATFORM
 		unset CROSS_COMPILE
-		make clean
-		make
-		echo "Finished" | figlet
-	elif [[ $1 == "pi" ]]; then
+	elif [[ "$1" == "ft" ]]; then
+		source /opt/env_aarch64-linux-gnu.sh
+	elif [[ "$1" == "zynq" ]]; then
+		source /opt/env_zynq7xxx_armhf.sh
+	elif [[ "$1" == "pi" ]]; then
 		#树莓派
 		export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
 		export ARCH=arm
 		export CC=arm-linux-gnueabihf-gcc
 		export CROSS_COMPILE=arm-linux-gnueabihf-
-		make clean
-		make
-		echo "Finished" | figlet
 	fi
-}
 
-# search
+	make clean
+	make
+	echo "Finished" | figlet
+}
+#}}}
+# My Quickly Commands {{{
+# search function
 function se()
 {
 	if [[ "$1" == "cweb" ]]; then
@@ -547,6 +623,11 @@ function rfc ()
 }
 
 # telnet ip
+function tl()
+{
+	c c 5
+	telnet 192.168.$1
+}
 function tln()
 {
 	c c 5
@@ -572,220 +653,10 @@ function del()
 		Trash_dir=/home/xuke/.my_trash
 		for i in $@
 		do
-			echo -e "${FG_GREEN}remove ${i} \tto\t ${Trash_dir}/${F6_END}"
+			echo -e "${FG_GREEN}remove ${i} \tto\t${Trash_dir}/${F6_END}"
 			mv ${i} ${Trash_dir}
 		done
 	fi
-}
-
-# My tfcp {{{1
-# Added for copy FW into tftpboot auto on 2017/8/4
-function tfcp()
-{
-	sw
-	echo "------------------------------------------------------------" | lolcat
-	echo "remove old FW:"
-	ls /home/xuke/tftpboot/*.bin | cut -d '/' -f5
-	rm /home/xuke/tftpboot/1_backup/*.bin
-	mv /home/xuke/tftpboot/*.bin /home/xuke/tftpboot/1_backup/
-	cp ./images/test/*.bin /home/xuke/tftpboot/
-	rm ./images/tmp/mImage*
-	cp /tftpboot/root /home/xuke/share2win/
-	sudo rm /tftpboot/*.bin
-	echo "Update root to:"
-	ls -ahl /home/xuke/share2win/root
-	echo "Update FW to:"
-	ls -ahl /home/xuke/tftpboot/*.bin
-	date | cowsay | lolcat
-	echo "------------------------------------------------------------" | lolcat
-    # Added for auto load FW images when put boot_command 6 on 2017/09/12
-    #local DES_1210_52ME_IMG=5A5A5A0A.img
-    #local DGS_1210_SERS_IMG=0A5A5A5A.img
-    #local TRENDNET_SERS_IGM=TRENDNET.img
-
-    ## give the images/FW_DIR here, if start compile a new project, please add
-    ## another if branch for get new $NAME before you want use command "tftp_cp"
-    ## to copy the FW into ~/tftpboot/ again.
-
-    #local LINUX_TFTP_DIR=`sw t; pwd;`
-    ##local WINDS_TFTP_DIR=/home/xuke/share/tftp_win
-    #local RESTART_TFTP="sudo service tftpd-hpa restart"
-
-    ## if TRENDNET code doesn't have single images, this branch will fail because it's FW name concreted to DUT type name
-    #if [ "$CUSTOMER_FOLDER" = "VG9" ] || [ "$CUSTOMER_FOLDER" = "trendnet"];then
-        ##local NAME=$(basename $PROJ_ROOT_PATH/images/TRENDNET)
-
-        ## copy images/TRENDNET* to tftpboot/ and restart tftp server.
-        #local HEX_DIR=images/test
-    #elif [ "$CUSTOMER_FOLDER" = "VG9" ];then
-        #local NAME=$(basename $PROJ_ROOT_PATH/images/test/*)
-
-        ## copy FW_DIR/$NAME* to tftpboot/ and restart tftp server. $NAME such
-        ## like as DGS-1210-52MPME-B1
-        #local HEX_DIR=images/test/$NAME
-
-        ## Added for DLINK modles auto get hex by hex file length on 2018/01/17.
-        ##for file in $(ls $PROJ_ROOT_PATH/$HEX_DIR/*.zos2)
-        #for file in $(ls $PROJ_ROOT_PATH/$HEX_DIR/*.img)
-        #do
-            #local HexLength=`expr length $file`
-            ##let HexLength=$HexLength-1
-        #done
-    #fi
-
-    ###############################################################
-    ## For just copy fw.hex into tftpboot/ otherwise any.hex      #
-    ## and change name ${special name}.img to DGS/DES fw update.  #
-    ###############################################################
-    #if [ ! $1 ]; then
-        #if [ "$CUSTOMER_FOLDER" = "VG9" ] || [ "$CUSTOMER_FOLDER" = "trendnet" ];then
-            #tfcp cl;
-            #cp $HEX_DIR/*.bin $LINUX_TFTP_DIR/
-            ##cp $HEX_DIR/squashfs.vc $WINDS_TFTP_DIR/
-            #tfcp sh;
-        #else
-            #tfcp cl;
-            ## Start copy hex file to the tftpboot directory.
-            #for file in $(ls $PROJ_ROOT_PATH/images/test/*.bin)
-            #do
-                ##echo $file `expr length $file` $HexLength
-                ## Change the local on 2018/01/17, and now need not to change here always.
-                ## just need add the HexLength below.
-                #if [ `expr length $file` = $HexLength ]; then
-                    #if [ "$NAME" = "DES-1210-52ME-C1" ]; then
-                        ##echo -e ${FG_GREEN}Copying \
-                            ##${F6_END}${BG_PURPLE}$file${F6_END}${FG_GREEN} into${FG_YELLOW} \
-                            ##tftpboot\/tftp_win \
-                            ##${FG_GREEN}with name ${FG_RED}\"$DES_1210_52ME_IMG\" ${F6_END}
-                        #cp $file $LINUX_TFTP_DIR/$DES_1210_52ME_IMG
-                        ##cp $file $WINDS_TFTP_DIR/$DES_1210_52ME_IMG
-                        ##echo -e ${FG_GREEN}done. ${F6_END}
-                    #else
-                        ##echo -e ${FG_GREEN}Copying \
-                            ##${F6_END}${BG_PURPLE}$file${F6_END}${FG_GREEN} into${FG_YELLOW} \
-                            ##tftpboot\/tftp_win \
-                            ##${FG_GREEN}with name ${FG_RED}\"$DGS_1210_SERS_IMG\" ${F6_END}
-                        #cp $file $LINUX_TFTP_DIR/$DGS_1210_SERS_IMG
-                        ##cp $file $WINDS_TFTP_DIR/$DGS_1210_SERS_IMG
-                        ##echo -e ${FG_GREEN}done. ${F6_END}
-                    #fi
-                    #tfcp sh
-                    ##else
-                    ##echo HexLength is $HexLength and load lenth is `expr length $file`
-                #fi
-            #done
-        #fi # end of trendnet
-    #fi
-    ## Modified on 2017/9/1
-    #case $1 in
-        #i|in|init )
-            ## For init my work state.
-            #echo -e ${FG_GREEN}Opening project. ${F6_END}
-            #tfcp re; sw f
-            #;;
-        #r|re|restart )
-            ## For restart the tftp service.
-            #echo -e ${FG_GREEN}Restaring tftp service. ${F6_END}
-            #$RESTART_TFTP;
-            #echo -e ${FG_GREEN}Restart done. ${F6_END}
-            #;;
-        #c|ch|chmod )
-            ## For chmod +rwx to the console SCRT call.
-            #echo -e ${FG_GREEN}Chmoding +rwx for console. ${F6_END}
-            #sudo chmod 777 /dev/ttyUSB0;
-            ##sudo chmod 777 /dev/ttyS0;
-            #echo -e ${FG_GREEN}Chmod done. ${F6_END}
-            #;;
-        #cl|cle|clean )
-            ## For clear files under tftpboot.
-            #if [ "$NAME" = "DES-1210-52ME-C1" ]; then
-                #echo -e ${FG_GREEN}Clearing ${FG_RED}$DES_1210_52ME_IMG ${FG_GREEN}from tftpboot. ${F6_END}
-                #rm -rf $LINUX_TFTP_DIR/$DES_1210_52ME_IMG
-                ##rm -rf $WINDS_TFTP_DIR/$DES_1210_52ME_IMG
-            #else
-                #if [ "$CUSTOMER_FOLDER" = "soarnex" ] || [ "$CUSTOMER_FOLDER" = "trendnet" ];then
-                    #echo -e ${FG_GREEN}Clearing ${FG_RED}squashfs.vc ${FG_GREEN}from tftpboot. ${F6_END}
-                    #rm -rf $LINUX_TFTP_DIR/squashfs.vc
-                    ##rm -rf $WINDS_TFTP_DIR/squashfs.vc
-                #else
-                    #echo -e ${FG_GREEN}Clearing ${FG_RED}$DGS_1210_SERS_IMG ${FG_GREEN}from tftpboot. ${F6_END}
-                    #rm -rf $LINUX_TFTP_DIR/$DGS_1210_SERS_IMG
-                    ##rm -rf $WINDS_TFTP_DIR/$DGS_1210_SERS_IMG
-                #fi
-            #fi
-            #;;
-        #s|sh|show )
-            ## For show after update FW.hex in tftpboot, to compare with time and size
-            #echo -e ${FG_GREEN}-----------------------------------------------------------${F6_END}
-            #if [ "$NAME" = "DES-1210-52ME-C1" ]; then
-                #image_name=$DES_1210_52ME_IMG
-            #else
-                #if [ "$CUSTOMER_FOLDER" = "soarnex" ] || [ "$CUSTOMER_FOLDER" = "trendnet" ];then
-                    #image_name="squashfs.vc"
-                #else
-                    #image_name=$DGS_1210_SERS_IMG
-                #fi
-            #fi
-
-            #linux_imgf_size=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f5)                      #9.4M | null
-            #if [[ "" != ${linux_imgf_size} ]]; then
-                #linux_imgf_date=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f6)                  #2018-12-05
-                #linux_imgf_time=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f7 | cut -d '.' -f1) #14:41:13
-                #linux_imgf_file=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f9)                  #5A5A5A0A.img
-            #else
-                #linux_imgf_size=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f6)                  #9.4M
-                #linux_imgf_date=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f7)                  #2018-12-05
-                #linux_imgf_time=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f8 | cut -d '.' -f1) #14:41:13
-                #linux_imgf_file=$(ls -hl --full-time $LINUX_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f10)                 #5A5A5A0A.img
-            #fi
-
-            ##wndws_imgf_size=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f5)
-            ##if [[ "" != ${wndws_imgf_size} ]]; then
-                ##wndws_imgf_date=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f6)
-                ##wndws_imgf_time=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f7 | cut -d '.' -f1)
-                ##wndws_imgf_file=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f9)
-            ##else
-                ##wndws_imgf_size=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f6)
-                ##wndws_imgf_date=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f7)
-                ##wndws_imgf_time=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f8 | cut -d '.' -f1)
-                ##wndws_imgf_file=$(ls -hl --full-time $WINDS_TFTP_DIR/ | grep "$image_name" | cut -d ' ' -f10)
-            ##fi
-
-            #if [ ! $2 ]; then
-                #echo -e "${FG_DARKGREEN}tftpboot(linux) :" \
-                    #"${FG_GREEN}${linux_imgf_size} ${FG_RED}${linux_imgf_date}${FG_YELLOW}(${linux_imgf_time}) ${FG_BLUE}${linux_imgf_file}${F6_END}"
-                ##echo -e ${FG_GREEN}-----------------------------------------------------------${F6_END}
-                ##echo -e "${FG_DARKGREEN}tftp_win(share) :" \
-                    ##"${FG_GREEN}${wndws_imgf_size} ${FG_RED}${wndws_imgf_date}${FG_YELLOW}(${wndws_imgf_time}) ${FG_BLUE}${wndws_imgf_file}${F6_END}"
-            #elif [ $2 = "-t" ]; then
-                #echo -e "${FG_DARKGREEN}tftpboot(linux) :" \
-                    #"${FG_GREEN}${linux_imgf_size} ${FG_RED}${linux_imgf_date}${FG_YELLOW}(${linux_imgf_time}) ${FG_BLUE}${linux_imgf_file}${F6_END}"
-            ##elif [ $2 = "-s" ]; then
-                ##echo -e "${FG_DARKGREEN}tftp_win(share) :" \
-                    ##"${FG_GREEN}${wndws_imgf_size} ${FG_RED}${wndws_imgf_date}${FG_YELLOW}(${wndws_imgf_time}) ${FG_BLUE}${wndws_imgf_file}${F6_END}"
-            #elif [ $2 = "-a" ];    then
-                #ls -hl $LINUX_TFTP_DIR/ ;
-                ##ls -hl $WINDS_TFTP_DIR/ ;
-            #fi
-            #echo -e ${FG_GREEN}-----------------------------------------------------------${F6_END}
-            #;;
-        #f|con|config )
-            #time=$(date +%Y-%m-%d)
-            ##if [ ! -d "~/make_default_msr_config" ]; then
-                ##mkdir ~/make_default_msr_config ;
-            ##fi
-            #echo -e ${FG_GREEN} Moveing the issdefault.conf to ~/make_default_msr_config/${NAME}_issdefault.conf ${F6_END}
-            #mv ~/Downloads/config.cfg  ~/make_default_msr_config/${NAME}_issdefault.conf
-            #cd ; tar -cvf msr_configs_${time}.tar.gz make_default_msr_config/* ;
-            #cd - ;
-            #lh ~/make_default_msr_config/ ~/msr_configs_*.tar.gz
-            #;;
-    #esac
-}
-# My Quick Commands {{{1
-function cmd()
-{
-    vim /home/xuke/mylinuxbuild/my_notes/note_cmd
 }
 
 # bashrc
@@ -872,7 +743,7 @@ function back()
         echo -e $F6_END
     fi
 }
-
+#}}}
 # test_b {{{1
 function test_b()
 {
@@ -1046,3 +917,18 @@ function cotmp()
     cd $current_dir &>/dev/null;
     return 0
 }
+
+# File ops{{{1
+# 文件编码转换
+function my_iconv()
+{
+	# UTF-8 -> GB2312
+	for i in $@
+	do
+		echo -e "${FG_GREEN}iconv ${i} \tto\t${i}_GB${F6_END}"
+		iconv -c -f UTF-8 -t GB2312 ${i} -o ${i}_GB
+		echo -e "${FG_GREEN}mv ${i}_GB \tto\t${i}${F6_END}"
+		mv ${i}_GB ${i}
+	done
+}
+#}}}
