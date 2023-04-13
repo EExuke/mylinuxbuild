@@ -458,7 +458,7 @@ function n()
 	#"n Id" : create or open note book
 	if [[ $1 == "" ]]; then
 		tree ~/mylinuxbuild/my_notes
-		echo -e "${FG_GREEN}Usage: n <Index> [headline endline]: create or open noteN book${F6_END}"
+		echo -e "${FG_GREEN}Usage: n <Index> [headline endline]: create or open note_XXX book${F6_END}"
 	elif [[ $2 == "" ]]; then
 		vim /home/xuke/mylinuxbuild/my_notes/note_$1
 	elif [[ $3 == "" ]]; then
@@ -475,6 +475,7 @@ function tfcp()
 	echo -e "$FG_GREEN------------------------------------------------------------$F6_END"
 	echo -e "${FG_GREEN}Update mainApp to ~/tftpboot/:${F6_END}"
 	cp ./Obj/mainApp ~/tftpboot/
+	${STRIP} ~/tftpboot/mainApp
 	ls -alh ~/tftpboot/mainApp
 	date | cowsay
 	echo -e "$FG_GREEN------------------------------------------------------------$F6_END"
@@ -742,6 +743,12 @@ function back()
         echo -e "\t${FG_RED}Note: Default value of <TIME> is today,format like 2018-01-19"
         echo -e $F6_END
     fi
+}
+
+# 打开Terminal的JSON配置文件
+function s()
+{
+	vim ~/quick_link/term_cfg.json
 }
 #}}}
 # test_b {{{1
