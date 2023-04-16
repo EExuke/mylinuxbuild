@@ -2,10 +2,10 @@
 "
 " Copyright (c) 2018 zhendong Cao. All Rights Reserved.
 "
-" Maintainer: zhendongcao
-"       Mail: <zhendongcao@nettech-global.com>
-"    Created: 2018-12-21
-" LastChange: 2018-12-22
+" Maintainer: EExuke
+"       Mail: <EExuke@qq.com>
+"    Created: 2019-12-21
+" LastChange: 2019-12-22
 
 " ---------------------------------------------------------
 "  GENERAL SETTINGS
@@ -103,7 +103,7 @@ let mapleader=","
 "}}}
 " FUNCTION: Personal Map-key {{{1
 nmap <F6> :NERDTreeFind<cr><cr>
-nmap <leader>ta gg<CR>:call AddTitle()<CR>
+nmap <leader>ta gg<CR>:call AddTitle()<CR>kkkA
 "nmap <leader>lkup <Plug>LookupFile<cr>
 nmap <leader>f  :MRU<cr>
 map  <leader><space>  :s/\s\+$//ge<cr>

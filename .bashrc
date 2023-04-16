@@ -211,3 +211,6 @@ export PATH=$PATH:/usr/local/bin:./:/usr/lib:~/win_cmd
 #依赖库路径 LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/usr/lib
 
+#配置X11远程显示
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+
