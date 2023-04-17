@@ -939,3 +939,16 @@ function my_iconv()
 	done
 }
 #}}}
+# hexfy{{{1
+# 翻译hex数据为ASCII字符串
+function hexfy()
+{
+	if [[ $# == 0 ]]; then
+		echo -e "${FG_GREEN}Usage: hexfy <hex string> ${F6_END}"
+	else
+		echo -e "${FG_GREEN}---------------------------------\n"
+		echo $@ | xxd -r -p
+		echo -e "\n---------------------------------${F6_END}"
+	fi
+}
+#}}}

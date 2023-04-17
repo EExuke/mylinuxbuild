@@ -207,3 +207,10 @@
 # 	指定依赖库路径:
 # 		LD_LIBRARY_PATH
 #
+# 	二进制或hex格式数据查看工具
+# 		xdd -h
+# 		hexdump -h
+# 	二进制或hex格式数据查看工具
+# 		dhex -h
+# 		hexeidt -h
+#
