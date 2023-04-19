@@ -33,6 +33,23 @@
 			"name": "MyCMD: show all window",
 			"keys": "shift+alt+a"
 		},
+		{
+			"command": {
+				"action": "multipleActions",
+				"actions": [
+					// create newPane
+					{"action": "newTab", "index": 1},
+					// Go back to the prevTab and close
+					{ "action": "prevTab", "tabSwitcherMode": "inOrder" },
+					//close old tab
+					{"action": "closePane"}
+					//go to new tab
+					//{ "action": "nextTab", "tabSwitcherMode": "inOrder" }
+				]
+			},
+			"name": "MyCMD: multiple cmd Actions",
+			"keys": "ctrl+d"
+		},
         {
             "command": 
             {
@@ -49,10 +66,6 @@
                 "splitMode": "duplicate"
             },
             "keys": "alt+shift+d"
-        },
-        {
-            "command": "unbound",
-            "keys": "ctrl+d"
         },
         {
             "command": "unbound",
