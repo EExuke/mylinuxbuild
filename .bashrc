@@ -202,6 +202,9 @@ if [ -f ~/bin/functions ]; then
 	#dir learnspace
 fi
 
+#发送当前路径到Terminal
+PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"'
+
 #export TERM=linux
 
 #可执行程序路径 PATH
@@ -213,4 +216,3 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/usr/lib
 
 #配置X11远程显示
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-
