@@ -746,7 +746,7 @@ function back()
 }
 
 # 打开Terminal的JSON配置文件
-function s()
+function setj()
 {
 	vim ~/quick_link/term_cfg.json
 }
