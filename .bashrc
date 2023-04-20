@@ -205,6 +205,10 @@ fi
 #发送当前路径到Terminal
 PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"'
 
+#配置X11远程显示
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+export LIBGL_ALWAYS_INDIRECT=1 #解决libGL报错
+
 #export TERM=linux
 
 #可执行程序路径 PATH
@@ -214,5 +218,3 @@ export PATH=$PATH:/usr/local/bin:./:/usr/lib:~/win_cmd
 #依赖库路径 LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/usr/lib
 
-#配置X11远程显示
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
