@@ -22,7 +22,7 @@ set   cinoptions=:4              "影响 'cindent' 重新缩进 C 程序行的�
 set   nobackup                   "不保留备份文件
 "set   expandtab                  "插入 <Tab> 时使用合适数量的空格
 set   tabstop=4                  "<Tab> 代表的空格数
-set   mouse=a                    "鼠标可用
+"set   mouse=a                    "鼠标可用
 set   number                     "显示行号
 set   history=1000               "命令历史显示1000条
 set   foldenable                 "折叠
