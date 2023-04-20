@@ -750,6 +750,12 @@ function setj()
 {
 	vim ~/quick_link/term_cfg.json
 }
+
+# 字符串转二维码
+function qcode()
+{
+	qrencode -t UTF8 $1
+}
 #}}}
 # test_b {{{1
 function test_b()

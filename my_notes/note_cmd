@@ -187,7 +187,9 @@
 # 			tcpdump -i <interface> "tcp[tcpflags] & (tcp-syn|tcp-ack) != 0"
 # 			...
 # 			...
-# 	qrencode:二维码生成工具
+# 	qrencode:二维码生成工具（最大支持输入6200个数字, 2900个字符）
+# 		 qrencode -t UTF8 -o - "this is a test string by EExuke"
+#
 # 	figlet: 打印横幅字体; 可使用-f+格式制定横幅格式，使用showfigfonts命令查看支持的格式；-k不粘连；
 #
 # 	bc计算器:
