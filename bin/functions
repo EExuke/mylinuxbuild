@@ -276,7 +276,18 @@ function p()
 
 function ff()
 {
-    firefox $*
+	if [[ $# == 0 ]]; then
+		echo -e "${FG_GREEN}Usage: ff [-f] <addr|path>${F6_END}"
+	elif [[ $1 == "-f" ]]; then
+		if [[ ${2:0:1} == "." || ${2:1:1} == "/" ]]; then
+			cur_path=`pwd`
+			firefox "file://///wsl$/Ubuntu-18.04/${cur_path}/${2:2}"
+		else
+			firefox "file://///wsl$/Ubuntu-18.04/$2"
+		fi
+	else
+		firefox $*
+	fi
 }
 
 function f()
