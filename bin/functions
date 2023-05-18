@@ -519,10 +519,13 @@ function cpin()
 {
 	echo -e "$FG_GREEN------------------------------------------------------------$F6_END"
 	if [[ $1 != "" ]]; then
-		echo -e "${FG_GREEN}Update $1 to ~/tftpboot/:${F6_END}"
-		cp $1 ~/tftpboot/
-		filename=`echo $1 | awk -F / '{print $NF}'`
-		ls -alh ~/tftpboot/${filename}
+		echo -e "${FG_GREEN}Update $@ to ~/tftpboot/:${F6_END}"
+		cp $@ ~/tftpboot/
+		for i in $@
+		do
+			filename=`echo ${i} | awk -F / '{print $NF}'`
+			ls -alh ~/tftpboot/${filename}
+		done
 		date | cowsay
 	else
 		ls ~/tftpboot/
@@ -536,9 +539,12 @@ function cpout()
 {
 	echo -e "$FG_GREEN------------------------------------------------------------$F6_END"
 	if [[ $1 != "" ]]; then
-		echo -e "${FG_GREEN}Copy $1 from ~/tftpboot/:${F6_END}"
-		cp ~/tftpboot/$1 ./
-		ls -alh ./$1
+		echo -e "${FG_GREEN}Copy $@ from ~/tftpboot/:${F6_END}"
+		for i in $@
+		do
+			cp ~/tftpboot/${i} ./
+			ls -alh ./${i}
+		done
 		date | cowsay
 	else
 		ls ~/tftpboot/
