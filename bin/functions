@@ -579,15 +579,13 @@ function mk()
 		unset PLATFORM
 		unset CROSS_COMPILE
 	elif [[ "$1" == "ft" ]]; then
+		#FT2000
 		source /opt/env_aarch64-linux-gnu.sh
 	elif [[ "$1" == "zynq" ]]; then
 		source /opt/env_zynq7xxx_armhf.sh
 	elif [[ "$1" == "pi" ]]; then
 		#树莓派
-		export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
-		export ARCH=arm
-		export CC=arm-linux-gnueabihf-gcc
-		export CROSS_COMPILE=arm-linux-gnueabihf-
+		source /opt/env_raspbian_arm_gnueabihf.sh
 	fi
 
 	make clean
