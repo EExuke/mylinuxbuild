@@ -211,8 +211,11 @@ function sw()
         o|opensource)
             try_cd core/code/opensource
             ;;
-        rpc )
-            try_cd core/code/future/ISS/common/cmrpc
+        q|qemu)
+            cd ~/learnspace/my_qemu_project
+            ;;
+        qrun )
+            cd ~/learnspace/my_qemu_project/qemu_run_env
             ;;
         s|storage )
             cd ~/workspace/Misc_libs/storage_app_stack/
