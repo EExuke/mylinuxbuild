@@ -775,6 +775,32 @@ function qcode()
 	qrencode -t UTF8 $1
 }
 #}}}
+
+# keil5 编译
+function mkuv()
+{
+	project_name=`ls ./*.uvprojx`
+	log_file="uv4_build.log"
+
+	if [[ -z ${project_name} ]]; then
+		echo -e "${FG_RED}Not Found uvprojx project!${F6_END}"
+		return
+	fi
+
+	if [[ $1 == "-b" ]]; then
+		echo -e "${FG_GREEN}build uvprojx project ${project_name} by keil5:${F6_END}"
+		uv4 -j0 ${project_name} $1 -o ${log_file}
+		cat ${log_file} && rm ${log_file}    # 打印编译信息
+	elif [[ $1 == "-c" ]]; then
+		echo -e "${FG_GREEN}clean uvprojx project by keil5:${F6_END}"
+		uv4 -j0 ${project_name} $1 -o ${log_file}
+		cat ${log_file} && rm ${log_file}    # 打印编译信息
+	else
+		echo -e "${FG_GREEN}open uvprojx project by ${project_name} keil5...${F6_END}"
+		uv4 ${project_name}
+	fi
+}
+
 # test_b {{{1
 function test_b()
 {
