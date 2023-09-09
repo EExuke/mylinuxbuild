@@ -6,7 +6,7 @@
 # -------------------------------------------------------------------------- --
 #     AUTHOR                   : EExuke
 #     FILE NAME                : myfy.sh
-#     FILE DESCRIPTION         : Linux shell script file
+#     FILE DESCRIPTION         : 在线cli快速翻译脚本
 #     FIRST CREATION DATE      : 2023/09/04
 # --------------------------------------------------------------------------
 #     Version                  : 1.0
@@ -28,10 +28,43 @@ B_YL="\033[43m"   B_BU="\033[44m"   B_PR="\033[45m"
 B_DG="\033[46m"   B_WT="\033[47m"
 
 #-----------------------------------------------------------
+#                  Keys
+#-----------------------------------------------------------
+API_ADDR="https://fanyi-api.baidu.com/api/trans/vip/translate"
+APP_ID="20230908001809652"
+APP_KEY="Blsc9e5yvpHLO74JBztT"
+
+#HEADER="Content-Type:application/json"
+HEADER="Content-Type:application/x-www-form-urlencoded"
+SALT=`date +%s`
+INPUT_STR="${*}"
+
+# 转URL编码
+input_ec=`echo -n ${INPUT_STR} | od -An -tx1 | tr -d '\n' | tr ' ' %`
+
+#-----------------------------------------------------------
 #                  MAIN PROCESS
 #-----------------------------------------------------------
-#web_site="http://dict.youdao.com/w/eng/$1/#keyfrom=dict2.index"
-web_site="http://dict.youdao.com/w/$1/#keyfrom=dict2.top"
-echo -e ${web_site}
+#sign=MD5(appid + q + salt + 密钥)
+sign=`echo -n "${APP_ID}${INPUT_STR}${SALT}${APP_KEY}" | md5sum | awk '{print $1}'`
 
-curl -s ${web_site} | grep "<li>" | awk -F "<li>|</li>" '{print $2}' | grep -Ev "^$|<a "
+# 判断中英文
+echo ${INPUT_STR} | grep -qP '[^\x00-\x7F]'
+if [[ $? -eq 0 ]]; then
+	# zh to en
+	data="q=${input_ec}&from=zh&to=en&appid=${APP_ID}&salt=${SALT}&sign=${sign}&action=0"
+else
+	# en to zh
+	data="q=${input_ec}&from=en&to=zh&appid=${APP_ID}&salt=${SALT}&sign=${sign}&action=0"
+fi
+
+#-----------------------------------------------------------
+#                   run curl
+#-----------------------------------------------------------
+result=`curl -s ${API_ADDR} -H ${HEADER} -d ${data}`
+
+#-----------------------------------------------------------
+#                   result parase
+#-----------------------------------------------------------
+echo ${result} | jq .trans_result[0]
+
