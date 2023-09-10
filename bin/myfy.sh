@@ -28,10 +28,28 @@ B_YL="\033[43m"   B_BU="\033[44m"   B_PR="\033[45m"
 B_DG="\033[46m"   B_WT="\033[47m"
 
 #-----------------------------------------------------------
+#                  web词典方式的支持
+#-----------------------------------------------------------
+#bing 词典
+bing_dictionary()
+{
+	url_bing="https://www.bing.com/dict/search"
+	data="q=${*}&qs=n&form=Z9LH5&sp=-1&lq=0&pq=${*}&sc=8-5&sk=&cvid=7B1FABA297AD4B47819022CF2426F2D3&ghsh=0&ghacc=0&ghpl="
+
+	content_line=`curl -s ${url_bing}"?"${data} | grep "<!--pc-->"`
+
+	result=`echo ${content_line} | awk -F 'description" content="' '{print $2}' | awk -F '"' '{print $1}' | awk -F '，' '{print $NF}'`
+
+	echo ""
+	echo ${result}
+}
+
+#-----------------------------------------------------------
 #                  API srcourse config
 #-----------------------------------------------------------
-#API_SRC="baidu"
-API_SRC="youdao"
+API_SRC="baidu"
+#API_SRC="youdao"
+#API_SRC="bing"
 
 #-----------------------------------------------------------
 #                  参数定义
@@ -94,6 +112,9 @@ elif [[ ${API_SRC} == "youdao" ]]; then
 	from="auto"
 
 	data="q=${input_ec}&from=${from}&to=${to}&appKey=${APP_ID}&salt=${SALT}&sign=${sign}&signType=${signType}&curtime=${CUR_TIME}"
+elif [[ ${API_SRC} == "bing" ]]; then
+	bing_dictionary ${input_ec}
+	exit 0
 fi
 
 #-----------------------------------------------------------
