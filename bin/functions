@@ -600,20 +600,21 @@ function mk()
 # search function
 function se()
 {
+	my_browser="firefox"
 	if [[ "$1" == "cweb" ]]; then
-		firefox "http://c.biancheng.net"
+		$my_browser "http://c.biancheng.net"
 		echo -e "[$1] open tag: C语言中文网 \n"
 	elif [[ "$1" == "gitee" ]]; then
-		firefox "https://gitee.com/EExuke/dashboard/projects"
+		$my_browser "https://gitee.com/EExuke/dashboard/projects"
 		echo -e "[$1] open tag: Gitee \n"
 	elif [[ "$1" == "rnb" ]]; then
-		firefox "https://c.runoob.com"
+		$my_browser "https://c.runoob.com"
 		echo -e "[$1] open tag: Runoob \n"
 	elif [[ "$1" == "mind" ]]; then
-		firefox "http://www.mindline.cn/webapp"
+		$my_browser "http://www.mindline.cn/webapp"
 		echo -e "[$1] open tag: MindLine \n"
 	elif [[ "$1" == "design" ]]; then
-		firefox "http://huatu.98youxi.com/home/newfile"
+		$my_browser "http://huatu.98youxi.com/home/newfile"
 		echo -e "[$1] open tag: 迅捷画图 \n"
 	elif [[ "$1" == "" ]]; then
 		echo -e "${F_DG}se${F6_E} ${F_GR}<Input contents for searching>${F6_E}"
@@ -623,7 +624,7 @@ function se()
 		echo -e "   ${F_GR}mind   (open MindLine)${F6_E}"
 		echo -e "   ${F_GR}design (open 迅捷画图)${F6_E}"
 	else
-		firefox "https://www.baidu.com/s?wd=$1"
+		$my_browser "https://www.baidu.com/s?wd=$1"
 		echo -e "searching: $1 \n"
 	fi
 }
