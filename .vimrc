@@ -136,11 +136,23 @@ nmap <leader>si :cs find i <C-R>=expand("<cfile>")<cr><cr>
 nmap <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
 nmap <leader>zz <C-w>o
 nmap <leader>gs :GetScripts<cr>
+nmap <leader>n  :set nonumber<cr>
+nmap <leader>N  :set number<cr>
 "InterestingWords多单词高亮："
 nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
 nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
 nnoremap <silent> m :call WordNavigation('forward')<cr>
 nnoremap <silent> M :call WordNavigation('backward')<cr>
+" Doxygen 注释风格映射快捷键
+nmap <leader>ta gg:DoxLic<CR>:DoxAuthor<CR>
+nmap <silent> [1 :DoxAuthor<CR>
+nmap <silent> [2 :Dox<CR>
+nmap <silent> [3 :DoxBlock<CR>
+nmap <silent> [4 :DoxLic<CR>
+let g:DoxygenToolkit_authorName="xuke"
+let g:DoxygenToolkit_licenseTag = "Copyright (C) \<enter>"
+let g:DoxygenToolkit_licenseTag = g:DoxygenToolkit_licenseTag.strftime("%Y")." Chengdu zhimingda electronics co.LTD\<enter>"
+let g:DoxygenToolkit_licenseTag = g:DoxygenToolkit_licenseTag."All rights reserved."
 "}}}
 " PLUGIN: SrcExpl Settings {{{1
 "nmap <C-I> <C-W>j:call g:SrcExpl_Jump()<CR>
