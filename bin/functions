@@ -812,15 +812,20 @@ function mkuv()
 # test_b {{{1
 function test_b()
 {
-    sw te;
+    if [ $# <= 1 ]; then
+		sw te;
+	else
+		sw $2;
+    fi
 
     if [ $# != 0 ]; then
         mkdir $1; cd $1;
     fi
 
     mkdir src inc obj;
+    touch obj/.gitinit
+    touch -O inc/"$1".h src/"$1".c
     vim Makefile;
-    touch src/"$1".c inc/"$1".h
 }
 
 # CC {{{1

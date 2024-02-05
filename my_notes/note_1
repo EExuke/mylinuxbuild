@@ -56,3 +56,9 @@ route add -net 192.56.76.0 netmask 255.255.255.0 dev eth0#添加一条静态路�
 route add default gw 192.168.0.1#添加默认路由
 route del -net 192.168.1.0/24 gw 192.168.0.1#删除一条路由
 route -n#查看路由表
+
+# 设置Linux内核printk输出到控制台终端shell的等级
+1）直接写 /proc/sys/kernel/printk:
+	echo 8 > /proc/sy/kernel/printk
+2）demsg -n 控制:
+	demsg -n 5
