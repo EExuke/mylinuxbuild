@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # This shell libarary gathers any useful tools to improve labor efficiency!
 #
@@ -812,20 +812,23 @@ function mkuv()
 # test_b {{{1
 function test_b()
 {
-    if [ $# <= 1 ]; then
+	if [[ $1 == "" ]]; then
+		echo -e "${FG_GREEN}Usage: $0 <prj_name> [dir]${F6_END}"
+		return
+	fi
+
+	if [[ $# < 2 ]]; then
 		sw te;
 	else
 		sw $2;
-    fi
+	fi
 
-    if [ $# != 0 ]; then
-        mkdir $1; cd $1;
-    fi
+	mkdir $1; cd $1;
 
-    mkdir src inc obj;
-    touch obj/.gitinit
-    touch -O inc/"$1".h src/"$1".c
-    vim Makefile;
+	mkdir src inc obj;
+	touch obj/.gitinit
+	vim -O inc/"$1".h src/"$1".c
+	vim Makefile;
 }
 
 # CC {{{1
