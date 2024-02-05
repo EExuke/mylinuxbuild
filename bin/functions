@@ -995,13 +995,19 @@ function cotmp()
 # 文件编码转换
 function my_iconv()
 {
-	# UTF-8 -> GB2312
 	for i in $@
 	do
-		echo -e "${FG_GREEN}iconv ${i} \tto\t${i}_GB${F6_END}"
-		iconv -c -f UTF-8 -t GB2312 ${i} -o ${i}_GB
-		echo -e "${FG_GREEN}mv ${i}_GB \tto\t${i}${F6_END}"
-		mv ${i}_GB ${i}
+		# UTF-8 -> GB2312
+		#echo -e "${FG_GREEN}iconv ${i} \tto\t${i}_GB${F6_END}"
+		#iconv -c -f UTF-8 -t GB2312 ${i} -o ${i}_GB
+		#echo -e "${FG_GREEN}mv ${i}_GB \tto\t${i}${F6_END}"
+		#mv ${i}_GB ${i}
+
+		# GB2312 -> UTF-8
+		echo -e "${FG_GREEN}iconv ${i} \tto\t${i}_UT${F6_END}"
+		iconv -c -f GB2312 -t UTF-8 ${i} -o ${i}_UT
+		echo -e "${FG_GREEN}mv ${i}_UT \tto\t${i}${F6_END}"
+		mv ${i}_UT ${i}
 	done
 }
 #}}}
