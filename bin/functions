@@ -776,8 +776,7 @@ function qcode()
 	qrencode -t UTF8 $1
 }
 #}}}
-
-# keil5 编译
+# keil5 编译{{{1
 function mkuv()
 {
 	project_name=`ls ./*.uvprojx`
@@ -808,7 +807,6 @@ function mkuv()
 		uv4 ${project_name}
 	fi
 }
-
 # test_b {{{1
 function test_b()
 {
@@ -991,6 +989,7 @@ function cotmp()
     return 0
 }
 
+
 # File ops{{{1
 # 文件编码转换
 function my_iconv()
@@ -1017,7 +1016,7 @@ function my_iconv()
 	done
 }
 #}}}
-# hexfy{{{1
+# hexfy{{{
 # 翻译hex数据为ASCII字符串
 function hexfy()
 {
@@ -1030,3 +1029,19 @@ function hexfy()
 	fi
 }
 #}}}
+# fpress{{{
+# 将文本压缩输出，即删除所有空格和空行
+function fpress()
+{
+	if [[ $1 == "-t" ]]; then
+		for fn in "${@:2}" ; do
+			echo -e "${FG_GREEN}$fn:${F6_END}"
+			sed -e '/^$/d' -e 's/[[:space:]]//g' $fn | tr -d '\n'
+			echo -e "\n"
+		done
+	else
+		sed -e '/^$/d' -e 's/[[:space:]]//g' $@
+	fi
+}
+#}}}
+

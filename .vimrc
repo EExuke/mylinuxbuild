@@ -106,13 +106,14 @@ nmap <F6> :NERDTreeFind<cr><cr>
 nmap <leader>ta gg<CR>:call AddTitle()<CR>kkkA
 "nmap <leader>lkup <Plug>LookupFile<cr>
 nmap <leader>f  :MRU<cr>
-map  <leader><space>  :s/\s\+$//ge<cr>
-map  <leader><tab>    :s/	/    /g<cr>
-map  <leader>l        :s/^\zs\ze/\=printf("%02d.",line("'<") == 0 ? line(".") : line(".")-line("'<") + 1)<cr>
-map  <leader>al       :%s/^\zs\ze/\=printf("%02d.", line("."))<cr>
-map  <leader>dl       :%s/^\s*[0-9]*.//g<cr>
-map  <leader>a<tab>   :%s/	/    /g<cr>
-map  <leader>a<space> :%s/\s\+$//ge<cr>
+map  <leader>d<space> :s/\s//ge<cr> :noh<cr>
+map  <leader><space>  :s/\s\+$//ge<cr> :noh<cr>
+map  <leader><tab>    :s/	/    /g<cr> :noh<cr>
+map  <leader>l        :s/^\zs\ze/\=printf("%02d.",line("'<") == 0 ? line(".") : line(".")-line("'<") + 1)<cr> :noh<cr>
+map  <leader>al       :%s/^\zs\ze/\=printf("%02d.", line("."))<cr> :noh<cr>
+map  <leader>dl       :%s/^\s*[0-9]*.//g<cr> :noh<cr>
+map  <leader>a<tab>   :%s/	/    /g<cr> :noh<cr>
+map  <leader>a<space> :%s/\s\+$//ge<cr> :noh<cr>
 nmap <leader>mma :set mouse=a<cr>
 nmap <leader>mmv :set mouse=v<cr>
 nmap <leader>0  :call LogDebug()<cr><cr>==f:a
@@ -145,10 +146,10 @@ nnoremap <silent> m :call WordNavigation('forward')<cr>
 nnoremap <silent> M :call WordNavigation('backward')<cr>
 " Doxygen 注释风格映射快捷键
 nmap <leader>ta gg:DoxLic<CR>:DoxAuthor<CR>
-nmap <silent> [1 :DoxAuthor<CR>
+nmap <silent> [1 gg:DoxAuthor<CR>
 nmap <silent> [2 :Dox<CR>
 nmap <silent> [3 :DoxBlock<CR>
-nmap <silent> [4 :DoxLic<CR>
+nmap <silent> [4 gg:DoxLic<CR>
 let g:DoxygenToolkit_authorName="xuke"
 let g:DoxygenToolkit_licenseTag = "Copyright (C) \<enter>"
 let g:DoxygenToolkit_licenseTag = g:DoxygenToolkit_licenseTag.strftime("%Y")." Chengdu zhimingda electronics co.LTD\<enter>"
@@ -306,4 +307,22 @@ let OmniCpp_MayCompleteScope = 1 " 输入 :: 后自动补全
 let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 au CompleteDone * pclose " 自动关闭补全窗口
 "}}}
+
+"----------------------------------------------------------
+"  MY VIM CMDS
+"----------------------------------------------------------
+"自定义VIM CMDS"{{{
+"用户自定义的命令必须以大写字母开头,并且不能包含符号
+"command Jsonf     :execute '.!python -m json.tool'
+command Jsonf     :execute '.!json_pp'
+command Pressf    :execute '%s/^$\n//g | d | noh'
+"}}}
+
+"----------------------------------------------------------
+"  FILES FORMAT SPECIAL CONFIG
+"----------------------------------------------------------
+"指定格式文件的自动指令"{{{
+autocmd FileType json    execute "set foldlevel=99 | set foldmethod=indent"
+"}}}
+
 
