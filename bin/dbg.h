@@ -1,6 +1,9 @@
 #ifndef  __BIN_DBG_H__
 #define  __BIN_DBG_H__
 
+#include <signal.h>
+#include <unistd.h>
+
 /* Select the format of the print */
 #define  PRINT_WITH_ENDIAN
 /*
@@ -122,6 +125,17 @@
 #define my_debug_purple_msg(msg, args...)     do { MYPRINT(PU, msg, ##args); fflush(stdout); }while (0)
 #define my_debug_darkgreen_msg(msg, args...)  do { MYPRINT(DG, msg, ##args); fflush(stdout); }while (0)
 #define my_debug_black_msg(msg, args...)      do { MYPRINT(BA, msg, ##args); fflush(stdout); }while (0)
+
+//基于pause+signal实现的,断点单步调试功能
+static inline void SIG_NONP(int sig) {}
+#define my_break_point(msg, args...)          do { MYPRINT(RE, msg, ##args); fflush(stdout); \
+	static char __my_break_point_first = 1; \
+	if (__my_break_point_first) { \
+		__my_break_point_first = 0; \
+		signal(SIGTSTP, SIG_NONP); \
+	} \
+	pause(); \
+} while (0)
 
 #define myprintf(msg, args...)                do { MYPRINT_NO_FEED(CL, msg, ##args); fflush(stdout); }while (0)
 #define myprintf_red(msg, args...)            do { MYPRINT_NO_FEED(RE, msg, ##args); fflush(stdout); }while (0)
