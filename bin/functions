@@ -624,7 +624,8 @@ function se()
 		echo -e "   ${F_GR}mind   (open MindLine)${F6_E}"
 		echo -e "   ${F_GR}design (open 迅捷画图)${F6_E}"
 	else
-		$my_browser "https://www.baidu.com/s?wd=$1"
+		#$my_browser "https://www.baidu.com/s?wd=$1" #baidu
+		$my_browser "https://cn.bing.com/search?form=MOZLBR&pc=MOZI&q=$1" #bing
 		echo -e "searching: $1 \n"
 	fi
 }
