@@ -5,7 +5,7 @@
  # -------------------------------------------------------------------------- --
  #     Filename                 : build
  #     Version                  : 1.0
- #     Author                   : Zhendong Cao
+ #     Author                   : Zhendong Cao, EExuke
  #     Last Change              : 2018/12/14
  #     FILE DESCRIPTION         : The script file is used to build my Ubuntu env.
  #                                After execution with parameter -b, it will be
@@ -48,6 +48,7 @@ if [ "$1" = "b" ] || [ "$1" = "-b" ] || [ "$1" = "--b" ] || [ "$1" = "--build" ]
         mv ~/bin backup/; ln -s ~/mylinuxbuild/bin ~/bin
         mv ~/.vim backup/; ln -s ~/mylinuxbuild/.vim ~/.vim
         mv ~/.ssh backup/; ln -s ~/mylinuxbuild/.ssh ~/.ssh
+        mv ~/.my_trash backup/; ln -s ~/mylinuxbuild/.my_trash ~/.my_trash
         ls -al ~/ | grep ^l
     else
         echo -e ${FG_YELLOW}mylinux instructions depend on dir ~/mylinuxbuild !${F6_END}

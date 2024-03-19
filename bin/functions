@@ -776,6 +776,23 @@ function qcode()
 {
 	qrencode -t UTF8 $1
 }
+
+# 清理my_trash回收站
+function my_trash_clean()
+{
+	echo -e "${FG_RED}Files in ~/.my_trash/ : ${F6_END}"
+	ls ~/.my_trash/
+	echo -e "${FG_RED}If you confirm to remove ~/.my_trash/* ? <y|n>: ${F6_END}"
+
+	read ack
+	if [[ $ack == 'y' || $ack == "yes" ]]; then
+		echo -e "${FG_GREEN}Now rm -rf ~/.my_trash/* ... ${F6_END}"
+		rm -rf ~/.my_trash/* -rf
+		echo -e "${FG_GREEN}Clean compeleted! ${F6_END}"
+	else
+		echo -e "${FG_GREEN}User canceled. ${F6_END}"
+	fi
+}
 #}}}
 # keil5 编译{{{1
 function mkuv()
