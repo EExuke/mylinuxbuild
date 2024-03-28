@@ -1,6 +1,6 @@
 " .vimrc - Vim configuration file Only for personal use.
 "
-" Copyright (c) 2018 zhendong Cao. All Rights Reserved.
+" Copyright (c) 2019 EExuke. All Rights Reserved.
 "
 " Maintainer: EExuke
 "       Mail: <EExuke@qq.com>
@@ -151,9 +151,9 @@ nmap <silent> [1 gg:DoxAuthor<CR>
 nmap <silent> [2 :Dox<CR>
 nmap <silent> [3 :DoxBlock<CR>
 nmap <silent> [4 gg:DoxLic<CR>
-let g:DoxygenToolkit_authorName="xuke"
+let g:DoxygenToolkit_authorName="EExuke"
 let g:DoxygenToolkit_licenseTag = "Copyright (C) \<enter>"
-let g:DoxygenToolkit_licenseTag = g:DoxygenToolkit_licenseTag.strftime("%Y")." Chengdu zhimingda electronics co.LTD\<enter>"
+let g:DoxygenToolkit_licenseTag = g:DoxygenToolkit_licenseTag.strftime("%Y")." ZKLX Optoelectronic Technology Co.LTD\<enter>"
 let g:DoxygenToolkit_licenseTag = g:DoxygenToolkit_licenseTag."All rights reserved."
 "}}}
 " PLUGIN: SrcExpl Settings {{{1

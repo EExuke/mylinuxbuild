@@ -1,5 +1,5 @@
 " ============================================================================
-" Copyright (C) 2001-2022 ZMD Tech, Inc.
+" Copyright (C) 2001-2022 EExuke Tech, Inc.
 " ============================================================================
 
 " ----------------------------------------------------------------------------
@@ -32,27 +32,27 @@ func SetCopyright()
     if &filetype == 'sh'
         call append(0, "#!/bin/bash")
         call append(1, "############################################################################# ##")
-        call append(2, "# Copyright (C) 2001-2022 ZMD Tech, Inc.")
+        call append(2, "# Copyright (C) 2019-2024 ZKLX Tech, Inc.")
         call append(3, "############################################################################ ##")
         call append(4, "#")
     elseif expand("%:e") == 'py'
         call append(0, "\############################################################################# ##")
-        call append(1, "\# Copyright (C) 2001-2022 ZMD Tech, Inc.")
+        call append(1, "\# Copyright (C) 2019-2024 ZKLX Tech, Inc.")
         call append(2, "\############################################################################# ##")
         call append(3, "\#")
     elseif expand("%:e") == 'vim'
         call append(0, "\" ============================================================================")
-        call append(1, "\" Copyright (C) 2001-2022 ZMD Tech, Inc.")
+        call append(1, "\" Copyright (C) 2019-2024 ZKLX Tech, Inc.")
         call append(2, "\" ============================================================================")
         call append(3, "")
     elseif expand("%:t") == 'Makefile'
         call append(0, "\# ==========================================")
-        call append(1, "\# 2022 EExuke. All Rights Reserved.")
+        call append(1, "\# 2024 EExuke. All Rights Reserved.")
         call append(2, "\# ==========================================")
         call append(3, "")
     else
         call append(0, " /* Copyright (C)")
-        call append(1, "  * 2022 Chengdu zhimingda electronics co.LTD")
+        call append(1, "  * 2024 ZKLX Optoelectronic Technology Co.LTD")
         call append(2, "  * All rights reserved.")
         call append(3, "  */")
     endif
@@ -119,7 +119,7 @@ func SetCHComTitle()
     let i=4
     call append(i, "\/* ************************************************************************** **")
     call append(i+1, " *     MODULE NAME            : system")
-    call append(i+2, " *     LANGUAGE               : C")
+    call append(i+2, " *     LANGUAGE               : C/C++")
     call append(i+3, " *     TARGET ENVIRONMENT     : Any")
     call append(i+4, " *     FILE NAME              : ".expand('<afile>:t'))
     call append(i+5, " *     FIRST CREATION DATE    : ".strftime("%Y/%m/%d"))
