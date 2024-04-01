@@ -77,8 +77,8 @@ inoremap <C-l> <Esc><C-W>l
 "}}}
 " ACTION: Window Contrl {{{1
 "C is Ctrl; A is Alt; S is Shift;
-nmap <C-Up> :vertical res +1<cr>
-nmap <C-Down> :vertical res -1<cr>
+nmap <C-o> :vertical res +1<cr>
+nmap <C-i> :vertical res -1<cr>
 "}}}
 " ---------------------------------------------------------
 "  PLUGIN SETTINGS
