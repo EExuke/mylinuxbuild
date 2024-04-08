@@ -581,10 +581,11 @@ function mk()
 		unset ARCH
 		unset PLATFORM
 		unset CROSS_COMPILE
-	elif [[ "$1" == "ft" ]]; then
-		#FT2000
-		source /opt/env_aarch64-linux-gnu.sh
+	elif [[ "$1" == "nv" ]]; then
+		#nvidia
+		source /opt/env_nv_aarch64-linux-gnu.sh
 	elif [[ "$1" == "zynq" ]]; then
+		#ZYNQ
 		source /opt/env_zynq7xxx_armhf.sh
 	elif [[ "$1" == "pi" ]]; then
 		#树莓派
@@ -593,7 +594,8 @@ function mk()
 
 	make clean
 	make
-	echo "Finished" | figlet
+	#echo "Finished" | figlet
+	echo "make finished!" | cowsay -f tux
 }
 #}}}
 # My Quickly Commands {{{

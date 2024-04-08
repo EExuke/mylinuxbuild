@@ -18,7 +18,7 @@
 	last = log --graph --abbrev-commit -1 --stat
 [user]
 	name = xuke
-	email = xuke@inhand.com.cn
+	email = xuke@EExuke.com.cn
 [credential]
 	helper = store
 [core]
