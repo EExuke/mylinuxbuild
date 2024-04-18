@@ -39,7 +39,7 @@ F6_END="\033[0m"
 function Sync()
 {
     if [ "$1" = "b" ] || [ "$1" = "-b" ]; then
-        find -L . -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.lua" -o -name "*.def" > cscope.files
+        find -L . -name "*.h" -o -name "*.hpp" -o -name "*.c" -o -name "*.cpp" -o -name "*.lua" -o -name "*.def" > cscope.files
         cscope -bkq -i cscope.files
         ctags-exuberant -R *
     elif [ "$1" = "c" ] || [ "$1" = "-c" ]; then
