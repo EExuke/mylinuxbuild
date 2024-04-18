@@ -163,53 +163,23 @@ function sw()
         "" )
             try_cd
             ;;
-        a|app )
-            try_cd AD56/MC-AD5602_FT_APP/mainApp
+        r|ruil )
+            try_cd lx_nx_ruil_53
             ;;
-        b|boot )
-            try_cd boot/uboot_bcm_switch/uboot boot/uboot_rtk_switch/u-boot-2011.12
+        s|sys )
+            try_cd lx_nx_ruil_53/lx_nx_ruil_ctv_sys
             ;;
-        k|kk )
-            try_cd os/os_bcm_switch/kernel/linux-3.6.5 os/os_rtk_uClinux_switch/uClinux/linux-2.6.x
+        c1|ctv1 )
+            try_cd lx_nx_ruil_53/lx_nx_ruil_ctv_cv1
             ;;
-        ag|agent )
-            try_cd inhand/agent
-            ;;
-        cli )
-            try_cd inhand/cli
+        c2|ctv2 )
+            try_cd lx_nx_ruil_53/lx_nx_ruil_ctv_cv2
             ;;
         w|work )
             cd ~/workspace
             ;;
-        n|np )
-            try_cd core/code/customer/${CUSTOMER_FOLDER}/npapi
-            ;;
-        f|fu )
-            try_cd core/code/future
-            ;;
-        i|in|inhand )
-            try_cd inhand/
-            ;;
-        im|imt )
-            try_cd images/test
-            ;;
-        msr )
-            try_cd core/code/future/ISS/common/msr
-            ;;
         l|lr )
             cd /home/xuke/learnspace
-            ;;
-        cl|clr )
-            try_cd core/code/customer/${CUSTOMER_FOLDER}/LR
-            ;;
-        m|mib )
-            try_cd core/code/future/mibs
-            ;;
-        cm|cmib )
-            try_cd core/code/customer/${CUSTOMER_FOLDER}/mibs/mibs
-            ;;
-        o|opensource)
-            try_cd core/code/opensource
             ;;
         q|qemu)
             cd ~/learnspace/my_qemu_project
@@ -220,41 +190,14 @@ function sw()
         s|storage )
             cd ~/workspace/Misc_libs/storage_app_stack/
             ;;
-        r|rootfs )
-            cd ~/workspace/Misc_libs/Rootfs/storage_rootfs_stack/
-            ;;
-        re )
-            cd /home/xuke/release
-            ;;
-        e|erps )
-            try_cd core/code/future/erps
-            ;;
         t|tf|tftp|tftpboot )
             cd /home/xuke/tftpboot/
-            ;;
-        cscope )
-            try_cd core/code
             ;;
         en|env|envirenment )
             cd /home/xuke/mylinuxbuild/
             ;;
         te|temp)
             cd /home/xuke/Templates/
-            ;;
-        235|IR235 )
-            try_cd inhand/InCross/arch/InRouter235
-            ;;
-        600|IR600 )
-            try_cd inhand/InCross/arch/InRouter600
-            ;;
-        700|IR700 )
-            try_cd inhand/InCross/arch/InRouter700
-            ;;
-        800|IR800 )
-            try_cd inhand/InCross/arch/InRouter800
-            ;;
-        c70|C70 )
-            cd ~/workspace/C70/software/RC-C70_ZYNQ_APP
             ;;
         bx2|BX2 )
             cd ~/workspace/BX2/trunk/RC-BX2_FT_APP/
