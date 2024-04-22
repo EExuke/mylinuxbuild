@@ -127,6 +127,7 @@ nmap <leader>7  :call PrintDebug_blue()<cr><cr>==f"a
 nmap <leader>8  :call PrintDebug_purple()<cr><cr>==f"a
 nmap <leader>9  :call PrintDebug_black()<cr><cr>==f"a
 nmap <leader>p  :call PrintBreak_point()<cr><cr>==f"a
+nmap <leader>bt  :call Print_Backtrace()<cr><cr>==
 nmap <leader>h  :/#include<cr> :call IncludeMyDebugHeader()<cr> :noh<cr><cr>
 nmap <leader>ss :cs find s <C-R>=expand("<cword>")<cr><cr>
 nmap <leader>sg :cs find g <C-R>=expand("<cword>")<cr><cr>

@@ -3,6 +3,7 @@
 
 #include <signal.h>
 #include <unistd.h>
+#include <execinfo.h>
 
 /* Select the format of the print */
 #define  PRINT_WITH_ENDIAN
@@ -135,6 +136,20 @@ static inline void SIG_NONP(int sig) {}
 		signal(SIGTSTP, SIG_NONP); \
 	} \
 	pause(); \
+} while (0)
+
+// My backtrace
+// *链接时需添加 -rdynamic 参数;
+// *static函数识别不到函数名
+#define my_debug_backtrace()      do { \
+	void *__bt_buf[128]; \
+	int __bt_size = backtrace(__bt_buf, sizeof(__bt_buf)); \
+	char **__bt_strings = backtrace_symbols(__bt_buf, __bt_size); \
+	printf("backtrace:\n"); \
+	for (int __i=0; __i<__bt_size; __i++) { \
+		printf("%*s %s\n", __i+4, "↑_", __bt_strings[__i]); \
+	} \
+	free(__bt_strings); \
 } while (0)
 
 #define myprintf(msg, args...)                do { MYPRINT_NO_FEED(CL, msg, ##args); fflush(stdout); }while (0)

@@ -61,6 +61,9 @@ endfunc
 func PrintBreak_point()
 	call append(line("."), "my_break_point(\"\");")
 endfunc
+func Print_Backtrace()
+	call append(line("."), "my_debug_backtrace();")
+endfunc
 func IncludeMyDebugHeader()
 	call append(line(".")-1, "#include \"/home/xuke/bin/dbg.h\"")
 endfunc
