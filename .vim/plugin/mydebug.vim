@@ -31,6 +31,9 @@ set cpo&vim
 " Using printf to debug process logic inside of C program,
 " you should has included my dbg.h into future/inc/iss.h first.
 " support 8 colors to be debuged with message.
+func ElogDebug()
+	call append(line("."), "log_d(\"\");")
+endfunc
 func LogDebug()
 	call append(line("."), "LOG_DB(\"%s(%d):\", __func__, __LINE__);")
 endfunc

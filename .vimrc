@@ -116,7 +116,7 @@ map  <leader>a<tab>   :%s/	/    /g<cr> :noh<cr>
 map  <leader>a<space> :%s/\s\+$//ge<cr> :noh<cr>
 nmap <leader>mma :set mouse=a<cr>
 nmap <leader>mmv :set mouse=v<cr>
-nmap <leader>0  :call LogDebug()<cr><cr>==f:a
+nmap <leader>0  :call ElogDebug()<cr><cr>==f"a
 nmap <leader>1  :call PrintDebug()<cr><cr>==f"a
 nmap <leader>2  :call PrintIssueTag()<cr><cr>==f#a
 nmap <leader>3  :call PrintDebug_red()<cr><cr>==f"a
