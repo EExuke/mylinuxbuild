@@ -1,0 +1,62 @@
+# /opt/env 模板:
+
+
+#!/bin/bash
+############################################################################# ##
+# Copyright (C) 2019-2024 ZKLX Tech, Inc.
+############################################################################ ##
+#
+# -------------------------------------------------------------------------- --
+#     AUTHOR                   : EExuke
+#     FILE NAME                : env_nv_aarch64-linux-gnu.sh
+#     FILE DESCRIPTION         : Linux shell script file
+#     FIRST CREATION DATE      : 2024/04/02
+# --------------------------------------------------------------------------
+#     Version                  : 1.0
+#     Last Change              : 2024/04/02
+## ************************************************************************** ##
+
+#-----------------------------------------------------------
+#                CONTROL and COLOUR VARIABLES
+#-----------------------------------------------------------
+C_ED="\033[0m"    C_HL="\033[01m"   C_UL="\033[04m"
+C_BL="\033[05m"   C_RV="\033[07m"   C_HD="\033[08m"
+C_UP="\033[nA"    C_DW="\033[nB"    C_RI="\033[nC "
+C_LE="\033[nD"    C_PS="\033[y;xH"  C_CL="\033[2J "
+F_BL="\033[30m"   F_RD="\033[31m"   F_GR="\033[32m"
+F_YL="\033[33m"   F_BU="\033[34m"   F_PU="\033[35m"
+F_DG="\033[36m"   F_WT="\033[37m"   B_BL="\033[40m"
+B_RE="\033[41m"   B_GR="\033[42m"   B_YL="\033[43m"
+B_BU="\033[44m"   B_PR="\033[45m"   B_DG="\033[46m"
+B_WT="\033[47m"
+
+#-----------------------------------------------------------
+#                  MAIN PROCESS
+#-----------------------------------------------------------
+export PATH=/usr/aarch64-linux-gnu/bin:/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/aarch64-linux-gnu/lib:/usr/local/cuda/targets/aarch64-linux/lib:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+export PKG_CONFIG_PATH=/usr/aarch64-linux-gnu/lib/pkgconfig:$PKG_CONFIG_PATH
+export CMAKE_PREFIX_PATH=/usr/aarch64-linux-gnu
+export CMAKE_CUDA_FLAGS="-ccbin aarch64-linux-gnu-g++"
+export CC="aarch64-linux-gnu-gcc"
+export CXX="aarch64-linux-gnu-g++"
+export CPP="aarch64-linux-gnu-gcc -E"
+export AS="aarch64-linux-gnu-as"
+export LD="aarch64-linux-gnu-ld"
+export GDB="aarch64-linux-gnu-gdb"
+export STRIP="aarch64-linux-gnu-strip"
+export RANLIB="aarch64-linux-gnu-ranlib"
+export OBJCOPY="aarch64-linux-gnu-objcopy"
+export OBJDUMP="aarch64-linux-gnu-objdump"
+export AR="aarch64-linux-gnu-ar"
+export NM="aarch64-linux-gnu-nm"
+export M4=m4
+export TARGET_PREFIX="aarch64-linux-gnu-"
+export CFLAGS=" -O2 -pipe -g"
+export CXXFLAGS=" -O2 -pipe -g"
+export LDFLAGS=""
+export CPPFLAGS=""
+export ARCH="aarch64"
+export CROSS_COMPILE="aarch64-linux-gnu-"
+export PLATFORM="jetson"
+
