@@ -217,4 +217,5 @@ export PATH=$PATH:/usr/local/bin:./:/usr/lib:~/win_cmd
 
 #依赖库路径 LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/usr/lib:/usr/local/lib
+export GST_PLUGIN_PATH=/usr/local/lib:/usr/lib/x86_64-linux-gnu/gstreamer-1.0
 
