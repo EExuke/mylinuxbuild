@@ -1,2 +1,3 @@
-#
+# quick copy
 cmake .. -DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc 
+LD_LIBRARY_PATH

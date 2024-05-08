@@ -73,7 +73,7 @@ endfunc
 
 " Auto add the InhandTag into source code.
 func PrintIssueTag()
-	call append(line("."), "\/* InhandTag: xuke modified on ".strftime("%Y/%m/%d")." for fixing M# */")
+	call append(line("."), "\/* ZklxTag: xuke modified on ".strftime("%Y/%m/%d")." for fixing M# */")
 endfunc
 
 " restore 'cpo'
