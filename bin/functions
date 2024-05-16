@@ -163,7 +163,7 @@ function sw()
         "" )
             try_cd
             ;;
-        r|ruil )
+        rl|ruil )
             try_cd p53_nx_rl_ctv
             ;;
         s|sys )
@@ -174,6 +174,18 @@ function sw()
             ;;
         i|itv )
             try_cd p53_nx_rl_ctv/itv_cv
+            ;;
+        452|p452 )
+            cd ~/workspace/P238_NX_452
+            ;;
+        jc|jcgs )
+            cd ~/workspace/LX_NX_JCGC
+            ;;
+        xx|xxt )
+            cd ~/workspace/LX_NX_XXT
+            ;;
+        xv|xxtv3 )
+            cd ~/workspace/LX_NX_XXT_V3
             ;;
         w|work )
             cd ~/workspace
@@ -187,9 +199,6 @@ function sw()
         qrun )
             cd ~/learnspace/my_qemu_project/qemu_run_env
             ;;
-        s|storage )
-            cd ~/workspace/Misc_libs/storage_app_stack/
-            ;;
         t|tf|tftp|tftpboot )
             cd /home/xuke/tftpboot/
             ;;
@@ -198,9 +207,6 @@ function sw()
             ;;
         te|temp)
             cd /home/xuke/Templates/
-            ;;
-        bx2|BX2 )
-            cd ~/workspace/BX2/trunk/RC-BX2_FT_APP/
             ;;
         * )
             cd "$1"
