@@ -195,9 +195,9 @@ fi
 
 if [ -f ~/bin/functions ]; then
 	. ~/bin/functions
-	dir 3       # choose which enviroment: 1:~/workspace/; 2:~/workroom/; 3:~/
+	dir 1       # choose which enviroment: 1:~/workspace/; 2:~/workroom/; 3:~/
 
-	dir workspace
+	dir P53_NX_RL
 	#dir workroom
 	#dir learnspace
 fi
