@@ -164,16 +164,16 @@ function sw()
             try_cd
             ;;
         r|ruil )
-            try_cd lx_nx_ruil_53
+            try_cd p53_nx_rl_ctv
             ;;
         s|sys )
-            try_cd lx_nx_ruil_53/lx_nx_ruil_ctv_sys
+            try_cd p53_nx_rl_ctv/tv_sys
             ;;
-        c1|ctv1 )
-            try_cd lx_nx_ruil_53/lx_nx_ruil_ctv_cv1
+        c|ctv )
+            try_cd p53_nx_rl_ctv/ctv_cv
             ;;
-        c2|ctv2 )
-            try_cd lx_nx_ruil_53/lx_nx_ruil_ctv_cv2
+        i|itv )
+            try_cd p53_nx_rl_ctv/itv_cv
             ;;
         w|work )
             cd ~/workspace
