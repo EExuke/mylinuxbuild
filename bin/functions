@@ -1013,4 +1013,11 @@ function fpress()
 	fi
 }
 #}}}
+# wssh{{{
+# 启动ssh service
+function wssh()
+{
+	sudo service ssh start
+}
+#}}}
 

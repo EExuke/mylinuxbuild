@@ -124,6 +124,7 @@
 # 			#补全preline+1行
 # 		2.制作压缩包:
 # 			tar cvzf XXX.tar.gz XXX/
+# 			zip -r XXX.zip XXX/
 # 		3.拼接文件:
 # 			cat ins.sh XXX.tar.gz > XXX_install.sh
 # 			chmod +x XXX_install.sh

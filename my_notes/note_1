@@ -62,3 +62,8 @@ route -n#查看路由表
 	echo 8 > /proc/sy/kernel/printk
 2）demsg -n 控制:
 	demsg -n 5
+
+#Ubuntu 关闭图形界面服务
+systemctl set-default multi-user.target   #关闭图形界面
+systemctl set-default graphical.target    #打开图形界面
+
