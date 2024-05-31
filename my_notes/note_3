@@ -6,8 +6,10 @@
 		./configure \
 		   CC=${HOST_ARCH}-gcc \
 		   CXX=${HOST_ARCH}-g++ \
-		   --build=${HOST_ARCH} \
-		   --prefix=/usr/${HOST_ARCH}
+		   --host=arm-linux-gnueabihf  #目标机架构
+		   --prefix=/usr/${HOST_ARCH}  #安装路径
+		# 实例:
+		.configure --host=arm-linux-gnueabihf --prefix=/usr/arm-linux-gnueabihf
 		make
 		make install
 

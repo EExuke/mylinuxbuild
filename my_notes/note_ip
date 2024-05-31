@@ -3,6 +3,8 @@ ssh xuke@101.132.166.232
 ssh xuke@49.234.65.156
 
 
+## 上传文件到服务器
+scp -r /local/dir xuke@101.132.166.232:/home/xuke/dir
+## 下载文件到服务器
+scp -r xuke@101.132.166.232:/home/xuke/dir /local/dir
 
-# 上传文件到服务器
-scp -r file xuke@101.132.166.232:/home/xuke/Public/

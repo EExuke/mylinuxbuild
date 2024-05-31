@@ -2,8 +2,17 @@
 cmake .. -DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc 
 LD_LIBRARY_PATH
 echo "options xdma hresolution=1024 vresolution=768 is_color_sensor=1 bayer_phase=0" >/etc/modprobe.d/xdma.conf
+echo "options xdma hdmi_channel=0 resolution0=1920,1080 resolution1=640,512" >/etc/modprobe.d/xdma.conf  #双base
 
 #YUV格式:
 YUV444: 4:4:4采样, 每一个Y对应一组UV分量,一个YUV占8+8+8 = 24bits 3个字节
 YUV422: 4:2:2采样, 每两个Y共用一组UV分量,一个YUV占8+4+4 = 16bits 2个字节
 YUV420: 4:2:0采样，每四个Y共用一组UV分量,一个YUV占8+2+2 = 12bits 1.5个字节
+
+# 关闭GUI
+systemctl set-default multi-user.target   #关闭图形界面
+systemctl set-default graphical.target    #打开图形界面
+
+# scp
+scp -r lx@192.168.101.121:/home/lx/dir ./
+scp -r ./dir lx@192.168.101.121:/home/lx/dir

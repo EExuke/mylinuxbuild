@@ -1,0 +1,28 @@
+# systemctl
+	编写NAME.service配置文件, 并放置至 /etc/systemd/system 或者 /lib/systemd/system
+	sudo systemctl daemon-reload    #重新加载service配置文件:
+	sudo systemctl start NAME.service
+	sudo systemctl stop NAME.service
+
+# ftp
+	//创建ftpusers用户组
+	sudo groupadd ftpusers
+	//创建一个用户并且自动创建家目录为/home/ftpuser_lxr
+	sudo useradd -m ftpuser_lxr
+	//将这个新用户加入到ftpuserers用户组中
+	usermod -G ftpusers ftpuser
+	//更改密码
+	sudo passwd ftpuser
+	//为用户添加一个具有一定权限的文件夹
+	mkdir /home/ftpuser_lxr/ftp
+	//新建一个pub目录用于存放文件，并且赋予全部权限
+	chmod 777 -R /home/ftpuser_lxr/ftp
+	//限制用户登录方式；限制用户username只能通过ftp登陆，而不能直接登陆服务器
+	usermod -s /sbin/nologin ftpuser
+
+# samba
+	sudo apt-get install samba samba-common
+	sudo smbpasswd -a lx_image
+	sudo vim /etc/samba/smb.conf
+	sudo service smbd restart
+

@@ -23,7 +23,7 @@
 	helper = store
 [core]
 	editor = vim
-	;quotepath = false
+	quotepath = false
 [gui]
 	;encoding = gb2312
 [i18n]
