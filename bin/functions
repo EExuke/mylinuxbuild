@@ -164,16 +164,16 @@ function sw()
             try_cd
             ;;
         rl|ruil )
-            try_cd p53_nx_rl_ctv
-            ;;
-        s|sys )
-            try_cd p53_nx_rl_ctv/tv_sys
+            cd ~/workspace/P53_NX_RL/p53_nx_rl_ctv
             ;;
         c|ctv )
-            try_cd p53_nx_rl_ctv/ctv_cv
+            try_cd lx_nx_xxt_v3_ctv
             ;;
         i|itv )
-            try_cd p53_nx_rl_ctv/itv_cv
+            try_cd lx_nx_xxt_v3_itv
+            ;;
+        f|ftv )
+            try_cd lx_nx_xxt_v3_ftv
             ;;
         452|p452 )
             cd ~/workspace/P238_NX_452
@@ -181,11 +181,17 @@ function sw()
         jc|jcgs )
             cd ~/workspace/LX_NX_JCGC
             ;;
+        pa|pack )
+            cd ~/workspace/LX_NX_PACK
+            ;;
         xx|xxt )
             cd ~/workspace/LX_NX_XXT
             ;;
         xv|xxtv3 )
             cd ~/workspace/LX_NX_XXT_V3
+            ;;
+        s|sys )
+            cd ~/workspace/LX_NX_PACK/lx_nx_pack_ftv/ftv_sys
             ;;
         w|work )
             cd ~/workspace

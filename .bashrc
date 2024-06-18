@@ -197,7 +197,7 @@ if [ -f ~/bin/functions ]; then
 	. ~/bin/functions
 	dir 1       # choose which enviroment: 1:~/workspace/; 2:~/workroom/; 3:~/
 
-	dir P53_NX_RL
+	dir LX_NX_XXT_V3
 	#dir workroom
 	#dir learnspace
 fi
@@ -206,7 +206,7 @@ fi
 PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"'
 
 #配置X11远程显示
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+export DISPLAY=$(ip route list default | awk '{print $3}'):0
 export LIBGL_ALWAYS_INDIRECT=1 #解决libGL报错
 
 #export TERM=linux

@@ -1,3 +1,7 @@
+# scp
+scp -r lx@10.5.0.100:/home/lx/dir ./
+scp -r ./dir lx@10.5.0.100:/home/lx/dir
+
 # quick copy
 cmake .. -DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc 
 LD_LIBRARY_PATH
@@ -13,6 +17,10 @@ YUV420: 4:2:0采样，每四个Y共用一组UV分量,一个YUV占8+2+2 = 12bits 
 systemctl set-default multi-user.target   #关闭图形界面
 systemctl set-default graphical.target    #打开图形界面
 
-# scp
-scp -r lx@192.168.101.121:/home/lx/dir ./
-scp -r ./dir lx@192.168.101.121:/home/lx/dir
+# FPGA 外触发 CC_FREQ_DIV = (100M / CC频率) - 1
+sudo busybox devmem 0x1f400A0000 32 xxxxxxxx
+sudo busybox devmem 0x1f400A0000 32 0x001FFFFF # 50 Hz
+sudo busybox devmem 0x1f400A0000 32 0x00196E69 # 60 Hz
+sudo busybox devmem 0x1f400A0000 32 0x000FFFFF #100 Hz
+sudo busybox devmem 0x1f400A0000 32 0x0007FFFF #200 Hz
+sudo busybox devmem 0x1f400A0000 32 0x0003FFFF #400 Hz
