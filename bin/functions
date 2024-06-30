@@ -54,6 +54,12 @@ function Sync()
     fi
 }
 
+# 为py项目创建tags
+function Ptags()
+{
+	find  . -name \*.py -print | xargs ~/mylinuxbuild/bin/ptags.py
+}
+
 # Quickly Change Directory(sw) {{{1
 # static: export project root path
 function dir_export()
