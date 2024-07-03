@@ -516,6 +516,16 @@ function cpout()
 	fi
 	echo -e "$FG_GREEN------------------------------------------------------------$F6_END"
 }
+
+# for auto run scp
+function myscp()
+{
+	if [[ $# < 2 ]]; then
+		echo -e "${FG_GREEN}Usage: myscp <src> <dst>"
+	else
+		sshpass -p "zklx123" scp -r $@
+	fi
+}
 #}}}
 #CROSS COMPILE {{{
 function mk()

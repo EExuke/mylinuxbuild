@@ -24,3 +24,6 @@ sudo busybox devmem 0x1f400A0000 32 0x00196E69 # 60 Hz
 sudo busybox devmem 0x1f400A0000 32 0x000FFFFF #100 Hz
 sudo busybox devmem 0x1f400A0000 32 0x0007FFFF #200 Hz
 sudo busybox devmem 0x1f400A0000 32 0x0003FFFF #400 Hz
+
+# NTP时间同步
+sudo ntpdate -u 192.168.101.9
