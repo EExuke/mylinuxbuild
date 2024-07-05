@@ -181,6 +181,9 @@ function sw()
         f|ftv )
             try_cd lx_nx_xxt_v3_ftv
             ;;
+        s|sys )
+            try_cd lx_nx_xxt_v3_ctv/ctv_sys
+            ;;
         452|p452 )
             cd ~/workspace/P238_NX_452
             ;;
@@ -196,8 +199,8 @@ function sw()
         xv|xxtv3 )
             cd ~/workspace/LX_NX_XXT_V3
             ;;
-        s|sys )
-            cd ~/workspace/LX_NX_PACK/lx_nx_pack_ftv/ftv_sys
+        mk|MK )
+            cd ~/workspace/P53_NX_MK
             ;;
         w|work )
             cd ~/workspace
