@@ -568,7 +568,7 @@ function mk()
 	fi
 
 	make clean
-	make
+	make -j32
 	#echo "Finished" | figlet
 	echo "make finished!" | cowsay -f tux
 }
