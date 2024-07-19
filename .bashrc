@@ -205,9 +205,9 @@ fi
 #发送当前路径到Terminal
 PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"'
 
-#配置X11远程显示
-export DISPLAY=$(ip route list default | awk '{print $3}'):0
-export LIBGL_ALWAYS_INDIRECT=1 #解决libGL报错
+#配置X11远程显示, (改用secureCRT的X11转发实现，这里就不用再指定了)
+#export DISPLAY=$(ip route list default | awk '{print $3}'):0
+#export LIBGL_ALWAYS_INDIRECT=1 #解决libGL报错
 
 #export TERM=linux
 

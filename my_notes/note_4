@@ -17,13 +17,24 @@ YUV420: 4:2:0采样，每四个Y共用一组UV分量,一个YUV占8+2+2 = 12bits 
 systemctl set-default multi-user.target   #关闭图形界面
 systemctl set-default graphical.target    #打开图形界面
 
-# FPGA 外触发 CC_FREQ_DIV = (100M / CC频率) - 1
+# new XDMA:
+# 462-FPGA 外触发 CC_FREQ_DIV = (200*1000*1000 / CC频率 / 2) - 1
 sudo busybox devmem 0x1f400A0000 32 xxxxxxxx
-sudo busybox devmem 0x1f400A0000 32 0x001FFFFF # 50 Hz
+sudo busybox devmem 0x1f400A0000 32 0x001E847F # 50 Hz
 sudo busybox devmem 0x1f400A0000 32 0x00196E69 # 60 Hz
-sudo busybox devmem 0x1f400A0000 32 0x000FFFFF #100 Hz
-sudo busybox devmem 0x1f400A0000 32 0x0007FFFF #200 Hz
-sudo busybox devmem 0x1f400A0000 32 0x0003FFFF #400 Hz
+sudo busybox devmem 0x1f400A0000 32 0x000F423F #100 Hz
+sudo busybox devmem 0x1f400A0000 32 0x0007A11F #200 Hz
+sudo busybox devmem 0x1f400A0000 32 0x0003D08F #400 Hz
+
+# GPU0921:
+# 451-FPGA 外触发 CC_FREQ_DIV = (125*1000*1000 / CC频率 / 2) - 1
+sudo busybox devmem 0x1f40040000 32 xxxxxxxx
+sudo busybox devmem 0x1f40040000 32 0x001312CF # 50 hz
+sudo busybox devmem 0x1f40040000 32 0x00098967 #100 Hz
+sudo busybox devmem 0x1f40040000 32 0x0004C4B3 #200 Hz
+sudo busybox devmem 0x1f40040000 32 0x00026259 #400 Hz
+sudo busybox devmem 0x1f40040000 32 0x00021E88 #450 Hz
+sudo busybox devmem 0x1f40040000 32 0x0001E847 #500 Hz
 
 # NTP时间同步
 sudo ntpdate -u 192.168.101.9
