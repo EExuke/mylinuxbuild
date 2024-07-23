@@ -493,7 +493,7 @@ function cpin()
 			filename=`echo ${i} | awk -F / '{print $NF}'`
 			ls -alh ~/tftpboot/${filename}
 		done
-		date | cowsay
+		date | cowsay | lolcat
 	else
 		ls ~/tftpboot/
 		echo "Usage: cpin <filename>" | cowsay
