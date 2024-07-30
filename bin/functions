@@ -1046,4 +1046,39 @@ function wssh()
 	sudo service ssh start
 }
 #}}}
+# my_deb{{{
+# 构建deb安装包
+function my_deb()
+{
+	if [[ $# == 1 || $# == 2 ]]; then
+		# DEBIAN dir
+		DEBIAN_DIR=~/mylinuxbuild/my_templates/DEBIAN
+
+		# name
+		if [[ $# == 1 ]]; then
+			SRC_DIR=$1
+			DEB_NAME=${1%/*}.deb
+		else
+			SRC_DIR=$1
+			DEB_NAME=$2
+		fi
+
+		# build
+		echo -e "${F_GR} ============================================= ${F6_END}"
+		echo -e "${F_GR} Build deb ${DEB_NAME} from ${SRC_DIR} ...... ${F6_END}"
+		echo -e "${F_GR} --------------------------------------------- ${F6_END}"
+
+		cp -r ${DEBIAN_DIR} ${SRC_DIR}/
+		vim ${SRC_DIR}/DEBIAN/control
+		dpkg -b ${SRC_DIR} ${DEB_NAME}
+		rm -r ${SRC_DIR}/DEBIAN
+
+		echo -e "${F_GR} --------------------------------------------- ${F6_END}"
+		echo -e "${F_GR} Build deb ${DEB_NAME} finished! ${F6_END}"
+		echo -e "${F_GR} ============================================= ${F6_END}"
+	else
+		echo -e "${F_GR} Usage: my_deb <src_dir> <pack_name> ${F6_END}"
+	fi
+}
+#}}}
 

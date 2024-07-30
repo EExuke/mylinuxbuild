@@ -34,17 +34,6 @@ echo 1 | sudo -S mount -t vboxsf share2ubuntu /home/xuke/share2win
 
 # 对比文件不同：diff file1 file2
 
-#大多数m4文件都在/usr/share/aclocal/目录下，
-#但实际上configure的默认aclocal路径为/usr/local/share/aclocal，
-#那么可以有两种方法，第一，将/usr/share/aclocal/下的*.m4文件都拷贝到usr/local/share/aclocal/目录下；第二，指定aclocal的安装路径；
-
-# Ir300编译脚本:中文环境对编译的影响：
-# 编译后， tools/kernel.sh读取linux/linux/vmlinux 文件时 grep 需要填中文, awk 参数改为$2 
-
-# IR300 git branchs:
-# release --debug
-# develop --new function develop
-
 # Linux下添加路由：https://www.cnblogs.com/wanghuaijun/p/8059664.html
 route add -net 192.56.76.0 netmask 255.255.255.0 dev eth0#添加一条静态路由
 route add default gw 192.168.0.1#添加默认路由

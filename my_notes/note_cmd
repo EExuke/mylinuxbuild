@@ -128,9 +128,9 @@
 # 		3.拼接文件:
 # 			cat ins.sh XXX.tar.gz > XXX_install.sh
 # 			chmod +x XXX_install.sh
-# 	deb包方式:
+# 	deb包方式: (已编写为快捷脚本命令: my_deb )
 # 		1.创建程序同名目录, 并在其中分别创建DEBIAN、安装路径如usr/local/bin/等目录;
-# 		2.在DEBIAN/ 下创建control文件并写入如下内容：(参考模板: mylinuxbuild/my_templates/DEBIAN, 使用实例: my_Templates/my_deb)
+# 		2.在DEBIAN/ 下创建control文件并写入如下内容：
 # 			package:<程序名>
 # 			version:1.0
 # 			architecture:arm64
@@ -143,9 +143,10 @@
 # 			包卸载后执行脚本: postrm
 # 		4.打包: dpkg -b <包目录名> <安装包名.deb>
 # 		5.安装: dpkg -i <安装包名.deb>
-# 		6.卸载: dpkg -r <程序名>    //package:<程序名>
+# 		6.卸载: dpkg -r <程序名>    //是control中的 package:<程序名>
 # 		7.查看包信息: dpkg -I | -info xxx.deb
 # 		8.查看包内文件: dpkg -c xxx.deb
+# 		9.解压: dpkg -x xxx.deb xxx
 # 	shell脚本压缩加密工具:
 # 		1. gzexe
 # 		2. shc
