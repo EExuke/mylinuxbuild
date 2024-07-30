@@ -1,0 +1,5 @@
+Package: my-test-pack
+Version: 1.0.0
+Maintainer: xuke@xuke.com
+Architecture: arm64
+Description: my test pack for deb
