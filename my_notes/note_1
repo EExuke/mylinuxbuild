@@ -50,3 +50,5 @@ route -n#查看路由表
 systemctl set-default multi-user.target   #关闭图形界面
 systemctl set-default graphical.target    #打开图形界面
 
+# 端口扫描
+nmap -np 22,23 192.168.1.*
