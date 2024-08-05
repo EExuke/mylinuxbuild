@@ -1077,7 +1077,7 @@ function my_deb()
 		echo -e "${F_GR} Build deb ${DEB_NAME} finished! ${F6_END}"
 		echo -e "${F_GR} ============================================= ${F6_END}"
 	else
-		echo -e "${F_GR} Usage: my_deb <src_dir> <pack_name> ${F6_END}"
+		echo -e "${F_GR} Usage: my_deb <src_dir> <pack_name.deb> ${F6_END}"
 	fi
 }
 #}}}

@@ -228,4 +228,6 @@
 # 		hexeidt -h
 # 	图片编辑器:
 # 		pinta
+# 	WSL打开文件夹：
+# 		wslview .
 #
