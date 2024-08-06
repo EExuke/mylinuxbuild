@@ -49,6 +49,7 @@ if [ "$1" = "b" ] || [ "$1" = "-b" ] || [ "$1" = "--b" ] || [ "$1" = "--build" ]
         mv ~/.vim backup/; ln -s ~/mylinuxbuild/.vim ~/.vim
         mv ~/.ssh backup/; ln -s ~/mylinuxbuild/.ssh ~/.ssh
         mv ~/.my_trash backup/; ln -s ~/mylinuxbuild/.my_trash ~/.my_trash
+        mv ~/win_cmd backup/; ln -s ~/mylinuxbuild/wsl/win_cmd ~/win_cmd
         ls -al ~/ | grep ^l
     else
         echo -e ${FG_YELLOW}mylinux instructions depend on dir ~/mylinuxbuild !${F6_END}
