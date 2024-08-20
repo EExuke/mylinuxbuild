@@ -38,3 +38,9 @@ sudo busybox devmem 0x1f40040000 32 0x0001E847 #500 Hz
 
 # NTP时间同步
 sudo ntpdate -u 192.168.101.9
+# RTC时间同步
+sudo date -s "2024-8-19 10:37:00"
+sudo hwclock -w -f /dev/rtc       #使用系统时间配置RTC时间
+sudo hwclock -r -f /dev/rtc       #查看RTC时间
+sudo hwclock -s                   #从RTC同步系统时间
+

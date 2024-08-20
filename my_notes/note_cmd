@@ -107,6 +107,9 @@
 # 	tig: git的可视化工具
 # 		sudo apt-get install tig
 # 		<使用说明可查>
+# 	打tag:
+# 		git tag v1.0            #本地tag
+# 		git push origin v1.0    #推送tag到仓库
 #
 # 五 程序安装包打包
 # 	sh自解压脚本方式:
