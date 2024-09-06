@@ -526,8 +526,8 @@ function myscp()
 	if [[ $# < 2 ]]; then
 		echo -e "${FG_GREEN}Usage: myscp <src> <dst>${F6_END}"
 	else
-		sshpass -p "zklx123" scp -r $@
-		echo -e "${FG_GREEN}==== scp -r $@ success! ====${F6_END}"
+		sshpass -p "zklx123" rsync -ar $@
+		echo -e "${FG_GREEN}==== rsync -ar $@ success! ====${F6_END}"
 	fi
 }
 #}}}
