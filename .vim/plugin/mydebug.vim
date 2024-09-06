@@ -67,8 +67,8 @@ endfunc
 func Print_Backtrace()
 	call append(line("."), "my_debug_backtrace();")
 endfunc
-func PrintBreak_csv()
-	call append(line("."), "MY_CSV_DATA_OUTPUT(\"file.csv\", \"%d,%d\\n\", );")
+func PrintBreak_outData()
+	call append(line("."), "MY_DATA_OUTPUT(\"file.csv\", \"%d,%d\\n\", );")
 endfunc
 func IncludeMyDebugHeader()
 	call append(line(".")-1, "#include \"/home/xuke/bin/dbg.h\"")

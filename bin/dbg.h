@@ -152,10 +152,10 @@ static inline void SIG_NONP(int sig) {}
 	free(__bt_strings); \
 } while (0)
 
-//csv格式数据输出命令, 用于绘制数据图表
-#define MY_CSV_DATA_OUTPUT(fname, args...)    do { \
-	static FILE *_csv_data_fd = fopen(fname, "w+"); \
-	fprintf(_csv_data_fd, ##args); \
+//格式数据输出命令, 用于绘制数据图表
+#define MY_DATA_OUTPUT(fname, args...)    do { \
+	static FILE *__my_data_fd = fopen(fname, "w+"); \
+	fprintf(__my_data_fd, ##args); \
 } while (0);
 
 #define myprintf(msg, args...)                do { MYPRINT_NO_FEED(CL, msg, ##args); fflush(stdout); }while (0)
