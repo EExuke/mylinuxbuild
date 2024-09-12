@@ -67,7 +67,7 @@ endfunc
 func Print_Backtrace()
 	call append(line("."), "my_debug_backtrace();")
 endfunc
-func PrintBreak_outData()
+func PrintDebug_outData()
 	call append(line("."), "MY_DATA_OUTPUT(\"file.csv\", \"%d,%d\\n\", );")
 endfunc
 func IncludeMyDebugHeader()
