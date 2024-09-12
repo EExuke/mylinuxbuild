@@ -35,27 +35,27 @@ PAUSE_TIME=0.5
 # 基础配置
 config_base()
 {
-echo -e '
-# 重置画面属性
-reset
-clear
-# 设置尺寸, 高宽比例
-#set size ratio 0.618
-# 设置图表标题和轴标签
-set title '"\"$1 Data Show\""'
-set title font ",14"
-set xlabel "point"
-set ylabel "val"
-# 设置刻度
-#set xtics 10
-#set mxtics 5
-# 设置网格
-set grid
-# 设置采样率
-#set samples 500
-# 设置CSV文件的分隔符
-set datafile separator ","
-'
+	echo -e '
+	# 重置画面属性
+	reset
+	clear
+	# 设置尺寸, 高宽比例
+	#set size ratio 0.618
+	# 设置图表标题和轴标签
+	set title '"\"$1 Data Show\""'
+	set title font ",14"
+	set xlabel "point"
+	set ylabel "val"
+	# 设置刻度
+	#set xtics 10
+	#set mxtics 5
+	# 设置网格
+	set grid
+	# 设置采样率
+	#set samples 500
+	# 设置CSV文件的分隔符
+	set datafile separator ","
+	'
 }
 
 # 点线风格设置, 查看图例方式: "gnuplot> test"
@@ -79,57 +79,57 @@ run_gnuplot_data()
 			;;
 		2)
 gnuplot << EOF
-`config_base $1`
-while (1) {
-	plot   "$1" using $2 title "col$2" `config_line`
-	pause ${PAUSE_TIME}
-}
+	`config_base $1`
+	while (1) {
+		plot   "$1" using $2 title "col$2" `config_line`
+		pause ${PAUSE_TIME}
+	}
 EOF
 			;;
 		3)
 gnuplot << EOF
-`config_base $1`
-while (1) {
-	plot   "$1" using $2 title "col$2" `config_line`,\
-	       "$1" using $3 title "col$3" `config_line`
-	pause ${PAUSE_TIME}
-}
+	`config_base $1`
+	while (1) {
+		plot   "$1" using $2 title "col$2" `config_line`,\
+			   "$1" using $3 title "col$3" `config_line`
+		pause ${PAUSE_TIME}
+	}
 EOF
 			;;
 		4)
 gnuplot << EOF
-`config_base $1`
-while (1) {
-	plot   "$1" using $2 title "col$2" `config_line`,\
-	       "$1" using $3 title "col$3" `config_line`,\
-	       "$1" using $4 title "col$4" `config_line`
-	pause ${PAUSE_TIME}
-}
+	`config_base $1`
+	while (1) {
+		plot   "$1" using $2 title "col$2" `config_line`,\
+			   "$1" using $3 title "col$3" `config_line`,\
+			   "$1" using $4 title "col$4" `config_line`
+		pause ${PAUSE_TIME}
+	}
 EOF
 			;;
 		5)
 gnuplot << EOF
-`config_base $1`
-while (1) {
-	plot   "$1" using $2 title "col$2" `config_line`,\
-	       "$1" using $3 title "col$3" `config_line`,\
-	       "$1" using $4 title "col$4" `config_line`,\
-	       "$1" using $5 title "col$5" `config_line`
-	pause ${PAUSE_TIME}
-}
+	`config_base $1`
+	while (1) {
+		plot   "$1" using $2 title "col$2" `config_line`,\
+			   "$1" using $3 title "col$3" `config_line`,\
+			   "$1" using $4 title "col$4" `config_line`,\
+			   "$1" using $5 title "col$5" `config_line`
+		pause ${PAUSE_TIME}
+	}
 EOF
 			;;
 		6)
 gnuplot << EOF
-`config_base $1`
-while (1) {
-	plot   "$1" using $2 title "col$2" `config_line`,\
-	       "$1" using $3 title "col$3" `config_line`,\
-	       "$1" using $4 title "col$4" `config_line`,\
-	       "$1" using $5 title "col$5" `config_line`,\
-	       "$1" using $6 title "col$6" `config_line`
-	pause ${PAUSE_TIME}
-}
+	`config_base $1`
+	while (1) {
+		plot   "$1" using $2 title "col$2" `config_line`,\
+			   "$1" using $3 title "col$3" `config_line`,\
+			   "$1" using $4 title "col$4" `config_line`,\
+			   "$1" using $5 title "col$5" `config_line`,\
+			   "$1" using $6 title "col$6" `config_line`
+		pause ${PAUSE_TIME}
+	}
 EOF
 			;;
 		*)
