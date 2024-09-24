@@ -197,7 +197,7 @@ if [ -f ~/bin/functions ]; then
 	. ~/bin/functions
 	dir 1       # choose which enviroment: 1:~/workspace/; 2:~/workroom/; 3:~/
 
-	dir LX_NX_XXT_V3
+	dir P53_NX_MK
 	#dir workroom
 	#dir learnspace
 fi

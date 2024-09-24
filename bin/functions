@@ -173,13 +173,13 @@ function sw()
             cd ~/workspace/P53_NX_RL/p53_nx_rl_ctv
             ;;
         c|ctv )
-            try_cd lx_nx_xxt_v3_ctv
+            try_cd p53_nx_mk_citv
             ;;
         i|itv )
             try_cd lx_nx_xxt_v3_itv
             ;;
         f|ftv )
-            try_cd lx_nx_xxt_v3_ftv
+            try_cd p53_nx_mk_fitv
             ;;
         s|sys )
             try_cd lx_nx_xxt_v3_ctv/ctv_sys

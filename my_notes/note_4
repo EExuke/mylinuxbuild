@@ -44,3 +44,7 @@ sudo hwclock -w -f /dev/rtc       #使用系统时间配置RTC时间
 sudo hwclock -r -f /dev/rtc       #查看RTC时间
 sudo hwclock -s                   #从RTC同步系统时间
 
+# ffmpeg
+ffplay -rtsp_transport tcp -i rtsp://192.168.101.211:8554/live -codec:v h264 -codec:a mp3 -max_delay 500
+https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm
+
