@@ -16,14 +16,21 @@ YUV420: 4:2:0采样，每四个Y共用一组UV分量,一个YUV占8+2+2 = 12bits 
 # 关闭GUI
 systemctl set-default multi-user.target   #关闭图形界面
 systemctl set-default graphical.target    #打开图形界面
+# 关闭nv串口
+sudo systemctl stop nvgetty.service
+sudo systemctl disable nvgetty.service
 
 # new XDMA:
 # 462-FPGA 外触发 CC_FREQ_DIV = (200*1000*1000 / CC频率 / 2) - 1
 sudo busybox devmem 0x1f400A0000 32 xxxxxxxx
+sudo busybox devmem 0x1f400A0000 32 0x01312CFF #  5 Hz
+sudo busybox devmem 0x1f400A0000 32 0x0098967F # 10 Hz
+sudo busybox devmem 0x1f400A0000 32 0x004C4B3F # 20 Hz
 sudo busybox devmem 0x1f400A0000 32 0x001E847F # 50 Hz
 sudo busybox devmem 0x1f400A0000 32 0x00196E69 # 60 Hz
 sudo busybox devmem 0x1f400A0000 32 0x000F423F #100 Hz
 sudo busybox devmem 0x1f400A0000 32 0x0007A11F #200 Hz
+sudo busybox devmem 0x1f400A0000 32 0x00051614 #300 Hz
 sudo busybox devmem 0x1f400A0000 32 0x0003D08F #400 Hz
 
 # GPU0921:
@@ -47,4 +54,8 @@ sudo hwclock -s                   #从RTC同步系统时间
 # ffmpeg
 ffplay -rtsp_transport tcp -i rtsp://192.168.101.211:8554/live -codec:v h264 -codec:a mp3 -max_delay 500
 https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm
+
+# haneWIN NFS 修复mmcfs:
+sudo mount -t nfs 192.168.101.9:/tools ./tmp/ -o nolock
+e2fsck /dev/mmc0p1xx
 

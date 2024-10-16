@@ -220,6 +220,8 @@
 #
 # 	查看动态依赖库:
 # 		ldd <app>;  readelf -d <app>;  objdump -x <app>
+# 	查看库的平台架构:
+# 		readelf -h <lib>
 # 	指定依赖库路径:
 # 		LD_LIBRARY_PATH
 #
