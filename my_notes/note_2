@@ -23,3 +23,14 @@ conntrack -L -p icmp
 
 conntrack -L |grep icmp
 
+# gpio wr
+//使能LED - GPIO
+system("sudo echo 417 > /sys/class/gpio/export");
+system("sudo echo out > /sys/class/gpio/gpio417/direction");
+system("sudo echo 0 > /sys/class/gpio/gpio417/value");
+g_gpfd = open("/sys/class/gpio/gpio417/value", O_RDWR);
+if (g_gpfd < 0) {
+	perror("open");
+}
+write(g_gpfd, "0", 1);
+write(g_gpfd, "1", 1);
