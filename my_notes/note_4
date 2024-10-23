@@ -3,7 +3,7 @@ scp -r lx@10.5.0.100:/home/lx/dir ./
 scp -r ./dir lx@10.5.0.100:/home/lx/dir
 
 # quick copy
-cmake .. -DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc 
+cmake .. -DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc
 LD_LIBRARY_PATH
 echo "options xdma hresolution=1024 vresolution=768 is_color_sensor=1 bayer_phase=0" >/etc/modprobe.d/xdma.conf
 echo "options xdma hdmi_channel=0 resolution0=1920,1080 resolution1=640,512" >/etc/modprobe.d/xdma.conf  #双base

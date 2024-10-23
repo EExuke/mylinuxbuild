@@ -235,4 +235,6 @@
 # 		pinta
 # 	WSL打开文件夹：
 # 		wslview .
+# 	按列合并文件:
+# 		paste -d , 1_data.csv 2_data.csv > all_data.csv
 #

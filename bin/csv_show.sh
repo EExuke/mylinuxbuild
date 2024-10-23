@@ -132,6 +132,20 @@ gnuplot << EOF
 	}
 EOF
 			;;
+		7)
+gnuplot << EOF
+	`config_base $1`
+	while (1) {
+		plot   "$1" using $2 title "col$2" `config_line`,\
+			   "$1" using $3 title "col$3" `config_line`,\
+			   "$1" using $4 title "col$4" `config_line`,\
+			   "$1" using $5 title "col$5" `config_line`,\
+			   "$1" using $6 title "col$6" `config_line`,\
+			   "$1" using $7 title "col$7" `config_line`
+		pause ${PAUSE_TIME}
+	}
+EOF
+			;;
 		*)
 			echo -e "${F_RD}Not Supported, Please extend me!${C_ED}"
 			;;
