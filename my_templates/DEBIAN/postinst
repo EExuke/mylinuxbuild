@@ -32,4 +32,10 @@ B_WT="\033[47m"
 #-----------------------------------------------------------
 echo -e "================================="
 echo -e "hello, now is in post install run:"
+
+# 关闭nvgetty服务
+echo -e "close nvgetty.service"
+sudo systemctl disable nvgetty.service
+
 echo -e "================================="
+
