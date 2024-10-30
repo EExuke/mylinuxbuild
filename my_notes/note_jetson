@@ -1,0 +1,25 @@
+# 准备系统镜像
+	拷贝对应的system.img和system.img.raw系统镜像到 ./Linux_for_Tegra/bootloader/ 下
+
+# 链接开发板套件后, 将USB设备链接至WSL：
+查看usb设备：usbipd list
+	绑定：usbipd bind -b 4-3
+连接：usbipd attach --wsl --busid=4-3 --auto-attach  (加--auto-attach防止掉线)
+	可再用usbipd list查看状态
+
+# 在wsl上执行 lsusb,即可查看, 确认USB已识别到APX设备
+
+# 刷写已备份的镜像
+## 1、短接GND和REC引脚 (将第2引脚GND和第3引脚FC_REC通过跳线短接——进入recovery模式)
+## 2、在 ./Linux_for_Tegra 目录下, 执行:
+	sudo ./flash.sh -r jetson-xavier-nx-devkit-emmc mmcblk0p1
+
+# 备份镜像:
+	sudo ./flash.sh -r -k APP -G backup.img jetson-xavier-nx-devkit-emmc mmcblk0p1
+
+# WIN_CMD:
+	usbipd list
+	usbipd attach --wsl --busid=4-3 --auto-attach
+# WSL:
+	lsusb
+	sudo ./flash.sh -r jetson-xavier-nx-devkit-emmc mmcblk0p1

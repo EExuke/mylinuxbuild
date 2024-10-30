@@ -55,7 +55,16 @@ sudo hwclock -s                   #从RTC同步系统时间
 ffplay -rtsp_transport tcp -i rtsp://192.168.101.211:8554/live -codec:v h264 -codec:a mp3 -max_delay 500
 https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm
 
-# haneWIN NFS 修复mmcfs:
-sudo mount -t nfs 192.168.101.9:/tools ./tmp/ -o nolock
-e2fsck /dev/mmc0p1xx
+# 破坏mmcfs超級块:
+- dd if=/dev/zero of=/dev/mmcblk0p1 bs=1k seek=1 count=1
+# 修复mmcfs损坏:
+## NFSD方式:
+- ifconfig eth0 192.168.101.211 netmask 255.255.255.0 up
+- sudo mount -t nfs 192.168.101.9:/tools ./tmp/ -o nolock
+- cd ./tmp
+- ./e2fsck /dev/mmcblk0n1p1 -y
+## 安全分区方式：
+- sudo mount /dev/mmcblk0p10 ./tmp
+- cd ./tmp
+- ./e2fsck /dev/mmcblk0n1p1 -y
 
