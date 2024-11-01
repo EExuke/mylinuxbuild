@@ -207,8 +207,8 @@ PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'printf "\e]9;9;%s\e\\" "$(
 
 #配置X11远程显示, (改用secureCRT的X11转发实现，这里就不用再指定了, 但是延迟大)
 #export DISPLAY=$(ip route list default | awk '{print $3}'):0
-#export DISPLAY=`who | awk -F '[()]' '{print $2}'`":0.0"
-#export LIBGL_ALWAYS_INDIRECT=1 #解决libGL报错
+export DISPLAY=`who | grep pts | awk -F '[()]' 'NR==1 {print $2}'`":0.0"
+export LIBGL_ALWAYS_INDIRECT=1 #解决libGL报错
 
 #export TERM=linux
 

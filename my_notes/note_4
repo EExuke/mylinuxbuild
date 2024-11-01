@@ -57,14 +57,18 @@ https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm
 
 # 破坏mmcfs超級块:
 - dd if=/dev/zero of=/dev/mmcblk0p1 bs=1k seek=1 count=1
-# 修复mmcfs损坏:
+# 修复fs损坏:
 ## NFSD方式:
 - ifconfig eth0 192.168.101.211 netmask 255.255.255.0 up
 - sudo mount -t nfs 192.168.101.9:/tools ./tmp/ -o nolock
 - cd ./tmp
 - ./e2fsck /dev/mmcblk0n1p1 -y
 ## 安全分区方式：
-- sudo mount /dev/mmcblk0p10 ./tmp
+- sudo mount /dev/mmcblk0p11 ./tmp
 - cd ./tmp
 - ./e2fsck /dev/mmcblk0n1p1 -y
+# 避免fs损坏:
+# 配置文件系统参数方式
+- tune2fs -c 10 /dev/mmcblk0p1    #每10次挂载，检查一次
+- tune2fs -i 3d /dev/mmcblk0p1    #每3天，检查一次
 
