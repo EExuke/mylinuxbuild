@@ -526,7 +526,8 @@ function cpout()
 # for auto run scp
 function myscp()
 {
-	if [[ $# < 2 ]]; then
+	if [[ $# -lt 2 ]]; then
+		echo $#
 		echo -e "${FG_GREEN}Usage: myscp <src> <dst>${F6_END}"
 	else
 		sshpass -p "zklx123" rsync -ar $@

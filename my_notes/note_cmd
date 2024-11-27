@@ -149,7 +149,7 @@
 # 		6.卸载: dpkg -r <程序名>    //是control中的 package:<程序名>
 # 		7.查看包信息: dpkg -I | -info xxx.deb
 # 		8.查看包内文件: dpkg -c xxx.deb
-# 		9.解压: dpkg -x xxx.deb xxx
+# 		9.解压/安装到指定目录: dpkg -x xxx.deb <dir>    #<dir>就是要安装的路径
 # 	shell脚本压缩加密工具:
 # 		1. gzexe
 # 		2. shc

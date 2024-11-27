@@ -51,7 +51,7 @@ sudo hwclock -w -f /dev/rtc       #使用系统时间配置RTC时间
 sudo hwclock -r -f /dev/rtc       #查看RTC时间
 sudo hwclock -s                   #从RTC同步系统时间
 
-# ffmpeg
+# ffmpeg拉流
 ffplay -rtsp_transport tcp -i rtsp://192.168.101.211:8554/live -codec:v h264 -codec:a mp3 -max_delay 500
 https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm
 
@@ -71,4 +71,12 @@ https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm
 # 配置文件系统参数方式
 - tune2fs -c 10 /dev/mmcblk0p1    #每10次挂载，检查一次
 - tune2fs -i 3d /dev/mmcblk0p1    #每3天，检查一次
+
+# 修改bootloader/l4t_initrd.img:
+- sudo su #确保img中所有文件权限都为root不变
+- cp bootloader/l4t_initrd.img ./tmp/my_l4t_initrd.img
+- mkdir ./tmp/temp && cd ./tmp/temp/
+- gunzip -c ../l4t_initrd.img | cpio -i    #解压
+- /*修改或添加内容，其中init为启动执行脚本*/
+- find . | cpio -H newc -o | gzip -9 -n > ../my_l4t_initrd.img
 

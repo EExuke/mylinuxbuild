@@ -2,6 +2,8 @@
 ping -I openvpn1 10.0.0.1 -s 16 -p 01
 # show
 tcpdump icmp -nn -XX -vvv
+# iperf3
+iperf3 -c 192.168.101.9 -u -b 1000M -f M
 
 # tcpdump 分析：
 14:54:05.135755 IP (tos 0x0, ttl 64, id 37728, offset 0, flags [none], proto ICMP (1), length 29)
@@ -34,3 +36,6 @@ if (g_gpfd < 0) {
 }
 write(g_gpfd, "0", 1);
 write(g_gpfd, "1", 1);
+
+# touch递归更新时间戳:
+find ./ * -exec touch {} \;
