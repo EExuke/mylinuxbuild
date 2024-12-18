@@ -194,7 +194,7 @@ function sw()
             cd ~/workspace/LX_NX_JCGC
             ;;
         pa|pack )
-            cd ~/workspace/LX_NX_PACK
+            cd ~/workspace/LX_NX_PACK/lx_nx_pack_tv
             ;;
         xx|xxt )
             cd ~/workspace/LX_NX_XXT
