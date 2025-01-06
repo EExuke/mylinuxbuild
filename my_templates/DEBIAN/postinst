@@ -37,6 +37,10 @@ echo -e "hello, now is in post install run:"
 echo -e "close nvgetty.service"
 sudo systemctl disable nvgetty.service
 
+# 加载modules
+#echo -e "load modules"
+#sudo depmod
+
 # 开自启相关service
 #echo -e "${F_YL}enable ftv_cv.service ${C_ED}"
 #echo -e "${F_YL}enable ftv_sys.service ${C_ED}"
