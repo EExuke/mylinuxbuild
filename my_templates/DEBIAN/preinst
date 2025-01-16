@@ -34,18 +34,18 @@ echo -e "================================="
 echo -e "hello, now is in pre install run:"
 
 # 关闭相关service
-echo -e "${F_YL}stop ftv_cv.service, ctv_cv.service, itv_cv.service${C_ED}"
-sudo systemctl stop ftv_cv.service
-sudo systemctl stop ctv_cv.service
-sudo systemctl stop itv_cv.service
-sudo systemctl stop citv_cv.service
-sudo systemctl stop fitv_cv.service
-echo -e "${F_YL}stop ftv_sys.service, ctv_sys.service, itv_sys.service${C_ED}"
-sudo systemctl stop ftv_sys.service
-sudo systemctl stop ctv_sys.service
-sudo systemctl stop itv_sys.service
-sudo systemctl stop citv_sys.service
-sudo systemctl stop fitv_sys.service
+#echo -e "${F_YL}stop CV services${C_ED}"
+#sudo systemctl stop ftv_cv.service
+#sudo systemctl stop ctv_cv.service
+#sudo systemctl stop itv_cv.service
+#sudo systemctl stop citv_cv.service
+#sudo systemctl stop fitv_cv.service
+#echo -e "${F_YL}stop sys services${C_ED}"
+#sudo systemctl stop ftv_sys.service
+#sudo systemctl stop ctv_sys.service
+#sudo systemctl stop itv_sys.service
+#sudo systemctl stop citv_sys.service
+#sudo systemctl stop fitv_sys.service
 
 echo -e "================================="
 

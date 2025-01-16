@@ -34,14 +34,13 @@ echo -e "================================="
 echo -e "hello, now is in post install run:"
 
 # 关闭nvgetty服务
-echo -e "close nvgetty.service"
-sudo systemctl disable nvgetty.service
+#echo -e "close nvgetty.service"
+#sudo systemctl disable nvgetty.service
 
 # 加载modules
 #echo -e "load modules"
 #sudo depmod
 
-# 开自启相关service
 #echo -e "${F_YL}enable ftv_cv.service ${C_ED}"
 #echo -e "${F_YL}enable ftv_sys.service ${C_ED}"
 
@@ -49,6 +48,13 @@ sudo systemctl disable nvgetty.service
 #echo -e "apply /tmp/patch_root patchs"
 #sudo cp -ar /tmp/patch_root/* /
 
+# 开自启相关service
+#echo -e "${F_YL}start CV services${C_ED}"
+#sudo systemctl start ftv_cv
+#sudo systemctl start ctv_cv
+#sudo systemctl start itv_cv
+#sudo systemctl start citv_cv
+#sudo systemctl start fitv_cv
 
 echo -e "================================="
 
