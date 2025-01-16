@@ -157,6 +157,18 @@ static inline void SIG_NONP(int sig) {}
 	static FILE *__my_data_fd = fopen(fname, "w+"); \
 	fprintf(__my_data_fd, ##args); \
 } while (0);
+#define MY_DATA_OUTPUT_FP(fp, fname, args...)    do { \
+	if (!fp) { \
+		fp = fopen(fname, "w+"); \
+	} \
+	fprintf(fp, ##args); \
+} while (0);
+#define MY_DATA_CLOSE_FP(fp)    do { \
+	if (fp) { \
+		fclose(fp); \
+		fp = NULL; \
+	} \
+} while (0);
 
 #define myprintf(msg, args...)                do { MYPRINT_NO_FEED(CL, msg, ##args); fflush(stdout); }while (0)
 #define myprintf_red(msg, args...)            do { MYPRINT_NO_FEED(RE, msg, ##args); fflush(stdout); }while (0)
