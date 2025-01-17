@@ -54,6 +54,10 @@ sudo hwclock -s                   #从RTC同步系统时间
 # ffmpeg拉流
 ffplay -rtsp_transport tcp -i rtsp://192.168.101.211:8554/live -codec:v h264 -codec:a mp3 -max_delay 500
 https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm
+# ffmpeg推流
+ffmpeg -re -i ./xxtv3_LDS010_itv_fly_6.mp4 -c copy -f rtsp rtsp://127.0.0.1:8554/raw
+# gstreamer推流
+gst-launch-1.0 filesrc location=./xxtv3_LDS010_itv_fly_6.mp4 ! qtdemux name=d d.video_0 ! rtspclientsink location=rtsp://127.0.0.1:8554/raw
 
 # 破坏mmcfs超級块:
 - dd if=/dev/zero of=/dev/mmcblk0p1 bs=1k seek=1 count=1
