@@ -1085,6 +1085,41 @@ function my_deb()
 	fi
 }
 #}}}
+# my_ipk{{{
+# 构建ipk安装包
+function my_ipk()
+{
+	if [[ $# == 1 || $# == 2 ]]; then
+		# DEBIAN template dir
+		DEBIAN_DIR=~/mylinuxbuild/my_templates/DEBIAN
+
+		# name
+		if [[ $# == 1 ]]; then
+			SRC_DIR=$1
+			IPK_NAME=${1%/*}.ipk
+		else
+			SRC_DIR=$1
+			IPK_NAME=$2
+		fi
+
+		# build
+		echo -e "${F_GR} ============================================= ${F6_END}"
+		echo -e "${F_GR} Build deb ${IPK_NAME} from ${SRC_DIR} ...... ${F6_END}"
+		echo -e "${F_GR} --------------------------------------------- ${F6_END}"
+
+		cp -r ${DEBIAN_DIR} ${SRC_DIR}/
+		vim ${SRC_DIR}/DEBIAN/control
+		tar -cvzf ${IPK_NAME} ${SRC_DIR}/*
+		rm -r ${SRC_DIR}/DEBIAN
+
+		echo -e "${F_GR} --------------------------------------------- ${F6_END}"
+		echo -e "${F_GR} Build ipk ${IPK_NAME} finished! ${F6_END}"
+		echo -e "${F_GR} ============================================= ${F6_END}"
+	else
+		echo -e "${F_GR} Usage: my_ipk <src_dir> <pack_name.ipk> ${F6_END}"
+	fi
+}
+#}}}
 # my_installer{{{
 # 构建install自解压安装包
 # print_template_head{{{
