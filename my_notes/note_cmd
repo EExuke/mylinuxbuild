@@ -150,6 +150,13 @@
 # 		7.查看包信息: dpkg -I | -info xxx.deb
 # 		8.查看包内文件: dpkg -c xxx.deb
 # 		9.解压/安装到指定目录: dpkg -x xxx.deb <dir>    #<dir>就是要安装的路径
+# 	ipk包方式: (已编写为快捷脚本命令: my_ipk )
+# 		1.安装: opkg install xxx.ipk  [-d <install_dir>]
+# 		2.卸载: opkg remove xxx.ipk
+# 		3.查看包信息: opkg info xxx.ipk
+# 		4.查看包内文件: ar p my-ipk-test.ipk data.tar.gz | tar -tzv
+# 		5.已安装列表: opkg list
+# 		6.查看已安装包的文件: opkg file <ipk-name>
 # 	shell脚本压缩加密工具:
 # 		1. gzexe
 # 		2. shc

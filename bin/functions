@@ -1107,10 +1107,20 @@ function my_ipk()
 		echo -e "${F_GR} Build deb ${IPK_NAME} from ${SRC_DIR} ...... ${F6_END}"
 		echo -e "${F_GR} --------------------------------------------- ${F6_END}"
 
-		cp -r ${DEBIAN_DIR} ${SRC_DIR}/
-		vim ${SRC_DIR}/DEBIAN/control
-		tar -cvzf ${IPK_NAME} ${SRC_DIR}/*
-		rm -r ${SRC_DIR}/DEBIAN
+		cd ${SRC_DIR}
+		# files
+		tar -cvzf data.tar.gz *
+		# scripts
+		cp -r ${DEBIAN_DIR} ./control
+		vim ./control/control
+		cd ./control
+		tar -cvzf ../control.tar.gz *
+		cd -
+		# AR pack
+		echo 2.0 > ./debian-binary
+		ar -rv ../${IPK_NAME} control.tar.gz data.tar.gz debian-binary
+		rm -r ./control.tar.gz ./data.tar.gz ./debian-binary ./control
+		cd ..
 
 		echo -e "${F_GR} --------------------------------------------- ${F6_END}"
 		echo -e "${F_GR} Build ipk ${IPK_NAME} finished! ${F6_END}"
