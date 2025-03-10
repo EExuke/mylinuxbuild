@@ -1113,9 +1113,7 @@ function my_ipk()
 		# scripts
 		cp -r ${DEBIAN_DIR} ./control
 		vim ./control/control
-		cd ./control
-		tar -cvzf ../control.tar.gz *
-		cd -
+		tar cvzf ./control.tar.gz -C control/ `ls control/`
 		# AR pack
 		echo 2.0 > ./debian-binary
 		ar -rv ../${IPK_NAME} control.tar.gz data.tar.gz debian-binary
