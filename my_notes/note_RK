@@ -1,0 +1,40 @@
+########################################################################################
+# RK3588 buildroot notes
+########################################################################################
+
+# U-Boot 编译
+	cd RK3588J_sdk/rk3588-buildroot-2021.11-sdk-v1.1/u-boot
+	make rk3588_defconfig
+	./make.sh rk3588
+	./make.sh CROSS_COMPILE=aarch64-none-linux-gnu- rk3588
+
+# Kernel 编译
+	if [[ $1 == "clean" ]]; then
+		echo -e "${F_GR}run distclean${C_ED}"
+		make CROSS_COMPILE=aarch64-none-linux-gnu- ARCH=arm64 distclean
+	elif [[ $1 == "menu" ]]; then
+		make -j4 CROSS_COMPILE=aarch64-none-linux-gnu- ARCH=arm64 menuconfig
+		echo -e "${F_GR}run [make -j4 CROSS_COMPILE=aarch64-none-linux-gnu- ARCH=arm64 savedefconfig] to make defconfig${C_ED}"
+		make -j4 CROSS_COMPILE=aarch64-none-linux-gnu- ARCH=arm64 savedefconfig
+		echo -e "${F_GR}run [mv defconfig arch/arm64/configs/rockchip_linux_defconfig] to recover configs${C_ED}"
+		mv defconfig arch/arm64/configs/rockchip_linux_defconfig
+	elif [[ $1 == "def" ]]; then
+		echo -e "${F_GR}load kernel configs${C_ED}"
+		make -j4 CROSS_COMPILE=aarch64-none-linux-gnu- ARCH=arm64 rockchip_linux_defconfig rk3588_linux.config
+	else
+		echo -e "${F_GR}build kernel image${C_ED}"
+		make -j32 CROSS_COMPILE=aarch64-none-linux-gnu- ARCH=arm64 tl3588f-evm.img
+		echo -e "${F_GR}make fit image${C_ED}"
+		./mk-fitimage.sh
+		echo -e "${F_GR}build dtbs${C_ED}"
+	fi
+
+# Buildroot 编译
+	cd RK3588J_sdk/rk3588-buildroot-2021.11-sdk-v1.1/
+	./build.sh ./device/rockchip/rk3588/tl3588_evm_defconfig
+	cd buildroot/
+	./envsetup.sh rockchip_rk3588
+	make menuconfig
+	make savedefconfig
+	cd .. && ./build.sh buildroot
+
