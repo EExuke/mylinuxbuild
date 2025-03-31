@@ -169,17 +169,17 @@ function sw()
         "" )
             try_cd
             ;;
-        rl|ruil )
-            cd ~/workspace/P53_NX_RL/p53_nx_rl_ctv
+        a|auto )
+            cd ~/workspace/CV_SRC_CODE/lx_auto_agent
             ;;
         c|ctv )
-            try_cd p53_nx_mk_citv
+            try_cd lx_nx_xxt_v3_ctv
             ;;
         i|itv )
             try_cd lx_nx_xxt_v3_itv
             ;;
         f|ftv )
-            try_cd p53_nx_mk_fitv
+            try_cd lx_nx_xxt_v3_ftv
             ;;
         s|sys )
             try_cd lx_nx_xxt_v3_ctv/ctv_sys

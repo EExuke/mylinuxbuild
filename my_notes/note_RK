@@ -37,4 +37,48 @@
 	make menuconfig
 	make savedefconfig
 	cd .. && ./build.sh buildroot
+	ll output/firmware/rootfs.img
+
+# FW 镜像构建
+	基于mkimage_v1.0.tar.gz, 拆解、合并系统固件 update.img （包含uboot.img, boot.img和rootfs.img）
+	update.img包含:
+		MiniLoaderAll.bin    SPL镜像                                   一般无需更新
+		uboot.img            U-Boot镜像                                -
+		boot.img             Kernel 镜像                               -
+		rootfs.img           根文件系统镜像                            -
+		oem.img              OEM 数据镜像                              一般无需更新
+		userdata.img         用户数据镜像                              一般无需更新
+		misc.img             中间状态暂存镜像，主要用于系统恢复模式    一般无需更新
+		recovery.img         系统恢复模式的根文件系统镜像              一般无需更新
+		parameter.txt        系统相关参数                              一般无需更新
+	1. 解压mkimage_v1.0.tar.gz后, cd mkimage/
+	2. 拆解update.img：
+		./mkimage.sh unpack image/update.img
+		生成文件于 output/ 目录下
+	3. 构建update.img:
+		更新替换output/Image/目录下的对应img文件
+		./mkimage.sh pack
+		生成新 update.img 于 output/update/ 下
+
+# 修改rootfs.img
+	sudo mount -o loop rootfs.img ./tmp_rootfs
+	修改文件
+	sudo umount -l ./tmp_rootfs
+
+# 扩容rootfs.img (扩容用于向rootfs中添加更多文件)
+	dd if=/dev/zero of=expanded_rootfs.img bs=1G count=4
+	mkfs.ext4 expanded_rootfs.img
+	sudo mount -o loop expanded_rootfs.img ./expanded_rootfs
+	拷贝原rootfs.img中所有文件到 ./expanded_rootfs/ 中
+	sync
+	sudo umount -l ./expanded_rootfs
+# rootfs容量resize到 mmcblk0p6 总大小
+	板子上执行: resize2fs /dev/mmcblk0p6
+
+# uboot镜像直接替换
+	dd if=uboot.img of=/dev/mmcblk0p1
+	sync && reboot
+# kernel镜像直接替换
+	dd if=boot.img of=/dev/mmcblk0p3
+	sync && reboot
 

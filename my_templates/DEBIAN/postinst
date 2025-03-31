@@ -43,6 +43,10 @@ echo -e "hello, now is in post install run:"
 
 #echo -e "${F_YL}enable ftv_cv.service ${C_ED}"
 #echo -e "${F_YL}enable ftv_sys.service ${C_ED}"
+#echo -e "${F_YL}enable ctv_cv.service ${C_ED}"
+#echo -e "${F_YL}enable ctv_sys.service ${C_ED}"
+#echo -e "${F_YL}enable itv_cv.service ${C_ED}"
+#echo -e "${F_YL}enable itv_sys.service ${C_ED}"
 
 # 应用补丁脚本
 #echo -e "apply /tmp/patch_root patchs"
