@@ -187,10 +187,10 @@ function sw()
         452|p452 )
             cd ~/workspace/P238_NX_452
             ;;
-        dc|DC )
-            cd ~/workspace/P53_NX_DC
+        jcv5|jc005 )
+            cd ~/workspace/LX_NX_JCV5
             ;;
-        jc|jcgs )
+        jcv4|jcgs )
             cd ~/workspace/LX_NX_JCGC
             ;;
         pa|pack )
