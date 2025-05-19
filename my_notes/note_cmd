@@ -246,4 +246,7 @@
 # 		wslview .
 # 	按列合并文件:
 # 		paste -d , 1_data.csv 2_data.csv > all_data.csv
+# 	JS压缩和解压工具:
+# 		压缩：minify file.js > min_file.js
+# 		解压：js-beautify -o recover_file.js min_file.js
 #

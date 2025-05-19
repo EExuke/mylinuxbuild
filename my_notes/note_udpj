@@ -8,3 +8,4 @@
 {"type":"pc_ctrl","cmd":"switch_target"}
 {"type":"pc_ctrl","cmd":"fire_state","fire_state":true}
 {"type":"pc_ctrl","cmd":"fire_state","fire_state":false}
+{"type":"pc_ctrl","cmd":"pc_response"}

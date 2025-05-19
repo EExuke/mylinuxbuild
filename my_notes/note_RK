@@ -23,7 +23,8 @@
 		make -j4 CROSS_COMPILE=aarch64-none-linux-gnu- ARCH=arm64 rockchip_linux_defconfig rk3588_linux.config
 	else
 		echo -e "${F_GR}build kernel image${C_ED}"
-		make -j32 CROSS_COMPILE=aarch64-none-linux-gnu- ARCH=arm64 tl3588f-evm.img
+		#make -j32 CROSS_COMPILE=aarch64-none-linux-gnu- ARCH=arm64 tl3588f-evm.img               #def
+		make -j32 CROSS_COMPILE=aarch64-none-linux-gnu- ARCH=arm64 tl3588f-zklx-v1.img           #zklx
 		echo -e "${F_GR}make fit image${C_ED}"
 		./mk-fitimage.sh
 		echo -e "${F_GR}build dtbs${C_ED}"
@@ -81,4 +82,12 @@
 # kernel镜像直接替换
 	dd if=boot.img of=/dev/mmcblk0p3
 	sync && reboot
+
+# 流控配置：
+	# 查看流控状态
+	ethtool -a eth0
+	# 启用接收（RX）和发送（TX）流控
+	ethtool -A eth0 rx on tx on
+	#强制生效（不依赖自动协商）
+	ethtool -s eth0 autoneg off
 
