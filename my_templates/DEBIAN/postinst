@@ -40,6 +40,7 @@ echo -e "hello, now is in post install run:"
 # 加载modules
 #echo -e "load modules"
 #sudo depmod
+sudo systemctl daemon-reload
 
 #echo -e "${F_YL}enable ftv_cv.service ${C_ED}"
 #echo -e "${F_YL}enable ftv_sys.service ${C_ED}"
