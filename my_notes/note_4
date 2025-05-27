@@ -24,6 +24,11 @@ cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
 echo 1907200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 echo 1907200 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+# NX拉GPIO01控制MCU实现整板复位
+sudo echo 421 > /sys/class/gpio/unexport
+sudo echo 421 > /sys/class/gpio/export
+sudo echo out > /sys/class/gpio/gpio421/direction
+
 
 # new XDMA:
 # 462-FPGA 外触发 CC_FREQ_DIV = (200*1000*1000 / CC频率 / 2) - 1
@@ -37,6 +42,7 @@ sudo busybox devmem 0x1f400A0000 32 0x000F423F #100 Hz
 sudo busybox devmem 0x1f400A0000 32 0x0007A11F #200 Hz
 sudo busybox devmem 0x1f400A0000 32 0x00051614 #300 Hz
 sudo busybox devmem 0x1f400A0000 32 0x0003D08F #400 Hz
+sudo busybox devmem 0x1f400A0000 32 0x00030D3F #500 Hz
 
 # GPU0921:
 # 451-FPGA 外触发 CC_FREQ_DIV = (125*1000*1000 / CC频率 / 2) - 1
