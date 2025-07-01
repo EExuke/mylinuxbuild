@@ -196,6 +196,9 @@ function sw()
         pa|pack )
             cd ~/workspace/LX_NX_PACK/lx_nx_pack_tv
             ;;
+        pa3|pack3 )
+            cd ~/workspace/LX_NX_PACK_V3
+            ;;
         xx|xxt )
             cd ~/workspace/LX_NX_XXT
             ;;

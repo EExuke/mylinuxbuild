@@ -4,3 +4,6 @@
 {"type":"pc_ctrl","cmd":"fire_state","fire_state":true}
 {"type":"pc_ctrl","cmd":"fire_state","fire_state":false}
 {"type":"pc_ctrl","cmd":"pc_response"}
+{"type":"pc_ctrl","cmd":"re_track"}
+{"type":"pc_ctrl", "cmd":"agent_en", "state":true}
+{"type":"pc_ctrl", "cmd":"agent_en", "state":false}

@@ -77,11 +77,11 @@ gst-launch-1.0 filesrc location=./xxtv3_LDS010_itv_fly_6.mp4 ! qtdemux name=d d.
 - ifconfig eth0 192.168.101.211 netmask 255.255.255.0 up
 - sudo mount -t nfs 192.168.101.9:/tools ./tmp/ -o nolock
 - cd ./tmp
-- ./e2fsck /dev/mmcblk0n1p1 -y
+- ./e2fsck /dev/mmcblk0p1 -y
 ## 安全分区方式：
 - sudo mount /dev/mmcblk0p11 ./tmp
 - cd ./tmp
-- ./e2fsck /dev/mmcblk0n1p1 -y
+- ./e2fsck /dev/mmcblk0p1 -y
 # 避免fs损坏:
 # 配置文件系统参数方式
 - tune2fs -c 10 /dev/mmcblk0p1    #每10次挂载，检查一次
