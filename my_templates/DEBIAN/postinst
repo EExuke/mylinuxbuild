@@ -52,6 +52,7 @@ sudo systemctl daemon-reload
 # 应用补丁脚本
 #echo -e "apply /tmp/patch_root patchs"
 #sudo cp -ar /tmp/patch_root/* /
+#sync
 
 # 开自启相关service
 #echo -e "${F_YL}start CV services${C_ED}"
@@ -60,6 +61,13 @@ sudo systemctl daemon-reload
 #sudo systemctl start itv_cv
 #sudo systemctl start citv_cv
 #sudo systemctl start fitv_cv
+
+#echo -e "${F_YL}start SYS services${C_ED}"
+#sudo systemctl start ftv_sys
+#sudo systemctl start ctv_sys
+#sudo systemctl start itv_sys
+#sudo systemctl start citv_sys
+#sudo systemctl start fitv_sys
 
 echo -e "================================="
 

@@ -48,5 +48,9 @@ sudo systemctl stop tv_sys.service
 #sudo systemctl stop citv_sys.service
 #sudo systemctl stop fitv_sys.service
 
+# 补丁脚本
+#echo -e "clear /tmp/patch_root dir"
+#sudo rm -rf /tmp/patch_root
+
 echo -e "================================="
 
