@@ -150,6 +150,7 @@
 # 		7.查看包信息: dpkg -I | -info xxx.deb
 # 		8.查看包内文件: dpkg -c xxx.deb
 # 		9.解压/安装到指定目录: dpkg -x xxx.deb <dir>    #<dir>就是要安装的路径
+# 		10.提取DEBIAN文件：dpkg-deb -e xxx.deb <dir>
 # 	ipk包方式: (已编写为快捷脚本命令: my_ipk )
 # 		1.安装: opkg install xxx.ipk  [-d <install_dir>]
 # 		2.卸载: opkg remove xxx.ipk
