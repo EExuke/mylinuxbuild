@@ -7,3 +7,23 @@
 {"type":"pc_ctrl","cmd":"re_track"}
 {"type":"pc_ctrl", "cmd":"agent_en", "state":true}
 {"type":"pc_ctrl", "cmd":"agent_en", "state":false}
+
+
+{
+	"device": "itv",
+	"module": "itv_cv",
+	"cmd_type": "algo_ctl",
+	"algo_ctl": {
+		"detecte_filter": {
+			"bg_type": 1,          //0-unknown, 1-sky, 2-tree, 3-mountain
+			"valid_class": 0x01,
+			"conf_thresh": 0.25,
+			"conf_frame": 3,
+			"edge_sharpness": 1234.5,
+			"distance": 1200.0,    //1.2km
+			"fire_state": false
+		}
+	}
+}
+
+

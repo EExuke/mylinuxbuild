@@ -30,6 +30,8 @@ sudo echo 421 > /sys/class/gpio/export
 sudo echo out > /sys/class/gpio/gpio421/direction
 
 
+# RK3588-FPGA 外触发 CC_FREQ_DIV = (150*1000*1000 / CC频率 / 2) - 1
+
 # new XDMA:
 # 462-FPGA 外触发 CC_FREQ_DIV = (200*1000*1000 / CC频率 / 2) - 1
 sudo busybox devmem 0x1f400A0000 32 xxxxxxxx
