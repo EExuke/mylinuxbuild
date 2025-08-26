@@ -12,6 +12,7 @@
 		.configure --host=arm-linux-gnueabihf --prefix=/usr/arm-linux-gnueabihf
 		make
 		make install
+		#make install DESTDIR=/home/xuke/tmp/tmp_install
 
 	# cmake
 		mkdir build

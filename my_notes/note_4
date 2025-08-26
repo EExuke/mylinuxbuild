@@ -29,8 +29,14 @@ sudo echo 421 > /sys/class/gpio/unexport
 sudo echo 421 > /sys/class/gpio/export
 sudo echo out > /sys/class/gpio/gpio421/direction
 
-
 # RK3588-FPGA 外触发 CC_FREQ_DIV = (150*1000*1000 / CC频率 / 2) - 1
+sudo busybox devmem 0xf02A0000 32 0x000B71AF  #100Hz 749999
+sudo busybox devmem 0xf02A0000 32 0x0005B8D7  #200hz 374999
+sudo busybox devmem 0xf02A0000 32 0x0003D08F  #300hz 249999
+sudo busybox devmem 0xf02A0000 32 0x0002DC6B  #400hz 187499
+sudo busybox devmem 0xf02A0000 32 0x000249EF  #500hz 149999
+sudo busybox devmem 0xf02A0000 32 0x0001E847  #600Hz 124999
+sudo busybox devmem 0xf02A0000 32 0x000124F7  #1000Hz 74999
 
 # new XDMA:
 # 462-FPGA 外触发 CC_FREQ_DIV = (200*1000*1000 / CC频率 / 2) - 1
@@ -71,6 +77,11 @@ https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm
 ffmpeg -re -i ./xxtv3_LDS010_itv_fly_6.mp4 -c copy -f rtsp rtsp://127.0.0.1:8554/raw
 # gstreamer推流
 gst-launch-1.0 filesrc location=./xxtv3_LDS010_itv_fly_6.mp4 ! qtdemux name=d d.video_0 ! rtspclientsink location=rtsp://127.0.0.1:8554/raw
+std::string pipeline = "( appsrc name=rawsrc ! videoconvert ! nvvidconv ! nvv4l2h264enc preset-level=1 control-rate=1 bitrate=6000000 insert-sps-pps=true ! h264parse ! rtph264pay name=pay0 pt=96 )";
+#preset-level=1 低延迟; control-rate=1 码率控制模式（0=可变，1=恒定）; bitrate=6000000 码率;
+# gstreamer拉流
+gst-launch-1.0 rtspsrc location=rtsp://192.168.101.211:8554/raw protocols=udp latency=0 ! rtpjitterbuffer latency=100 ! rtph264depay ! h264parse config-interval=-1 ! nvv4l2decoder ! nvvidconv ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw,format=BGR ! autovideosink drop=1 max-buffers=3
+gst-launch-1.0 rtspsrc location=rtsp://192.168.101.211:8554/raw latency=0 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! autovideosink
 
 # 破坏mmcfs超級块:
 - dd if=/dev/zero of=/dev/mmcblk0p1 bs=1k seek=1 count=1
