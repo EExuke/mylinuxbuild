@@ -175,6 +175,7 @@
 # 	网络客户端：nc <ip> <port> 
 # 		echo "hello" | nc -w 0 -u 192.168.101.211 18089
 # 		cat radar_targets.json | tr -d " \t\n" | nc -w 0 -u 192.168.101.211 18089
+# 		收包调试：nc -u -l 13000 | xxd
 # 	快速杀死进程：pkill <psName> 或 killall <psName>
 # 	进程查看器：htop
 # 	文件编码类型转换（解决linux下显示win编码文件乱码问题）

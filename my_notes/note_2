@@ -39,3 +39,11 @@ write(g_gpfd, "1", 1);
 
 # touch递归更新时间戳:
 find ./ * -exec touch {} \;
+
+# core dump: (编译时加 -g -rdynamic)
+ulimit -c unlimited                                            #只对当前shell生效
+sudo sysctl -w kernel.core_pattern=/var/crash/core.%e.%p.%t    #只对当前shell生效
+./code_test
+ls /var/crash/core.code_test.5691.1761889645
+gdb ./code_test /var/crash/core.code_test.5691.1761889645
+

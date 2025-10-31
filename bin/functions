@@ -532,9 +532,14 @@ function myscp()
 	if [[ $# -lt 2 ]]; then
 		echo $#
 		echo -e "${FG_GREEN}Usage: myscp <src> <dst>${F6_END}"
-	else
+	elif [[ ${2:0:6} == nvidia ]]; then
+		sshpass -p "nvidia" rsync -ar $@
+		echo -e "${FG_GREEN}==== rsync -ar $@ success! ====${F6_END}"
+	elif [[ ${2:0:2} == lx ]]; then
 		sshpass -p "zklx123" rsync -ar $@
 		echo -e "${FG_GREEN}==== rsync -ar $@ success! ====${F6_END}"
+	else
+		rsync -ar $@
 	fi
 }
 #}}}

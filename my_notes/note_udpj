@@ -26,4 +26,6 @@
 	}
 }
 
+#FTV:
+{ "type":"cv_state", "cmd":"ftv_cv_state", "ftv_cv_state":{"state":"Tracking", "score":0.75, "target":{"x":350, "y":350, "w":180, "h":120}, "offset":{"x":1, "y":-1}, "sharp":15.0}}
 
