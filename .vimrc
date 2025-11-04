@@ -326,6 +326,7 @@ command Pressf    :execute '%s/^$\n//g | d | noh'
 "----------------------------------------------------------
 "指定格式文件的自动指令"{{{
 autocmd FileType json    execute "set foldlevel=99 | set foldmethod=indent"
+autocmd FileType * setlocal formatoptions-=r formatoptions-=o    "换行和O插入时不自动加注释
 "}}}
 
 
