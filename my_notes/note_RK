@@ -91,3 +91,14 @@
 	#强制生效（不依赖自动协商）
 	ethtool -s eth0 autoneg off
 
+# 默认DDR性能问题：
+	查看：
+		cat /sys/kernel/debug/clk/clk_summary | grep ddr
+		cat /sys/class/devfreq/dmc/max_freq
+		cat /sys/class/devfreq/dmc/min_freq
+		cat /sys/class/devfreq/dmc/governor
+	提速：
+		echo 2112000 > /sys/class/devfreq/dmc/max_freq
+		echo 2112000 > /sys/class/devfreq/dmc/min_freq
+		echo performance > /sys/class/devfreq/dmc/governor
+

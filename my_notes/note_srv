@@ -25,4 +25,15 @@
 	sudo smbpasswd -a lx_image
 	sudo vim /etc/samba/smb.conf
 	sudo service smbd restart
-
+## 配置文件:
+	# SSD_1
+	[u_disk]
+	comment = shared dir SSD_1
+	path = /mnt/SSD_1
+	browseable = yes
+	writable = yes
+	guest ok = yes
+	read only = no
+	create mask = 1444
+	directory mask = 1755
+	delete readonly = no
