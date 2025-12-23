@@ -1,4 +1,4 @@
-{"type":"radar_data","cmd":"targets_list","targets_list": [ { "targetId": 1, "aziAngle": 321.26, "pitchAngle": 5.57, "distance": 1011.0, "motionDirection": 0, "speed": 6.88, "time": 1742787856724 }, { "targetId": 2, "aziAngle": 239.26, "pitchAngle": 2.62, "distance": 371.0, "motionDirection": 1, "speed": 7.88, "time": 1742787856724 }] }
+{ "type" : "radar_data", "cmd" : "targets_list", "targets_list" : [ { "aziAngle" : 321.26, "time" : 1742787856724, "pitchAngle" : 25.57, "motionDirection" : 0, "speed" : 6.88, "distance" : 2011, "targetId" : 1 }, { "aziAngle" : 221.26, "time" : 1742787856724, "pitchAngle" : 15.57, "motionDirection" : 0, "speed" : 6.88, "distance" : 1411, "targetId" : 2 }, { "aziAngle" : 121.26, "time" : 1742787856724, "pitchAngle" : 7.57, "motionDirection" : 0, "speed" : 6.88, "distance" : 811, "targetId" : 3 }, { "speed" : 7.88, "motionDirection" : 1, "distance" : 471, "targetId" : 4, "aziAngle" : 39.26, "time" : 1742787856724, "pitchAngle" : 3.62 } ] }
 
 {"type":"pc_ctrl","cmd":"switch_target"}
 {"type":"pc_ctrl","cmd":"fire_state","fire_state":true}
