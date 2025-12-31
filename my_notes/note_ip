@@ -8,3 +8,13 @@ scp -r /local/dir xuke@101.132.166.232:/home/xuke/dir
 ## 下载文件到服务器
 scp -r xuke@101.132.166.232:/home/xuke/dir /local/dir
 
+# WSL2网络修复：(powershell下执行)
+netsh winsock reset
+netsh int ip reset
+wsl --shutdown
+Restart-Service LxssManager
+Get-NetAdapter -Name "vEthernet (WSL)" | Enable-NetAdapter -Confirm:$false
+重启
+配置windows11网络适配器IP
+打开WSL，配置DNS：
+	sudo vim /etc/resolv.conf
