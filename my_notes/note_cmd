@@ -251,4 +251,6 @@
 # 	JS压缩和解压工具:
 # 		压缩：minify file.js > min_file.js
 # 		解压：js-beautify -o recover_file.js min_file.js
+# 	查看systemctl日志：
+# 		sudo journalctl -u ctv_cv -f
 #
