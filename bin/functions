@@ -590,9 +590,9 @@ function mk()
 function se()
 {
 	my_browser="firefox"
-	if [[ "$1" == "cweb" ]]; then
-		$my_browser "http://c.biancheng.net"
-		echo -e "[$1] open tag: C语言中文网 \n"
+	if [[ "$1" == "kimi" ]]; then
+		$my_browser "https://www.kimi.com"
+		echo -e "[$1] open tag: AI-Kimi \n"
 	elif [[ "$1" == "gitee" ]]; then
 		$my_browser "https://gitee.com/EExuke/dashboard/projects"
 		echo -e "[$1] open tag: Gitee \n"
@@ -607,7 +607,7 @@ function se()
 		echo -e "[$1] open tag: 迅捷画图 \n"
 	elif [[ "$1" == "" ]]; then
 		echo -e "${F_DG}se${F6_E} ${F_GR}<Input contents for searching>${F6_E}"
-		echo -e "   ${F_GR}cweb   (open C语言中文网)${F6_E}"
+		echo -e "   ${F_GR}kimi   (open AI-Kimi)${F6_E}"
 		echo -e "   ${F_GR}gitee  (open Gitee仓库)${F6_E}"
 		echo -e "   ${F_GR}rnb    (open Runoob)${F6_E}"
 		echo -e "   ${F_GR}mind   (open MindLine)${F6_E}"
