@@ -544,6 +544,39 @@ function myscp()
 }
 #}}}
 #CROSS COMPILE {{{
+function x_remote_make()
+{
+	if [[ $# -lt 3 ]]; then
+		echo -e "${FG_GREEN}Usage: ${FUNCNAME[0]} <uname> <passwd> <IP>${F6_END}"
+		return
+	fi
+
+	local USR_NAME=$1
+	local USR_PASSWD=$2
+	local IP_ADDR=$3
+	local CUR_DIR=`pwd`
+	local PROJECT_PATH=`echo ${CUR_DIR} | awk -F / 'NF--' OFS=/`
+	local PROJECT_NAME=`echo ${CUR_DIR} | awk -F / '{print $(NF-1)}'`
+	local X_T_CMD="cd /tmp/${PROJECT_NAME}/Build/ && cmake .. && make -j8"
+
+	if [[ "Build" != `echo ${CUR_DIR} | awk -F / '{print $NF}'` ]]; then
+		echo -e "${FG_RED} current dir is not "Build". ${F6_END}"
+		return
+	fi
+
+	#host -> target
+	sshpass -p ${USR_PASSWD} rsync -ar ${PROJECT_PATH} ${USR_NAME}@${IP_ADDR}:/tmp/
+
+	#cmd
+	sshpass -p ${USR_PASSWD} ssh -t ${USR_NAME}@${IP_ADDR} ${X_T_CMD}
+
+	#target -> host
+	sshpass -p ${USR_PASSWD} rsync -ar ${USR_NAME}@${IP_ADDR}:/tmp/${PROJECT_NAME}/Build/* ./
+
+	#clean
+	sshpass -p ${USR_PASSWD} ssh -t ${USR_NAME}@${IP_ADDR} "rm -rf /tmp/${PROJECT_NAME}"
+}
+
 function mk()
 {
 	if [[ "$1" == "x86" ]]; then
@@ -577,6 +610,13 @@ function mk()
 	elif [[ "$1" == "pi" ]]; then
 		#树莓派
 		source /opt/env_raspbian_arm_gnueabihf.sh
+	elif [[ "$1" == "orin" ]]; then
+		local TARGET_IP="192.168.101.233"
+		if [[ $2 != "" ]]; then
+			TARGET_IP=$2
+		fi
+		x_remote_make nvidia nvidia ${TARGET_IP}
+		return
 	fi
 
 	make clean
