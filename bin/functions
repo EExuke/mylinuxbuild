@@ -557,7 +557,7 @@ function x_remote_make()
 	local CUR_DIR=`pwd`
 	local PROJECT_PATH=`echo ${CUR_DIR} | awk -F / 'NF--' OFS=/`
 	local PROJECT_NAME=`echo ${CUR_DIR} | awk -F / '{print $(NF-1)}'`
-	local X_T_CMD="cd /tmp/${PROJECT_NAME}/Build/ && cmake .. && make -j8"
+	local X_T_CMD="cd /tmp/${PROJECT_NAME}/Build/ && cmake .. && make -j8 && find ../ -maxdepth 1 -not -name \"Build\" -not -name \"..\" -exec rm -rf {} +"
 
 	if [[ "Build" != `echo ${CUR_DIR} | awk -F / '{print $NF}'` ]]; then
 		echo -e "${FG_RED} current dir is not "Build". ${F6_END}"
@@ -574,7 +574,7 @@ function x_remote_make()
 	sshpass -p ${USR_PASSWD} rsync -ar ${USR_NAME}@${IP_ADDR}:/tmp/${PROJECT_NAME}/Build/* ./
 
 	#clean
-	sshpass -p ${USR_PASSWD} ssh -t ${USR_NAME}@${IP_ADDR} "rm -rf /tmp/${PROJECT_NAME}"
+	#sshpass -p ${USR_PASSWD} ssh -t ${USR_NAME}@${IP_ADDR} "rm -rf /tmp/${PROJECT_NAME}"
 }
 
 function mk()
