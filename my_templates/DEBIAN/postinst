@@ -42,32 +42,21 @@ echo -e "hello, now is in post install run:"
 #sudo depmod
 sudo systemctl daemon-reload
 
-#echo -e "${F_YL}enable ftv_cv.service ${C_ED}"
-#echo -e "${F_YL}enable ftv_sys.service ${C_ED}"
-#echo -e "${F_YL}enable ctv_cv.service ${C_ED}"
-#echo -e "${F_YL}enable ctv_sys.service ${C_ED}"
-#echo -e "${F_YL}enable itv_cv.service ${C_ED}"
-#echo -e "${F_YL}enable itv_sys.service ${C_ED}"
-
 # 应用补丁脚本
 #echo -e "apply /tmp/patch_root patchs"
 #sudo cp -ar /tmp/patch_root/* /
 #sync
 
-# 开自启相关service
-#echo -e "${F_YL}start CV services${C_ED}"
-#sudo systemctl start ftv_cv
-#sudo systemctl start ctv_cv
-#sudo systemctl start itv_cv
-#sudo systemctl start citv_cv
-#sudo systemctl start fitv_cv
 
-#echo -e "${F_YL}start SYS services${C_ED}"
-#sudo systemctl start ftv_sys
+# 开自启相关service
+echo -e "${F_YL}enable installed services ${C_ED}"
+#sudo systemctl enable ctv_cv.service
+#sudo systemctl enable ctv_sys.service
+
+# 运行相关service
+echo -e "${F_YL}start installed services ${C_ED}"
+#sudo systemctl start ctv_cv
 #sudo systemctl start ctv_sys
-#sudo systemctl start itv_sys
-#sudo systemctl start citv_sys
-#sudo systemctl start fitv_sys
 
 echo -e "================================="
 
