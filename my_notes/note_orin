@@ -1,0 +1,6 @@
+# jetson Orin NX notes
+
+## gstreamer推流pipeline：(重点为： nvvidconv ! video/x-raw(memory:NVMM),format=NV12 和 nvv4l2h264enc)
+	std::string pipeline = "( appsrc name=osdsrc ! videoconvert ! nvvidconv ! video/x-raw(memory:NVMM),format=NV12 ! nvv4l2h264enc preset-level=0 profile=1 control-rate=2 bitrate=6000000 ! h264parse ! rtph264pay name=pay0 pt=96 )";
+
+## rootfs组件list:
