@@ -128,8 +128,15 @@
 # 		2.制作压缩包:
 # 			tar cvzf XXX.tar.gz XXX/
 # 			xz最高压缩比 (级别 9，高,慢):
-# 			tar -cJf XXX.tar.xz -9 XXX/
+# 			XZ_OPT="-9 -T0" tar -cJf XXX.tar.xz XXX/
 # 			zip -r XXX.zip XXX/
+# 			tar多核并行：
+# 				# 压缩（使用所有 CPU 核心）
+# 				tar -cvf - XXX/ | pigz -p $(nproc) > XXX.tar.gz
+# 				# 或简写
+# 				tar cvf - XXX/ | pigz > XXX.tar.gz
+# 				解压（pigz 解压也支持并行）
+# 				pigz -dc XXX.tar.gz | tar -xvf -
 
 # 		3.拼接文件:
 # 			cat ins.sh XXX.tar.gz > XXX_install.sh
@@ -154,6 +161,7 @@
 # 		8.查看包内文件: dpkg -c xxx.deb
 # 		9.解压/安装到指定目录: dpkg -x xxx.deb <dir>    #<dir>就是要安装的路径
 # 		10.提取DEBIAN文件：dpkg-deb -e xxx.deb <dir>
+# 		11.强制安装：dpkg --force-all -i XXX.deb
 # 	ipk包方式: (已编写为快捷脚本命令: my_ipk )
 # 		1.安装: opkg install xxx.ipk  [-d <install_dir>]
 # 		2.卸载: opkg remove xxx.ipk
