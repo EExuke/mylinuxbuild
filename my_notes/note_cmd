@@ -108,8 +108,8 @@
 # 		sudo apt-get install tig
 # 		<使用说明可查>
 # 	打tag:
-# 		git tag v1.0            #本地tag
-# 		git push origin v1.0    #推送tag到仓库
+# 		git tag v1.0.0            #本地tag
+# 		git push origin --tags    #推送tag到仓库
 #
 # 五 程序安装包打包
 # 	sh自解压脚本方式:
@@ -126,11 +126,11 @@
 # 			#
 # 			#补全preline+1行
 # 		2.制作压缩包:
-# 			tar cvzf XXX.tar.gz XXX/
-# 			xz最高压缩比 (级别 9，高,慢):
-# 			XZ_OPT="-9 -T0" tar -cJf XXX.tar.xz XXX/
 # 			zip -r XXX.zip XXX/
-# 			tar多核并行：
+# 			tar cvzf XXX.tar.gz XXX/
+# 			#xz最高压缩比 (级别 9，高,慢):
+# 			XZ_OPT="-9 -T0" tar -cJf XXX.tar.xz XXX/
+# 			#tar多核并行：
 # 				# 压缩（使用所有 CPU 核心）
 # 				tar -cvf - XXX/ | pigz -p $(nproc) > XXX.tar.gz
 # 				# 或简写

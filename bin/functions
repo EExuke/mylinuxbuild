@@ -611,11 +611,11 @@ function mk()
 		#树莓派
 		source /opt/env_raspbian_arm_gnueabihf.sh
 	elif [[ "$1" == "orin" ]]; then
-		local TARGET_IP="192.168.101.233"
+		local TARGET_IP="192.168.101.211"
 		if [[ $2 != "" ]]; then
 			TARGET_IP=$2
 		fi
-		x_remote_make nvidia nvidia ${TARGET_IP}
+		x_remote_make lx zklx123 ${TARGET_IP}
 		return
 	fi
 

@@ -29,3 +29,10 @@
 #FTV:
 { "type":"cv_state", "cmd":"ftv_cv_state", "ftv_cv_state":{"state":"Tracking", "score":0.75, "target":{"x":350, "y":350, "w":180, "h":120}, "offset":{"x":1, "y":-1}, "sharp":15.0}}
 
+{
+	"device": "ftv",
+	"module": "ftv_cv",
+	"cmd_type": "agent_cmd",
+	"cmd": "fire_simulate",
+	"val": true    //true：开， false：关
+}
