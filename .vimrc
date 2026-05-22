@@ -145,8 +145,8 @@ nmap <leader>N  :set number<cr>
 "InterestingWords多单词高亮："
 nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
 nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
-nnoremap <silent> m :call WordNavigation('forward')<cr>
-nnoremap <silent> M :call WordNavigation('backward')<cr>
+"nnoremap <silent> m :call WordNavigation('forward')<cr>
+"nnoremap <silent> M :call WordNavigation('backward')<cr>
 " Doxygen 注释风格映射快捷键
 nmap <leader>ta gg:DoxLic<CR>:DoxAuthor<CR>
 nmap <silent> [1 gg:DoxAuthor<CR>

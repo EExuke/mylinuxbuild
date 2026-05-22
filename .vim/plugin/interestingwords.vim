@@ -249,8 +249,8 @@ if !hasmapto('<Plug>InterestingWords')
     vnoremap <silent> <leader>k :call InterestingWords('v')<cr>
     nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
 
-    nnoremap <silent> m :call WordNavigation(1)<cr>
-    nnoremap <silent> M :call WordNavigation(0)<cr>
+    nnoremap <silent> <F8> :call WordNavigation(0)<cr>
+    nnoremap <silent> <F9> :call WordNavigation(1)<cr>
 endif
 
 if g:interestingWordsDefaultMappings
