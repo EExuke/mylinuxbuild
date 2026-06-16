@@ -268,4 +268,7 @@
 # 		解压：js-beautify -o recover_file.js min_file.js
 # 	查看systemctl日志：
 # 		sudo journalctl -u ctv_cv -f
-#
+# 	解决sudo命令连接环境:
+# 创建或编辑配置文件
+# 		sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/local.conf'
+# 		sudo ldconfig

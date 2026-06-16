@@ -493,7 +493,7 @@ function cpin()
 	echo -e "$FG_GREEN------------------------------------------------------------$F6_END"
 	if [[ $1 != "" ]]; then
 		echo -e "${FG_GREEN}Update $@ to ~/tftpboot/:${F6_END}"
-		cp $@ ~/tftpboot/
+		cp -ar $@ ~/tftpboot/
 		for i in $@
 		do
 			filename=`echo ${i} | awk -F / '{print $NF}'`

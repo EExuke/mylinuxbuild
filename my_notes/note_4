@@ -53,6 +53,7 @@ sudo busybox devmem 0x1f400A0000 32 0x0007A11F #200 Hz
 sudo busybox devmem 0x1f400A0000 32 0x00051614 #300 Hz
 sudo busybox devmem 0x1f400A0000 32 0x0003D08F #400 Hz
 sudo busybox devmem 0x1f400A0000 32 0x00030D3F #500 Hz
+sudo busybox devmem 0x1f400A0000 32 0x0001869F #1000 Hz
 
 # GPU0921:
 # 451-FPGA 外触发 CC_FREQ_DIV = (125*1000*1000 / CC频率 / 2) - 1
