@@ -27,3 +27,4 @@ export WSL_UP_IP=`ifconfig eth0 | grep "inet " | awk '{print $2}'`
 export WSL_UP_MASK=`ifconfig eth0 | grep "inet " | awk '{print $4}'`
 export WSL_UP_GW=`ip route | grep default`
 export WSL_UP_ROUTE=`ip route | grep / | awk '{print $1,$2,$3}'`
+export GDK_BACKEND=x11

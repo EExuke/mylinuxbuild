@@ -26,6 +26,13 @@
 })
 
 #define GST_PIPELINE_RTSP_RK(url)    ({ \
+	"rtspsrc location=" + url + \
+	" protocols=udp latency=0 drop-on-latency=true ! rtph264depay ! h264parse ! mppvideodec arm-afbc=false fast-mode=true ! videoconvert n-threads=8 dither=0 ! video/x-raw,format=BGR ! appsink drop=true sync=false max-buffers=1"; \
+})
+//1920*1080对齐16处理
+#define GST_PIPELINE_RTSP_RK_1080P(url)    ({ \
+	"rtspsrc location=" + url + \
+	" protocols=udp latency=0 drop-on-latency=true ! rtph264depay ! h264parse ! mppvideodec arm-afbc=false fast-mode=true ! video/x-raw,format=NV12 ! videoscale add-borders=false method=nearest-neighbour ! video/x-raw,format=NV12,width=1920,height=1088 ! videoconvert n-threads=8 dither=0 ! video/x-raw,format=BGR ! appsink drop=true sync=false max-buffers=1"; \
 })
 /*------------------End of Macro Definition------------------*/
 
