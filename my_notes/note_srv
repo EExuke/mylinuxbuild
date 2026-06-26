@@ -3,6 +3,26 @@
 	sudo systemctl daemon-reload    #重新加载service配置文件:
 	sudo systemctl start NAME.service
 	sudo systemctl stop NAME.service
+	使用服务定时器任务：(以ntpdate时间同步为例)
+		1) 创建服务: /etc/systemd/system/ntpdate-sync.service
+			[Unit]
+			Description=Force time sync via ntpdate
+			After=network-online.target
+			[Service]
+			Type=oneshot
+			ExecStart=/usr/sbin/ntpdate -u 192.168.101.100
+		2) 创建定时器: /etc/systemd/system/ntpdate-sync.timer
+			[Unit]
+			Description=Run ntpdate sync periodically
+			[Timer]
+			OnBootSec=30
+			OnUnitActiveSec=10min
+			AccuracySec=1s
+			[Install]
+			WantedBy=timers.target
+		3) 启动定时器服务：
+			sudo systemctl enable --now ntpdate-sync.timer
+			sudo systemctl list-timers ntpdate-sync.timer
 
 # ftp
 	//创建ftpusers用户组
