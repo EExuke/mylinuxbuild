@@ -102,3 +102,8 @@
 		echo 2112000 > /sys/class/devfreq/dmc/min_freq
 		echo performance > /sys/class/devfreq/dmc/governor
 
+# RKNN版本：
+	查看版本：
+		strings librknnrt.so | grep -i "librknnrt version"
+		strings librknn_api.so | grep -i "librknnrt version"
+

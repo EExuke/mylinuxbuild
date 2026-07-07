@@ -4,3 +4,54 @@
 	std::string pipeline = "( appsrc name=osdsrc ! videoconvert ! nvvidconv ! video/x-raw(memory:NVMM),format=NV12 ! nvv4l2h264enc preset-level=0 profile=1 control-rate=2 bitrate=6000000 ! h264parse ! rtph264pay name=pay0 pt=96 )";
 
 ## rootfs组件list:
+	- lx_init_run.sh & lx_init_run.service :
+		1)bootloader启动顺序配置
+		2)GPIO引脚模式配置
+
+# GPIO
+## 常用GPIO引脚： ( gpioinfo )
+-   gpiochip0_line85_15引脚：(硬复位)
+	sudo busybox devmem 0x02440020 w 0x000    #写0x000配置为GPIO
+-   gpiochip0_line43_33引脚：(24V输出)
+	sudo busybox devmem 0x02434040 w 0x000    #写0x000配置为GPIO
+-   gpiochip0_line106_31引脚：(12V输出)
+	sudo busybox devmem 0x02430070 w 0x000    #写0x000配置为GPIO
+##  操作:
+	sudo gpioset --mode=wait gpiochip0 85=1
+	sudo gpioset --mode=wait gpiochip0 85=0
+
+## gpio配置基地址对应表：
+	PADCTL块名   基地址        所属Pad Control Group    对应gpioinfo脚前缀
+	PADCTL_A0    0x02430000    G3                       `PA`~`PF`, `PQ`  `PZ`PQ.05, PQ.06 (Pin 29/31)
+	PADCTL_A13   0x0243d000    G2                       `PA`~`PF` (部分)
+	PADCTL_A14   0x0c302000    AON                      `PA`~`PF` (AON 域)
+	PADCTL_A15   0x0c303000    AONHV                    `PA`~`PF` (AONHV 域)
+	PADCTL_A16   0x02438000    G5                       `PM`, `PO`~`PZ`
+	PADCTL_A24   0x02448000    G7                       `PAA`~`PAD`PAC.06 (Pin 7)
+	PADCTL_EDP   0x02440000    EDP                      `PN`PN.01 (Pin 15)
+	PADCTL_G4    0x02434000    G4                       `PG`~`PL` PG.06 (Pin 32), PH.00 (Pin 33)
+
+## 安装查询工具:
+	pip3 install Jetson.GPIO
+	jetson-gpio-pinmux-lookup <Pin_num>
+	其中 Pin_num 由gpioinfo查到的line号 --> 40-Pin 号:
+	gpiochip0线号    引脚名    40-pin号   信号名      寄存器地址
+	41               PG.06     Pin 32     GPIO07
+	43               PH.00     Pin 33     GPIO13      0x02434040
+	85               PN.01     Pin 15     GPIO12      0x02440020
+	105              PQ.05     Pin 29     GPIO01
+	106              PQ.06     Pin 31     GPIO11      0x02430070
+	112              PP.04     Pin 11     UART1_RTS
+	122              PR.04     Pin 13     SPI1_SCK
+	123              PR.05     Pin 22     SPI1_MISO
+	124              PR.00     Pin 37     SPI1_MOSI
+	125              PR.01     Pin 18     SPI1_CS0
+	126              PR.02     Pin 16     SPI1_CS1
+	133              PQ.03     Pin 23     SPI0_SCK
+	134              PQ.02     Pin 21     SPI0_MISO
+	135              PQ.01     Pin 19     SPI0_MOSI
+	136              PQ.00     Pin 24     SPI0_CS0
+	137              PQ.07     Pin 26     SPI0_CS1
+	144              PAC.06    Pin 7      GPIO09
+
+
