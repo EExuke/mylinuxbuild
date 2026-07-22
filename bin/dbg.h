@@ -156,6 +156,7 @@ static inline void SIG_NONP(int sig) {}
 #define MY_DATA_OUTPUT(fname, args...)    do { \
 	static FILE *__my_data_fd = fopen(fname, "w+"); \
 	fprintf(__my_data_fd, ##args); \
+	fflush(__my_data_fd); \
 } while (0);
 #define MY_DATA_OUTPUT_FP(fp, fname, args...)    do { \
 	if (!fp) { \
