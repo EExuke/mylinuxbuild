@@ -57,3 +57,11 @@
 	create mask = 1444
 	directory mask = 1755
 	delete readonly = no
+
+# WSL下使SSHD自启动：
+	1.将WSL自启程序切换为systemd：（修改/etc/wsl.conf, 添加如下字段）
+		[boot]
+		systemd=true
+	2.重启WSL后,使能sshd：
+		sudo systemctl enable sshd
+

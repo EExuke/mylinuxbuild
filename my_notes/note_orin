@@ -1,5 +1,17 @@
 # jetson Orin NX notes
 
+## 备份&烧写
+- 备份：sudo ./tools/backup_restore/l4t_backup_restore.sh -e nvme0n1 -b jetson-orin-nano-devkit
+- 恢复：sudo ./tools/backup_restore/l4t_backup_restore.sh -e nvme0n1 -r jetson-orin-nano-devkit
+- 只烧写MB1：sudo ./flash.sh -k A_MB1_BCT -c bootloader/generic/cfg/flash_t234_qspi.xml jetson-orin-nano-devkit internal
+- 修改MB1设备树：Linux_for_Tegra/bootloader/generic/BCT/tegra234-mb1-bct-misc-p3767-0000.dts
+	misc {
+		enable_soctherm_polling = <1>; //enable pooling
+		soctherm {
+			tmon_polling_interval = <0x30D40>; //interval 200ms
+		}
+	}
+
 ## gstreamer推流pipeline：(重点为： nvvidconv ! video/x-raw(memory:NVMM),format=NV12 和 nvv4l2h264enc)
 	std::string pipeline = "( appsrc name=osdsrc ! videoconvert ! nvvidconv ! video/x-raw(memory:NVMM),format=NV12 ! nvv4l2h264enc preset-level=0 profile=1 control-rate=2 bitrate=6000000 ! h264parse ! rtph264pay name=pay0 pt=96 )";
 

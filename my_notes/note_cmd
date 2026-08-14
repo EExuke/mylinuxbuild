@@ -180,6 +180,7 @@
 # 六 常用工具
 # 	串口工具 minicom
 # 		运行： sudo minicom -D /dev/ttyUSB0 -b 115200 
+# 	图形串口工具 cutecom
 #
 # 七 好用的终端
 # 	terminator:
