@@ -202,8 +202,8 @@ function sw()
         pa3|pack3 )
             cd ~/workspace/LX_NX_PACK_V3
             ;;
-        xv|xxtv3 )
-            cd ~/workspace/LX_NX_XXT_V3
+        o|orin )
+            cd ~/workspace/CV_SRC_CODE/ORIN_APP_DEMO/lx_cv_orin_ctv/ctv_cv
             ;;
         h|htm )
             cd ~/workspace/CV_SRC_CODE/lx_rk_htmdfc_dtv
