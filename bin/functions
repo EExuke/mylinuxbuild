@@ -1079,6 +1079,17 @@ function hexfy()
 		echo -e "\n---------------------------------${F6_END}"
 	fi
 }
+# 翻译ASCII字符串为hex数据
+function hexfy_r()
+{
+	if [[ $# == 0 ]]; then
+		echo -e "${FG_GREEN}Usage: hexfy_r <ASCII string> ${F6_END}"
+	else
+		echo -e "${FG_GREEN}---------------------------------\n"
+		echo $@ | xxd -c 16
+		echo -e "\n---------------------------------${F6_END}"
+	fi
+}
 #}}}
 # fpress{{{
 # 将文本压缩输出，即删除所有空格和空行
