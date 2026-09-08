@@ -184,25 +184,30 @@ static inline void SIG_NONP(int sig) {}
     fflush(stdout); \
 } while (0)
 
-#define PRINT_PKT(buf, num) do { \
-	printf ("\nPrinting the Packet Received (%s:%d):\n", __FUNCTION__, __LINE__); \
-	printf ("-----------------------  ----------------------- \n");               \
-	for (int _i=0; _i<num; _i++) {                                                \
-		if (0==_i%8 && _i%16) { printf(" ");  }                                   \
-		if (_i>0 && 0==_i%16) { printf("\n"); }                                   \
-		printf ("%02X ", *(buf + _i));                                            \
-	}                                                                             \
-	printf ("\n-----------------------  ----------------------- \n");             \
-	fflush(stdout);                                                               \
+#define MY_PRINT_PKT(buf, num) do { \
+	printf("\nPrinting the Packet Received (%s:%d):\n", __FUNCTION__, __LINE__); \
+	printf("-----------------------  ----------------------- \n"); \
+	for (int _i=1; _i<num+1; _i++) { \
+		printf("%02X ", *(buf + _i-1)); \
+		if (0==_i%8 && _i%16) { printf(" "); } \
+		if (0==_i%16 || _i==num) { \
+			if (_i%16) { printf("\t"); } \
+			printf("\t¦"); \
+			for (int _j=0; _j<((_i%16)?(_i%16):16); _j++) { printf("%c", (0x20<=buf[((_i-1)/16)*16+_j] && buf[((_i-1)/16)*16+_j]<=0x7E) ? buf[((_i-1)/16)*16+_j] : '.'); } \
+			printf("¦\n"); \
+		} \
+	} \
+	printf("-----------------------  ----------------------- \n"); \
+	fflush(stdout); \
 } while (0)
-#define my_print_pkt(_b, _n);    ({PRINT_PKT(_b, _n);})
+#define my_print_pkt(_b, _n);    ({MY_PRINT_PKT(_b, _n);})
 
-//#define MY_STR_FORMAT(fmt, args...)    ({ \
-			//char _buf[1024] = {0}; \
-			//snprintf(_buf, sizeof(_buf), fmt, ##args); \
-			//_buf; \
-		//})
-//#define strformat(fmt, args...)    ({MY_STR_FORMAT(fmt, ##args);})
+#define _MY_STR_FORMAT(fmt, args...)    ({ \
+			char _buf[1024] = {0}; \
+			snprintf(_buf, sizeof(_buf), fmt, ##args); \
+			_buf; \
+		})
+#define strformat(fmt, args...)    ({_MY_STR_FORMAT(fmt, ##args);})
 
 /* printf cursor ctrl */
 // 清屏
