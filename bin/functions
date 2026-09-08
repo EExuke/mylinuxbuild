@@ -175,6 +175,9 @@ function sw()
         ma|mauto )
             cd ~/Templates/my_Templates/zklx_eexuke/lx_auto_agent
             ;;
+        d|dtv )
+            cd ~/workspace/CV_SRC_CODE/NX_APP_DEMO/lx_cv_nx_dtv
+            ;;
         c|ctv )
             try_cd lx_nx_xxt_v3_ctv
             ;;

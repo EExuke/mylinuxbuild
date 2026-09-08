@@ -23,6 +23,8 @@
 		3) 启动定时器服务：
 			sudo systemctl enable --now ntpdate-sync.timer
 			sudo systemctl list-timers ntpdate-sync.timer
+	查看运行输出日志：
+			sudo journalctl -u ctv_cv -f
 
 # ftp
 	//创建ftpusers用户组

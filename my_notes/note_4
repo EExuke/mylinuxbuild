@@ -39,6 +39,7 @@ sudo busybox devmem 0xf02A0000 32 0x0002DC6B  #400hz 187499
 sudo busybox devmem 0xf02A0000 32 0x000249EF  #500hz 149999
 sudo busybox devmem 0xf02A0000 32 0x0001E847  #600Hz 124999
 sudo busybox devmem 0xf02A0000 32 0x000124F7  #1000Hz 74999
+sudo busybox devmem 0xf02A1000 32 0x000B71AF  #100Hz base1的CC1地址
 
 # new XDMA:
 # 462-FPGA 外触发 CC_FREQ_DIV = (200*1000*1000 / CC频率 / 2) - 1

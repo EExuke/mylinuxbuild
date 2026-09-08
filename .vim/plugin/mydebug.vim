@@ -67,6 +67,9 @@ endfunc
 func Print_Backtrace()
 	call append(line("."), "my_debug_backtrace();")
 endfunc
+func Print_Pkt()
+	call append(line("."), "my_print_pkt(_b, _n);")
+endfunc
 func PrintDebug_outData()
 	call append(line("."), "MY_DATA_OUTPUT(\"file.csv\", \"%d,%d\\n\", );")
 endfunc

@@ -184,21 +184,25 @@ static inline void SIG_NONP(int sig) {}
     fflush(stdout); \
 } while (0)
 
-#define PRINT_PKT do { \
-    printf ("\n-----------------------  ----------------------- \n");             \
-    printf ("\nPrinting the Packet Received (%s-%d):\n", __FUNCTION__, __LINE__); \
-    for (i4_Index = 0; i4_Index < u2_PktLen; i4_Index++)                          \
-        if (i4_Index % 8 == 0 && i4_Index != 0)                                   \
-            if (i4_Index % 16 == 0 && i4_Index != 0)                              \
-                printf ("%02X\n", *(p_u1RadiusReceivedPacket + i4_Index));        \
-            else                                                                  \
-                printf ("%02X  ", *(p_u1RadiusReceivedPacket + i4_Index));        \
-        else                                                                      \
-            printf ("%02X ", *(p_u1RadiusReceivedPacket + i4_Index));             \
-    printf ("\n-----------------------  ----------------------- \n");             \
-    fflush(stdout); \
+#define PRINT_PKT(buf, num) do { \
+	printf ("\nPrinting the Packet Received (%s:%d):\n", __FUNCTION__, __LINE__); \
+	printf ("-----------------------  ----------------------- \n");               \
+	for (int _i=0; _i<num; _i++) {                                                \
+		if (0==_i%8 && _i%16) { printf(" ");  }                                   \
+		if (_i>0 && 0==_i%16) { printf("\n"); }                                   \
+		printf ("%02X ", *(buf + _i));                                            \
+	}                                                                             \
+	printf ("\n-----------------------  ----------------------- \n");             \
+	fflush(stdout);                                                               \
 } while (0)
+#define my_print_pkt(_b, _n);    ({PRINT_PKT(_b, _n);})
 
+//#define MY_STR_FORMAT(fmt, args...)    ({ \
+			//char _buf[1024] = {0}; \
+			//snprintf(_buf, sizeof(_buf), fmt, ##args); \
+			//_buf; \
+		//})
+//#define strformat(fmt, args...)    ({MY_STR_FORMAT(fmt, ##args);})
 
 /* printf cursor ctrl */
 // 清屏
