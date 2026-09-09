@@ -64,6 +64,9 @@ endfunc
 func PrintBreak_point()
 	call append(line("."), "my_break_point(\"\");")
 endfunc
+func PrintPstop_point()
+	call append(line("."), "my_pstop_point(\"\");")
+endfunc
 func Print_Backtrace()
 	call append(line("."), "my_debug_backtrace();")
 endfunc

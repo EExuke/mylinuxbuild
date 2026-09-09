@@ -4,6 +4,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include <execinfo.h>
+#include <sys/syscall.h>
 
 /* Select the format of the print */
 #define  PRINT_WITH_ENDIAN
@@ -127,16 +128,40 @@
 #define my_debug_darkgreen_msg(msg, args...)  do { MYPRINT(DG, msg, ##args); fflush(stdout); }while (0)
 #define my_debug_black_msg(msg, args...)      do { MYPRINT(BA, msg, ##args); fflush(stdout); }while (0)
 
-//基于pause+signal实现的,断点单步调试功能, 按Ctrl+z继续运行
-static inline void SIG_NONP(int sig) {}
+//基于主线程接收signal并转发实现的, 线程断点单步调试功能, 按Ctrl+z继续运行
+static inline void SIG_CONTINUE(int sig) {
+	pid_t pid = syscall(SYS_getpid);
+	pid_t self_tid = syscall(SYS_gettid);
+	if (pid != self_tid) { return; }
+
+	char path[256];
+	snprintf(path, sizeof(path), "/proc/%d/task", pid);
+	DIR* dir = opendir(path);
+	struct dirent* entry;
+	while ((entry = readdir(dir)) != NULL) {
+		if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) { continue; }
+		pid_t tid = atoi(entry->d_name);
+		if (tid == 0 || tid == self_tid) { continue; }
+		syscall(SYS_tkill, tid, SIGTSTP);
+	}
+	closedir(dir);
+}
 #define my_break_point(msg, args...)          do { MYPRINT(RE, msg, ##args); fflush(stdout); \
 	static char __my_break_point_first = 1; \
 	if (__my_break_point_first) { \
 		__my_break_point_first = 0; \
-		signal(SIGTSTP, SIG_NONP); \
+		signal(SIGTSTP, SIG_CONTINUE); \
 	} \
 	pause(); \
+	printf("%s(%d): continue run tid=%ld\n", __func__, __LINE__, pthread_self()); \
 } while (0)
+
+//进程暂停挂起, 执行fg恢复运行
+#define my_pstop_point(msg, args...)          do { MYPRINT(RE, msg, ##args); fflush(stdout); \
+	kill(getpid(), SIGSTOP); \
+	sleep(1); \
+} while (0)
+
 
 // My backtrace
 // *链接时需添加 -rdynamic 参数;

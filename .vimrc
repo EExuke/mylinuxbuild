@@ -127,6 +127,7 @@ nmap <leader>7  :call PrintDebug_blue()<cr><cr>==f"a
 nmap <leader>8  :call PrintDebug_purple()<cr><cr>==f"a
 nmap <leader>9  :call Print_Pkt()<cr><cr>==fba
 nmap <leader>p  :call PrintBreak_point()<cr><cr>==f"a
+nmap <leader>P  :call PrintPstop_point()<cr><cr>==f"a
 nmap <leader>bt :call Print_Backtrace()<cr><cr>==
 nmap <leader>o  :call PrintDebug_outData()<cr><cr>==f"a
 nmap <leader>h  :/#include<cr> :call IncludeMyDebugHeader()<cr> :noh<cr><cr>
