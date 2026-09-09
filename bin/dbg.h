@@ -127,7 +127,7 @@
 #define my_debug_darkgreen_msg(msg, args...)  do { MYPRINT(DG, msg, ##args); fflush(stdout); }while (0)
 #define my_debug_black_msg(msg, args...)      do { MYPRINT(BA, msg, ##args); fflush(stdout); }while (0)
 
-//基于pause+signal实现的,断点单步调试功能
+//基于pause+signal实现的,断点单步调试功能, 按Ctrl+z继续运行
 static inline void SIG_NONP(int sig) {}
 #define my_break_point(msg, args...)          do { MYPRINT(RE, msg, ##args); fflush(stdout); \
 	static char __my_break_point_first = 1; \
