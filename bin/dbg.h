@@ -186,10 +186,10 @@ static inline void SIG_NONP(int sig) {}
 
 #define MY_PRINT_PKT(buf, num) do { \
 	printf("\nPrinting the Packet Received (%s:%d):\n", __FUNCTION__, __LINE__); \
-	printf("-----------  -----------------------  ----------------------- \n"); \
+	printf("-------  -----------------------  ----------------------- \n"); \
 	for (int _i=1; _i<num+1; _i++) { \
 		if (1==_i%16) { \
-			printf("0x%08X:  ", _i-1); \
+			printf("0x%04X:  ", _i-1); \
 		} \
 		printf("%02X ", (uint8_t)*(buf + _i-1)); \
 		if (0==_i%8 && _i%16) { printf(" "); } \
@@ -200,7 +200,7 @@ static inline void SIG_NONP(int sig) {}
 			printf("¦\n"); \
 		} \
 	} \
-	printf("-----------  -----------------------  ----------------------- \n"); \
+	printf("-------  -----------------------  ----------------------- \n"); \
 	fflush(stdout); \
 } while (0)
 #define my_print_pkt(_b, _n);    ({MY_PRINT_PKT(_b, _n);})
