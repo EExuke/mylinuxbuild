@@ -4,6 +4,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include <execinfo.h>
+#include <dirent.h>
 #include <sys/syscall.h>
 
 /* Select the format of the print */
@@ -153,7 +154,7 @@ static inline void SIG_CONTINUE(int sig) {
 		signal(SIGTSTP, SIG_CONTINUE); \
 	} \
 	pause(); \
-	printf("%s(%d): continue run tid=%ld\n", __func__, __LINE__, pthread_self()); \
+	printf("%s(%d): continue run\n", __func__, __LINE__); \
 } while (0)
 
 //进程暂停挂起, 执行fg恢复运行
