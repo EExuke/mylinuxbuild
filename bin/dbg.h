@@ -66,10 +66,8 @@
 #endif
 
 #include <string.h>
-/*
- *#define filename(x)                (strrchr(x, '/') ? strrchr(x, '/')+1 : x)
- */
-#define filename(x)                (strstr(x, "future") ? strstr(x, "future")+7 : x)
+#define filename(x)                (strrchr(x, '/') ? strrchr(x, '/')+1 : x)
+//#define filename(x)                (strstr(x, "src") ? strstr(x, "src")+3 : x)
 
 #ifdef PRINT_WITH_ENDIAN
 #ifndef  OSIX_HOST
@@ -128,6 +126,7 @@
 #define my_debug_purple_msg(msg, args...)     do { MYPRINT(PU, msg, ##args); fflush(stdout); }while (0)
 #define my_debug_darkgreen_msg(msg, args...)  do { MYPRINT(DG, msg, ##args); fflush(stdout); }while (0)
 #define my_debug_black_msg(msg, args...)      do { MYPRINT(BA, msg, ##args); fflush(stdout); }while (0)
+
 
 //基于主线程接收signal并转发实现的, 线程断点单步调试功能, 按Ctrl+z继续运行
 static inline void SIG_CONTINUE(int sig) {
