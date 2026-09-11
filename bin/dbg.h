@@ -135,15 +135,14 @@ static inline void SIG_CONTINUE(int sig) {
 	pid_t self_tid = syscall(SYS_gettid);
 	if (pid != self_tid) { return; }
 
-	char path[256];
+	char path[64];
 	snprintf(path, sizeof(path), "/proc/%d/task", pid);
 	DIR* dir = opendir(path);
 	struct dirent* entry;
-	while ((entry = readdir(dir)) != NULL) {
+	while ((entry = readdir(dir))) {
 		if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) { continue; }
 		pid_t tid = atoi(entry->d_name);
-		if (tid == 0 || tid == self_tid) { continue; }
-		syscall(SYS_tkill, tid, SIGTSTP);
+		if (tid != 0 && tid != self_tid) { syscall(SYS_tkill, tid, SIGTSTP); }
 	}
 	closedir(dir);
 }
