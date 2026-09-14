@@ -126,6 +126,9 @@
 #define my_debug_purple_msg(msg, args...)     do { MYPRINT(PU, msg, ##args); fflush(stdout); }while (0)
 #define my_debug_darkgreen_msg(msg, args...)  do { MYPRINT(DG, msg, ##args); fflush(stdout); }while (0)
 #define my_debug_black_msg(msg, args...)      do { MYPRINT(BA, msg, ##args); fflush(stdout); }while (0)
+#define myprintf(msg, args...)                do { MYPRINT_NO_FEED(CL, msg, ##args); fflush(stdout); }while (0)
+#define myprintf_red(msg, args...)            do { MYPRINT_NO_FEED(RE, msg, ##args); fflush(stdout); }while (0)
+#define myprintf_green(msg, args...)          do { MYPRINT_NO_FEED(GR, msg, ##args); fflush(stdout); }while (0)
 
 
 //基于主线程接收signal并转发实现的, 线程断点单步调试功能, 按Ctrl+z继续运行
@@ -195,18 +198,6 @@ static inline void SIG_CONTINUE(int sig) {
 	} \
 } while (0);
 
-#define myprintf(msg, args...)                do { MYPRINT_NO_FEED(CL, msg, ##args); fflush(stdout); }while (0)
-#define myprintf_red(msg, args...)            do { MYPRINT_NO_FEED(RE, msg, ##args); fflush(stdout); }while (0)
-#define myprintf_green(msg, args...)          do { MYPRINT_NO_FEED(GR, msg, ##args); fflush(stdout); }while (0)
-
-#define DEBUG_CABLE do { \
-    printf("\n %s i4PortControlIndex=%d\n",i4LinkStatus == CFA_IF_UP ? "CFA_IF_UP":"CFA_IF_DOWN", i4PortControlIndex); \
-    printf("pu2CableStatus[0]=%d,pu2CableLen[0]=%d\n",pu2CableStatus[0],pu2CableLen[0]); \
-    printf("pu2CableStatus[1]=%d,pu2CableLen[1]=%d\n",pu2CableStatus[1],pu2CableLen[1]); \
-    printf("pu2CableStatus[2]=%d,pu2CableLen[2]=%d\n",pu2CableStatus[2],pu2CableLen[2]); \
-    printf("pu2CableStatus[3]=%d,pu2CableLen[3]=%d\n",pu2CableStatus[3],pu2CableLen[3]); \
-    fflush(stdout); \
-} while (0)
 
 #define MY_PRINT_PKT(buf, num) do { \
 	printf("\nPrinting the Packet Received (%s:%d):\n", __FUNCTION__, __LINE__); \
