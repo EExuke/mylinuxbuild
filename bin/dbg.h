@@ -225,7 +225,9 @@ static inline void SIG_CONTINUE(int sig) {
 			snprintf(_buf, sizeof(_buf), fmt, ##args); \
 			_buf; \
 		})
+#ifndef strformat
 #define strformat(fmt, args...)    ({_MY_STR_FORMAT(fmt, ##args);})
+#endif
 
 /* printf cursor ctrl */
 // 清屏
