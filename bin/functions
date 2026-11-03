@@ -176,19 +176,22 @@ function sw()
             cd ~/Templates/my_Templates/zklx_eexuke/lx_auto_agent
             ;;
         d|dtv )
-            cd ~/workspace/CV_SRC_CODE/NX_APP_DEMO/lx_cv_nx_dtv
+            try_cd lx_cv_nx_dtv
             ;;
         c|ctv )
-            try_cd lx_nx_xxt_v3_ctv
+            try_cd lx_cv_nx_ctv
             ;;
         i|itv )
-            try_cd lx_nx_xxt_v3_itv
+            try_cd lx_cv_nx_itv
             ;;
         f|ftv )
-            try_cd lx_nx_xxt_v3_ftv
+            try_cd lx_cv_nx_ftv
             ;;
         s|sys )
-            try_cd lx_nx_xxt_v3_ctv/ctv_sys
+            try_cd lx_cv_nx_ctv/ctv_sys
+            ;;
+        xxt|xxt3 )
+            cd ~/workspace/LX_NX_XXT_V3
             ;;
         452|p452 )
             cd ~/workspace/P238_NX_452
@@ -241,6 +244,15 @@ function sw()
 }
 
 # My Shell Commands {{{1
+function d2h()
+{
+	printf "%x\n" $1
+}
+function h2d()
+{
+	printf "%d\n" $1
+}
+
 function p()
 {
     if [ $# -eq "0" ]; then

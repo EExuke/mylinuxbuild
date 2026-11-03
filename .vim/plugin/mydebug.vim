@@ -77,7 +77,7 @@ func PrintDebug_outData()
 	call append(line("."), "MY_DATA_OUTPUT(\"file.csv\", \"%d,%d\\n\", );")
 endfunc
 func IncludeMyDebugHeader()
-	call append(line(".")-1, "#include \"/home/xuke/bin/dbg.h\"")
+	call append(line("."), "#include \"/home/xuke/bin/dbg.h\"")
 endfunc
 
 " Auto add the InhandTag into source code.

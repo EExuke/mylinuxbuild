@@ -130,7 +130,7 @@ nmap <leader>p  :call PrintBreak_point()<cr><cr>==f"a
 nmap <leader>P  :call PrintPstop_point()<cr><cr>==f"a
 nmap <leader>bt :call Print_Backtrace()<cr><cr>==
 nmap <leader>o  :call PrintDebug_outData()<cr><cr>==f"a
-nmap <leader>h  :/#include<cr> :call IncludeMyDebugHeader()<cr> :noh<cr><cr>
+nmap <leader>h  :/#include<cr> }k :call IncludeMyDebugHeader()<cr> :noh<cr><cr>
 nmap <leader>ss :cs find s <C-R>=expand("<cword>")<cr><cr>
 nmap <leader>sg :cs find g <C-R>=expand("<cword>")<cr><cr>
 nmap <leader>sc :cs find c <C-R>=expand("<cword>")<cr><cr>
