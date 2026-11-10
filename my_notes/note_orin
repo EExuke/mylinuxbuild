@@ -19,6 +19,37 @@
 	- lx_init_run.sh & lx_init_run.service :
 		1)bootloader启动顺序配置
 		2)GPIO引脚模式配置
+	-下载组件：
+		- glib: sudo apt install -y libglib2.0-dev
+		- ffmpeg: sudo apt install -y libavcodec-dev libavformat-dev libswscale-dev libavutil-dev
+		- gstreamer:
+			/opt/aarch64--glibc--stable-2023.08-1/aarch64-buildroot-linux-gnu/lib/libgst*
+			/opt/aarch64--glibc--stable-2023.08-1/aarch64-buildroot-linux-gnu/lib/gstreamer*
+			/opt/aarch64--glibc--stable-2023.08-1/aarch64-buildroot-linux-gnu/include/gstreamer*
+		- libyaml-cpp-dev
+	- 编译组件：
+		- protobuf: protobuf-cpp-3.17.3.tar.gz
+		- opencv_4.10.0 (with cuda、gstreamer、ffmpeg, GTK+): opencv_4.10.0_builded.tar.gz
+	- 通用组件：
+		- libzmq_nx.tar.gz
+		- lx-elog-dev-aarch64-1.0.0.deb
+		- lx-njson-dev-aarch64-1.0.0.deb
+		- lx-streamer-dev-aarch64-1.0.2.deb
+		- lx-xdma-dev-aarch64-1.0.1.deb
+		- lx-jcvp-web-dev-aarch64-1.5.0.deb (with opencv_4.10.0)
+
+
+# rootfs 自定义补丁
+- busybox安装: sudo apt-get install busybox
+- 启动执行脚本: /ets/systemd/system/lx_init_load.service -> /usr/local/scripts/lx_init_load.service
+	- 启动时间及顺序配置:
+		sudo efibootmgr -t 0
+		sudo efibootmgr -o 0008,0000,0006,0007,0009,000A,000B,000C
+		sudo  efibootmgr -v
+- FPGA固件及目录：/usr/local/FPGA/
+- FPGA在线升级工具：/usr/bin/update
+- 在线升级web：/ets/systemd/system/updater_web.service -> /usr/local/updater_web/updater_web.service
+- 硬重启命令替换: /usr/sbin/reboot -> /usr/sbin/reboot.sh
 
 # GPIO
 ## 常用GPIO引脚： ( gpioinfo )
